@@ -2,16 +2,14 @@
 
 import { useEffect, useRef, useState, useMemo } from 'react'
 import { motion, useScroll, useTransform, AnimatePresence, useMotionValue, useSpring } from 'framer-motion'
-import { ArrowUpRight, Play, Mail, Instagram, Linkedin, MessageCircle, MapPin, Plus, Minus, Camera, Film, Video, Award, Users, Clock, ChevronRight } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
+import { ArrowUpRight, Play, Mail, Instagram, Linkedin, MessageCircle, MapPin, Plus, Minus, X, Calendar, ExternalLink } from 'lucide-react'
 import { toast, Toaster } from 'sonner'
+import { PROJECTS, REAL_CLIENTS, BLOG_POSTS } from '@/lib/projects'
 
 /* ---------- i18n ---------- */
 const T = {
   es: {
-    nav: { work: 'Proyectos', about: 'Sobre mí', services: 'Servicios', process: 'Proceso', contact: 'Contacto' },
+    nav: { work: 'Proyectos', about: 'Sobre mí', services: 'Servicios', process: 'Proceso', blog: 'Blog', contact: 'Contacto' },
     hero: {
       eyebrow: 'Filmmaker · Barcelona',
       title1: 'Stories that move people.',
@@ -25,8 +23,8 @@ const T = {
     about: {
       kicker: '01 — Sobre mí',
       title: 'Cine, marca y verdad en cada frame.',
-      body1: 'Soy Jared Duron, filmmaker basado en Barcelona. Dirijo, filmo y edito historias cinematográficas para marcas, agencias y productoras que buscan elevar su comunicación audiovisual a un nivel superior.',
-      body2: 'Mi trabajo se mueve entre la publicidad comercial, el documental humano y la cobertura de eventos internacionales. Cada proyecto es una oportunidad para construir una imagen memorable con narrativa, luz y ritmo.',
+      body1: 'Soy Jared Duron, filmmaker y fotógrafo con base en Barcelona. Originario de Honduras, dirijo, filmo y edito historias cinematográficas para marcas globales, agencias creativas y productoras internacionales.',
+      body2: 'He trabajado con clientes como John Deere, Dior, WWF, KNX y Messe Frankfurt, cubriendo desde eventos internacionales (ISE Barcelona, Light + Building Frankfurt) hasta documental humano, fotografía comercial y contenido de marca. Cada proyecto es una oportunidad para construir imagen memorable con narrativa, luz y ritmo.',
       stats: [
         { n: '120+', l: 'Proyectos entregados' },
         { n: '9', l: 'Años de experiencia' },
@@ -102,7 +100,7 @@ const T = {
     },
   },
   en: {
-    nav: { work: 'Work', about: 'About', services: 'Services', process: 'Process', contact: 'Contact' },
+    nav: { work: 'Work', about: 'About', services: 'Services', process: 'Process', blog: 'Journal', contact: 'Contact' },
     hero: {
       eyebrow: 'Filmmaker · Barcelona',
       title1: 'Stories that move people.',
@@ -114,8 +112,8 @@ const T = {
     about: {
       kicker: '01 — About',
       title: 'Cinema, brand and truth in every frame.',
-      body1: "I'm Jared Duron, a filmmaker based in Barcelona. I direct, shoot and edit cinematic stories for brands, agencies and production houses looking to elevate their audiovisual communication.",
-      body2: 'My work moves between commercial advertising, human documentary and international event coverage. Every project is a chance to build a memorable image through narrative, light and rhythm.',
+      body1: "I'm Jared Duron, a filmmaker and photographer based in Barcelona. Originally from Honduras, I direct, shoot and edit cinematic stories for global brands, creative agencies and international production houses.",
+      body2: 'I have worked with clients like John Deere, Dior, WWF, KNX and Messe Frankfurt, covering everything from international events (ISE Barcelona, Light + Building Frankfurt) to human documentary, commercial photography and brand content.',
       stats: [
         { n: '120+', l: 'Projects delivered' }, { n: '9', l: 'Years of experience' }, { n: '15+', l: 'Countries filmed' }, { n: '40+', l: 'Premium brands' },
       ],
@@ -176,7 +174,7 @@ const T = {
     footer: { tagline: 'Cinematic video production. Made in Barcelona.', rights: 'All rights reserved.' },
   },
   ca: {
-    nav: { work: 'Projectes', about: 'Sobre mi', services: 'Serveis', process: 'Procés', contact: 'Contacte' },
+    nav: { work: 'Projectes', about: 'Sobre mi', services: 'Serveis', process: 'Procés', blog: 'Blog', contact: 'Contacte' },
     hero: {
       eyebrow: 'Filmmaker · Barcelona',
       title1: 'Històries que emocionen.',
@@ -249,71 +247,7 @@ const T = {
   },
 }
 
-/* ---------- Portfolio Data ---------- */
-const PROJECTS = [
-  {
-    id: 'meridian',
-    title: 'Meridian — Brand Film',
-    client: 'Meridian Athletics',
-    category: { es: 'Publicidad · Deporte', en: 'Advertising · Sport', ca: 'Publicitat · Esport' },
-    year: '2024',
-    location: 'Barcelona · Girona',
-    image: 'https://images.unsplash.com/photo-1568876694728-451bbf694b83?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzl8MHwxfHNlYXJjaHwxfHxjaW5lbWF0aWMlMjBmaWxtbWFraW5nfGVufDB8fHxibGFja3wxNzgzMTAyMDExfDA&ixlib=rb-4.1.0&q=85',
-    role: 'Director & DoP',
-  },
-  {
-    id: 'atlas',
-    title: 'Atlas — Documentary Series',
-    client: 'National Geographic',
-    category: { es: 'Documental · Serie', en: 'Documentary · Series', ca: 'Documental · Sèrie' },
-    year: '2024',
-    location: 'Marruecos · Sahara',
-    image: 'https://images.unsplash.com/photo-1496559249665-c7e2874707ea?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzl8MHwxfHNlYXJjaHwzfHxjaW5lbWF0aWMlMjBmaWxtbWFraW5nfGVufDB8fHxibGFja3wxNzgzMTAyMDExfDA&ixlib=rb-4.1.0&q=85',
-    role: 'Cinematographer',
-  },
-  {
-    id: 'lume',
-    title: 'Lume — Product Launch',
-    client: 'Lume Studio',
-    category: { es: 'Producto · Comercial', en: 'Product · Commercial', ca: 'Producte · Comercial' },
-    year: '2025',
-    location: 'Barcelona',
-    image: 'https://images.pexels.com/photos/1117132/pexels-photo-1117132.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-    role: 'Director',
-  },
-  {
-    id: 'summit',
-    title: 'Summit — Event Coverage',
-    client: 'European Tech Summit',
-    category: { es: 'Evento · Internacional', en: 'Event · International', ca: 'Esdeveniment · Internacional' },
-    year: '2024',
-    location: 'Milano · Berlin',
-    image: 'https://images.unsplash.com/photo-1570834322056-ba3e2994ab85?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2ODl8MHwxfHNlYXJjaHw0fHxmaWxtJTIwcHJvZHVjdGlvbnxlbnwwfHx8YmxhY2t8MTc4MzEwMjAxMXww&ixlib=rb-4.1.0&q=85',
-    role: 'Director & Editor',
-  },
-  {
-    id: 'noir',
-    title: 'Noir — Fashion Editorial',
-    client: 'Noir Magazine',
-    category: { es: 'Moda · Editorial', en: 'Fashion · Editorial', ca: 'Moda · Editorial' },
-    year: '2025',
-    location: 'Barcelona',
-    image: 'https://images.unsplash.com/photo-1515138692129-197a2c608cfd?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDN8MHwxfHNlYXJjaHw0fHxkcmFtYXRpYyUyMHBvcnRyYWl0fGVufDB8fHxibGFja3wxNzgzMTAyMDE4fDA&ixlib=rb-4.1.0&q=85',
-    role: 'DoP & Colorist',
-  },
-  {
-    id: 'origen',
-    title: 'Origen — Corporate Film',
-    client: 'Origen Tech Group',
-    category: { es: 'Corporativo · Tech', en: 'Corporate · Tech', ca: 'Corporatiu · Tech' },
-    year: '2024',
-    location: 'Barcelona · 22@',
-    image: 'https://images.unsplash.com/photo-1619473667737-b3abeb860aa1?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODd8MHwxfHNlYXJjaHwzfHxjaW5lbWF0b2dyYXBoeXxlbnwwfHx8YmxhY2t8MTc4MzEwMjAxMHww&ixlib=rb-4.1.0&q=85',
-    role: 'Director',
-  },
-]
-
-const CLIENTS = ['MERIDIAN', 'ATLAS FILMS', 'LUME', 'NOIR MAG', 'ORIGEN TECH', 'EUROPEAN SUMMIT', 'NAT GEO', 'PORSCHE IBÉRICA', 'CATALANA OCC.', 'BALEARIA', 'MOB.LAB', 'BCN22@']
+/* ---------- Portfolio Data (imported from /lib/projects) ---------- */
 
 /* ---------- Custom Cursor ---------- */
 function CustomCursor() {
@@ -386,6 +320,7 @@ function Nav({ locale, setLocale, t }) {
           <a href="#about" className="hover:text-white/60 transition-colors">{t.nav.about}</a>
           <a href="#services" className="hover:text-white/60 transition-colors">{t.nav.services}</a>
           <a href="#process" className="hover:text-white/60 transition-colors">{t.nav.process}</a>
+          <a href="#blog" className="hover:text-white/60 transition-colors">{t.nav.blog}</a>
           <a href="#contact" className="hover:text-white/60 transition-colors">{t.nav.contact}</a>
         </nav>
 
@@ -419,7 +354,7 @@ function Nav({ locale, setLocale, t }) {
             exit={{ opacity: 0, y: -10 }}
             className="md:hidden bg-[#0A0A0A] border-t border-white/10 px-6 py-6 space-y-4"
           >
-            {['work', 'about', 'services', 'process', 'contact'].map((k) => (
+            {['work', 'about', 'services', 'process', 'blog', 'contact'].map((k) => (
               <a key={k} href={`#${k}`} onClick={() => setOpen(false)} className="block text-xl font-display">{t.nav[k]}</a>
             ))}
             <div className="flex gap-2 pt-4">
@@ -579,6 +514,7 @@ function About({ t }) {
 
 /* ---------- Work ---------- */
 function Work({ t, locale }) {
+  const [active, setActive] = useState(null)
   return (
     <section id="work" className="relative py-24 md:py-40 px-6 md:px-10 border-t border-white/5">
       <div className="max-w-[1600px] mx-auto">
@@ -589,66 +525,231 @@ function Work({ t, locale }) {
               {t.work.title}
             </h2>
           </div>
-          <p className="max-w-sm text-white/60 leading-relaxed">{t.work.sub}</p>
+          <div className="max-w-sm">
+            <p className="text-white/60 leading-relaxed">{t.work.sub}</p>
+            <a href="https://www.behance.net/jaredduron" target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-2 text-sm text-white/80 hover:text-white group">
+              <span className="uppercase tracking-widest text-[11px]">Behance</span>
+              <ArrowUpRight className="w-3.5 h-3.5 group-hover:rotate-45 transition-transform" />
+            </a>
+          </div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-x-6 gap-y-20 md:gap-y-32">
           {PROJECTS.map((p, i) => (
-            <ProjectCard key={p.id} project={p} index={i} locale={locale} />
+            <ProjectCard key={p.id} project={p} index={i} locale={locale} onOpen={() => setActive(p)} />
           ))}
         </div>
       </div>
+      <ProjectModal project={active} locale={locale} onClose={() => setActive(null)} />
     </section>
   )
 }
 
-function ProjectCard({ project, index, locale }) {
+function ProjectCard({ project, index, locale, onOpen }) {
   const ref = useRef(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
   const y = useTransform(scrollYProgress, [0, 1], [50, -50])
 
   return (
-    <motion.a
-      href={`#${project.id}`}
+    <motion.button
+      onClick={onOpen}
       ref={ref}
-      data-cursor="Play"
+      data-cursor="View"
       initial={{ opacity: 0, y: 60 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-50px' }}
       transition={{ duration: 1, delay: (index % 2) * 0.1, ease: [0.22, 1, 0.36, 1] }}
-      className={`group block ${index % 2 === 1 ? 'md:mt-24' : ''}`}
+      className={`group block text-left w-full ${index % 2 === 1 ? 'md:mt-24' : ''}`}
     >
-      <div className="relative overflow-hidden aspect-[4/5] md:aspect-[4/5] bg-neutral-900">
+      <div className="relative overflow-hidden aspect-[4/5] bg-neutral-900">
         <motion.div style={{ y }} className="absolute inset-0 -top-12 -bottom-12">
           <img
-            src={project.image}
-            alt={`${project.title} — ${project.role} filmmaker Barcelona`}
+            src={project.cover}
+            alt={`${project.title} — ${project.client} — Jared Duron filmmaker Barcelona`}
             loading="lazy"
-            className="w-full h-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-105"
+            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
           />
         </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
 
         <div className="absolute top-4 left-4 right-4 flex justify-between items-start text-[11px] uppercase tracking-widest text-white/80">
           <span>{project.category[locale]}</span>
           <span className="font-mono-num">{project.year}</span>
         </div>
 
-        <div className="absolute bottom-4 right-4 w-11 h-11 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-500">
-          <Play className="w-4 h-4 text-white fill-white" />
+        <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end text-white">
+          <div>
+            <div className="font-display text-2xl md:text-3xl leading-none">{project.title}</div>
+            <div className="text-xs text-white/70 mt-1">{project.client}</div>
+          </div>
+          <div className="w-11 h-11 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-500">
+            <ArrowUpRight className="w-4 h-4 text-white" />
+          </div>
         </div>
       </div>
 
-      <div className="mt-5 flex items-start justify-between gap-6">
-        <div>
-          <h3 className="font-display text-2xl md:text-3xl tracking-tight">{project.title}</h3>
-          <p className="text-white/50 text-sm mt-1">{project.client} · {project.location}</p>
+      <div className="mt-4 flex items-start justify-between gap-6">
+        <div className="text-sm text-white/60">{project.subtitle} · {project.location}</div>
+        <div className="text-right text-[11px] uppercase tracking-widest text-white/40 shrink-0">{project.role}</div>
+      </div>
+    </motion.button>
+  )
+}
+
+function ProjectModal({ project, locale, onClose }) {
+  useEffect(() => {
+    if (!project) return
+    const onKey = (e) => { if (e.key === 'Escape') onClose() }
+    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', onKey)
+    return () => {
+      document.body.style.overflow = ''
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [project, onClose])
+
+  return (
+    <AnimatePresence>
+      {project && (
+        <motion.div
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+          transition={{ duration: 0.4 }}
+          className="fixed inset-0 z-[80] bg-[#0A0A0A]/98 backdrop-blur-xl overflow-y-auto"
+        >
+          <button
+            onClick={onClose}
+            data-cursor="Close"
+            className="fixed top-6 right-6 md:top-8 md:right-10 z-10 w-12 h-12 rounded-full bg-white/10 backdrop-blur border border-white/20 flex items-center justify-center hover:bg-white hover:text-black transition-all"
+            aria-label="Close"
+          >
+            <X className="w-5 h-5" />
+          </button>
+
+          <motion.div
+            initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 40, opacity: 0 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="max-w-[1400px] mx-auto px-6 md:px-10 py-20 md:py-28"
+          >
+            <div className="text-[11px] uppercase tracking-[0.3em] text-white/50 mb-4">{project.category[locale]} · {project.year}</div>
+            <h2 className="font-display text-5xl md:text-8xl leading-[0.95] tracking-tight text-balance">
+              {project.title}
+            </h2>
+            <div className="mt-3 font-display italic text-2xl md:text-3xl text-white/60">{project.subtitle}</div>
+
+            <div className="mt-10 md:mt-14 grid md:grid-cols-12 gap-8 md:gap-12 border-t border-white/10 pt-8 md:pt-12">
+              <div className="md:col-span-4 space-y-6">
+                <MetaRow k="Client" v={project.client} />
+                <MetaRow k="Role" v={project.role} />
+                <MetaRow k="Location" v={project.location} />
+                <MetaRow k="Year" v={project.year} />
+                {project.tools?.length > 0 && <MetaRow k="Tools" v={project.tools.join(' · ')} />}
+                {project.tags?.length > 0 && (
+                  <div>
+                    <div className="text-[11px] uppercase tracking-widest text-white/40 mb-2">Tags</div>
+                    <div className="flex flex-wrap gap-2">
+                      {project.tags.map(tag => (
+                        <span key={tag} className="text-[11px] px-2.5 py-1 border border-white/15 rounded-full text-white/70">{tag}</span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                <a
+                  href={project.behanceUrl}
+                  target="_blank" rel="noopener noreferrer"
+                  className="mt-6 inline-flex items-center gap-3 bg-white text-black px-6 py-3.5 rounded-full text-sm uppercase tracking-wider hover:bg-white/90 transition-all group"
+                >
+                  View on Behance <ExternalLink className="w-4 h-4 group-hover:rotate-12 transition-transform" />
+                </a>
+              </div>
+              <div className="md:col-span-8">
+                <p className="text-lg md:text-xl text-white/80 leading-relaxed">{project.description[locale]}</p>
+              </div>
+            </div>
+
+            <div className="mt-16 md:mt-24 space-y-4 md:space-y-6">
+              {project.gallery.map((img, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-100px' }}
+                  transition={{ duration: 0.8 }}
+                  className="overflow-hidden bg-neutral-950"
+                >
+                  <img src={img} alt={`${project.title} — image ${idx + 1}`} loading="lazy" className="w-full h-auto" />
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="mt-16 md:mt-24 text-center border-t border-white/10 pt-16">
+              <div className="text-[11px] uppercase tracking-[0.3em] text-white/50 mb-4">Next chapter</div>
+              <a href="#contact" onClick={onClose} className="font-display text-4xl md:text-6xl italic hover:text-white/60 transition-colors">
+                Let&apos;s work together →
+              </a>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  )
+}
+
+function MetaRow({ k, v }) {
+  return (
+    <div>
+      <div className="text-[11px] uppercase tracking-widest text-white/40 mb-1">{k}</div>
+      <div className="text-white/90">{v}</div>
+    </div>
+  )
+}
+
+/* ---------- Blog ---------- */
+function Blog({ t, locale }) {
+  return (
+    <section id="blog" className="relative py-24 md:py-40 px-6 md:px-10 border-t border-white/5">
+      <div className="max-w-[1600px] mx-auto">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16 md:mb-24">
+          <div>
+            <SectionKicker>08 — {locale === 'en' ? 'Journal' : 'Blog'}</SectionKicker>
+            <h2 className="font-display text-4xl md:text-6xl lg:text-7xl leading-[1.02] tracking-tight mt-6 max-w-3xl text-balance">
+              {locale === 'es' ? 'Ideas sobre cine, marca y producción.' : locale === 'ca' ? 'Idees sobre cinema, marca i producció.' : 'Ideas on cinema, brand and production.'}
+            </h2>
+          </div>
         </div>
-        <div className="text-right text-[11px] uppercase tracking-widest text-white/40 shrink-0 pt-2">
-          {project.role}
+        <div className="grid md:grid-cols-3 gap-8 md:gap-10">
+          {BLOG_POSTS.slice(0, 6).map((post, i) => (
+            <motion.a
+              key={post.slug}
+              href={`#${post.slug}`}
+              data-cursor="Read"
+              initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-50px' }} transition={{ duration: 0.8, delay: (i % 3) * 0.1 }}
+              className="group block"
+            >
+              <div className="relative aspect-[4/3] overflow-hidden bg-neutral-900 mb-5">
+                <img src={post.cover} alt={post.title[locale]} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                <div className="absolute top-4 left-4 text-[11px] uppercase tracking-widest bg-black/50 backdrop-blur px-2.5 py-1 rounded-full border border-white/10">
+                  {post.category[locale]}
+                </div>
+              </div>
+              <div className="flex items-center gap-3 text-[11px] uppercase tracking-widest text-white/40 font-mono-num mb-3">
+                <span>{new Date(post.date).toLocaleDateString(locale === 'en' ? 'en-US' : locale === 'ca' ? 'ca-ES' : 'es-ES', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                <span>·</span>
+                <span>{post.read}</span>
+              </div>
+              <h3 className="font-display text-xl md:text-2xl leading-tight tracking-tight group-hover:text-white/70 transition-colors text-balance">
+                {post.title[locale]}
+              </h3>
+              <p className="mt-3 text-white/60 leading-relaxed text-sm">{post.excerpt[locale]}</p>
+              <div className="mt-4 inline-flex items-center gap-2 text-sm">
+                <span className="uppercase tracking-widest text-[11px]">Read</span>
+                <ArrowUpRight className="w-3.5 h-3.5 group-hover:rotate-45 transition-transform" />
+              </div>
+            </motion.a>
+          ))}
         </div>
       </div>
-    </motion.a>
+    </section>
   )
 }
 
@@ -739,7 +840,7 @@ function Clients({ t }) {
       </div>
       <div className="overflow-hidden border-y border-white/10 py-8">
         <div className="flex whitespace-nowrap animate-marquee">
-          {[...CLIENTS, ...CLIENTS, ...CLIENTS].map((c, i) => (
+          {[...REAL_CLIENTS, ...REAL_CLIENTS, ...REAL_CLIENTS].map((c, i) => (
             <span key={i} className="mx-8 md:mx-12 text-lg md:text-2xl tracking-[0.15em] text-white/50 hover:text-white transition-colors">
               {c}
             </span>
@@ -884,6 +985,10 @@ function Contact({ t, locale }) {
           <p className="mt-6 text-white/60 leading-relaxed max-w-md">{t.contact.sub}</p>
 
           <div className="mt-12 space-y-4 text-sm">
+            <a href="https://calendly.com/jaredduron/30min" target="_blank" rel="noopener noreferrer" data-cursor="Book" className="flex items-center gap-4 text-white/80 hover:text-white transition-colors group">
+              <Calendar className="w-4 h-4" /> {locale === 'en' ? 'Book a call · Calendly' : locale === 'ca' ? 'Reserva una trucada · Calendly' : 'Reserva una llamada · Calendly'}
+              <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
+            </a>
             <a href="mailto:hello@jaredduron.com" className="flex items-center gap-4 text-white/80 hover:text-white transition-colors group">
               <Mail className="w-4 h-4" /> hello@jaredduron.com
               <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -987,7 +1092,7 @@ function Footer({ t }) {
           <div className="md:col-span-2">
             <div className="text-[11px] uppercase tracking-widest text-white/40 mb-4">Menu</div>
             <ul className="space-y-2 text-sm">
-              {['work', 'about', 'services', 'process', 'contact'].map((k) => (
+              {['work', 'about', 'services', 'process', 'blog', 'contact'].map((k) => (
                 <li key={k}><a href={`#${k}`} className="hover:text-white/60">{t.nav[k]}</a></li>
               ))}
             </ul>
@@ -1112,6 +1217,7 @@ function App() {
           <Clients t={t} />
           <Testimonials t={t} />
           <FAQ t={t} />
+          <Blog t={t} locale={locale} />
           <Contact t={t} locale={locale} />
         </main>
         <Footer t={t} />
