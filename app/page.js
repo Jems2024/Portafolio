@@ -11,10 +11,10 @@ const T = {
   es: {
     nav: { work: 'Proyectos', about: 'Sobre mí', services: 'Servicios', process: 'Proceso', blog: 'Blog', contact: 'Contacto' },
     hero: {
-      eyebrow: 'Filmmaker · Barcelona',
+      eyebrow: 'Filmmaker & Graphic Designer · Barcelona',
       title1: 'Stories that move people.',
       title2: 'Films that grow brands.',
-      sub: 'Producción audiovisual cinematográfica para marcas premium, agencias creativas y productoras internacionales.',
+      sub: 'Producción audiovisual y diseño gráfico para marcas premium, agencias creativas y productoras internacionales. Más de 7 años transformando ideas en experiencias visuales.',
       cta1: 'Ver Proyectos',
       cta2: 'Trabajemos juntos',
       scroll: 'Desplázate',
@@ -23,13 +23,13 @@ const T = {
     about: {
       kicker: '01 — Sobre mí',
       title: 'Cine, marca y verdad en cada frame.',
-      body1: 'Soy Jared Duron, filmmaker y fotógrafo con base en Barcelona. Originario de Honduras, dirijo, filmo y edito historias cinematográficas para marcas globales, agencias creativas y productoras internacionales.',
-      body2: 'He trabajado con clientes como John Deere, Dior, WWF, KNX y Messe Frankfurt, cubriendo desde eventos internacionales (ISE Barcelona, Light + Building Frankfurt) hasta documental humano, fotografía comercial y contenido de marca. Cada proyecto es una oportunidad para construir imagen memorable con narrativa, luz y ritmo.',
+      body1: 'Soy Jared Durón, filmmaker y diseñador gráfico con base en Barcelona. Originario de Honduras, cuento con más de 7 años transformando ideas en experiencias visuales para marcas, agencias y productoras internacionales.',
+      body2: 'He liderado proyectos para KNX (ISE 2026 Barcelona, Light+Building 2026 Frankfurt), WWF, BCIE, John Deere, Grupo Roble (Multiplaza, MetroMall), Miniso y clientes creadores como Juan Lucho o Prósperos Podcast. Especializado en producción integral: preproducción, rodaje, edición, motion, color grading y VideoMapping.',
       stats: [
+        { n: '7+', l: 'Años de experiencia' },
         { n: '120+', l: 'Proyectos entregados' },
-        { n: '9', l: 'Años de experiencia' },
-        { n: '15+', l: 'Países filmados' },
-        { n: '40+', l: 'Marcas premium' },
+        { n: '30+', l: 'Marcas premium' },
+        { n: '2', l: 'Disciplinas · Film & Design' },
       ],
     },
     work: {
@@ -59,7 +59,7 @@ const T = {
         { n: '01', t: 'Discovery', d: 'Entendemos el brief, los objetivos y la audiencia. Definimos KPI y tono.' },
         { n: '02', t: 'Concepto', d: 'Tratamiento creativo, moodboard, guion y referencias cinematográficas.' },
         { n: '03', t: 'Preproducción', d: 'Casting, locations, equipo, permisos, storyboard y plan de rodaje.' },
-        { n: '04', t: 'Rodaje', d: 'Dirección con equipo cinematográfico: RED, ARRI, ópticas Zeiss/Cooke.' },
+        { n: '04', t: 'Rodaje', d: 'Dirección y captura con enfoque cinematográfico. Iluminación, sonido y planos coreografiados según el storyboard.' },
         { n: '05', t: 'Postproducción', d: 'Edición, color grading, sound design, mezcla y motion graphics.' },
         { n: '06', t: 'Delivery', d: 'Másteres para todos los formatos y adaptaciones para cada canal.' },
       ],
@@ -81,8 +81,7 @@ const T = {
         { q: '¿Dónde estás basado y viajas para proyectos?', a: 'Estoy basado en Barcelona y viajo regularmente por España, Europa y proyectos internacionales. Trabajo con equipos locales en cada destino.' },
         { q: '¿Cuánto cuesta un vídeo corporativo o una campaña?', a: 'Cada proyecto se cotiza según brief, días de rodaje, equipo y postproducción. Los proyectos típicos van desde 3.000€ hasta producciones publicitarias de +50.000€.' },
         { q: '¿Cuál es el plazo de entrega habitual?', a: 'Un vídeo corporativo suele entregarse en 3-4 semanas. Campañas publicitarias entre 6-10 semanas dependiendo del alcance.' },
-        { q: '¿Trabajas con agencias y productoras?', a: 'Sí. Colaboro como director, DoP o filmmaker freelance con agencias creativas y productoras nacionales e internacionales.' },
-        { q: '¿Qué equipo utilizas para rodar?', a: 'Cámaras RED Komodo, Sony FX6/FX3, ópticas Zeiss Supreme y Cooke, gimbals Ronin, iluminación Aputure/ARRI y grip profesional.' },
+        { q: '¿Trabajas con agencias y productoras?', a: 'Sí. Colaboro como director, editor o videografo freelance con agencias creativas y productoras nacionales e internacionales. También asumo dirección creativa y diseño gráfico para campañas integrales.' },
       ],
     },
     contact: {
@@ -102,20 +101,23 @@ const T = {
   en: {
     nav: { work: 'Work', about: 'About', services: 'Services', process: 'Process', blog: 'Journal', contact: 'Contact' },
     hero: {
-      eyebrow: 'Filmmaker · Barcelona',
+      eyebrow: 'Filmmaker & Graphic Designer · Barcelona',
       title1: 'Stories that move people.',
       title2: 'Films that grow brands.',
-      sub: 'Cinematic video production for premium brands, creative agencies and international production houses.',
+      sub: 'Audiovisual production and graphic design for premium brands, creative agencies and international production houses. 7+ years turning ideas into visual experiences.',
       cta1: 'View Work', cta2: "Let's Work Together", scroll: 'Scroll',
     },
     marquee: 'Available for projects · Barcelona · Worldwide · Commercial · Documentary · Events ·',
     about: {
       kicker: '01 — About',
       title: 'Cinema, brand and truth in every frame.',
-      body1: "I'm Jared Duron, a filmmaker and photographer based in Barcelona. Originally from Honduras, I direct, shoot and edit cinematic stories for global brands, creative agencies and international production houses.",
-      body2: 'I have worked with clients like John Deere, Dior, WWF, KNX and Messe Frankfurt, covering everything from international events (ISE Barcelona, Light + Building Frankfurt) to human documentary, commercial photography and brand content.',
+      body1: "I'm Jared Durón, a filmmaker and graphic designer based in Barcelona. Originally from Honduras, I bring 7+ years turning ideas into visual experiences for premium brands, agencies and international production houses.",
+      body2: 'I have led projects for KNX (ISE 2026 Barcelona, Light+Building 2026 Frankfurt), WWF, BCIE, John Deere, Grupo Roble (Multiplaza, MetroMall), Miniso and creator clients like Juan Lucho and Prósperos Podcast. Specialized in end-to-end production: pre-production, shooting, editing, motion, color grading and VideoMapping.',
       stats: [
-        { n: '120+', l: 'Projects delivered' }, { n: '9', l: 'Years of experience' }, { n: '15+', l: 'Countries filmed' }, { n: '40+', l: 'Premium brands' },
+        { n: '7+', l: 'Years of experience' },
+        { n: '120+', l: 'Projects delivered' },
+        { n: '30+', l: 'Premium brands' },
+        { n: '2', l: 'Disciplines · Film & Design' },
       ],
     },
     work: { kicker: '02 — Selected Work', title: 'Selected Work', sub: 'A curated selection of commercial campaigns, documentaries and international coverage.' },
@@ -140,7 +142,7 @@ const T = {
         { n: '01', t: 'Discovery', d: 'We understand the brief, goals and audience. Define KPIs and tone.' },
         { n: '02', t: 'Concept', d: 'Creative treatment, moodboard, script and cinematic references.' },
         { n: '03', t: 'Pre-production', d: 'Casting, locations, crew, permits, storyboard and shooting plan.' },
-        { n: '04', t: 'Shooting', d: 'Directing with a cinematic crew: RED, ARRI, Zeiss/Cooke optics.' },
+        { n: '04', t: 'Shooting', d: 'Directing and capturing with a cinematic approach. Lighting, sound and choreographed shots per storyboard.' },
         { n: '05', t: 'Post-production', d: 'Editing, color grading, sound design, mix and motion graphics.' },
         { n: '06', t: 'Delivery', d: 'Masters for all formats and adaptations for each channel.' },
       ],
@@ -160,8 +162,7 @@ const T = {
         { q: 'Where are you based and do you travel?', a: 'Based in Barcelona and traveling regularly across Spain, Europe and international projects. I work with local crews in each destination.' },
         { q: 'How much does a corporate video or a campaign cost?', a: 'Each project is quoted based on brief, shoot days, crew and post-production. Typical projects range from €3,000 to advertising productions of €50,000+.' },
         { q: 'What is the usual delivery timeline?', a: 'A corporate video is usually delivered in 3-4 weeks. Advertising campaigns between 6-10 weeks depending on scope.' },
-        { q: 'Do you work with agencies and production companies?', a: 'Yes. I collaborate as director, DoP or freelance filmmaker with national and international creative agencies and production houses.' },
-        { q: 'What gear do you shoot with?', a: 'RED Komodo, Sony FX6/FX3, Zeiss Supreme and Cooke optics, Ronin gimbals, Aputure/ARRI lighting and pro grip.' },
+        { q: 'Do you work with agencies and production companies?', a: 'Yes. I collaborate as director, editor or freelance videographer with national and international creative agencies. I also take on creative direction and graphic design for integrated campaigns.' },
       ],
     },
     contact: {
@@ -176,19 +177,22 @@ const T = {
   ca: {
     nav: { work: 'Projectes', about: 'Sobre mi', services: 'Serveis', process: 'Procés', blog: 'Blog', contact: 'Contacte' },
     hero: {
-      eyebrow: 'Filmmaker · Barcelona',
+      eyebrow: 'Filmmaker & Graphic Designer · Barcelona',
       title1: 'Històries que emocionen.',
       title2: 'Pel·lícules que fan créixer marques.',
-      sub: 'Producció audiovisual cinematogràfica per a marques premium, agències creatives i productores internacionals.',
+      sub: 'Producció audiovisual i disseny gràfic per a marques premium, agències creatives i productores internacionals.',
       cta1: 'Veure Projectes', cta2: 'Treballem junts', scroll: 'Baixa',
     },
     marquee: 'Disponible per a projectes · Barcelona · Worldwide · Comercial · Documental · Esdeveniments ·',
     about: {
       kicker: '01 — Sobre mi', title: 'Cinema, marca i veritat a cada frame.',
-      body1: 'Sóc Jared Duron, filmmaker amb base a Barcelona. Dirigeixo, filmo i edito històries cinematogràfiques per a marques, agències i productores que volen elevar la seva comunicació audiovisual.',
-      body2: "El meu treball es mou entre la publicitat comercial, el documental humà i la cobertura d'esdeveniments internacionals. Cada projecte és una oportunitat per construir una imatge memorable.",
+      body1: 'Sóc Jared Durón, filmmaker i dissenyador gràfic amb base a Barcelona. Originari d\'Hondures, tinc més de 7 anys transformant idees en experiències visuals per a marques, agències i productores internacionals.',
+      body2: "He liderat projectes per a KNX (ISE 2026 Barcelona, Light+Building 2026 Frankfurt), WWF, BCIE, John Deere, Grupo Roble, Miniso i creadors com Juan Lucho o Prósperos Podcast. Especialitzat en producció integral: preproducció, rodatge, edició, motion, color grading i VideoMapping.",
       stats: [
-        { n: '120+', l: 'Projectes lliurats' }, { n: '9', l: "Anys d'experiència" }, { n: '15+', l: 'Països filmats' }, { n: '40+', l: 'Marques premium' },
+        { n: '7+', l: "Anys d'experiència" },
+        { n: '120+', l: 'Projectes lliurats' },
+        { n: '30+', l: 'Marques premium' },
+        { n: '2', l: 'Disciplines · Film & Design' },
       ],
     },
     work: { kicker: '02 — Selected Work', title: 'Treball seleccionat', sub: 'Una selecció de campanyes comercials, documentals i cobertures internacionals.' },
@@ -212,7 +216,7 @@ const T = {
         { n: '01', t: 'Discovery', d: 'Entenem el brief, els objectius i el públic. Definim KPI i to.' },
         { n: '02', t: 'Concepte', d: 'Tractament creatiu, moodboard, guió i referències cinematogràfiques.' },
         { n: '03', t: 'Preproducció', d: 'Càsting, localitzacions, equip, permisos, storyboard i pla de rodatge.' },
-        { n: '04', t: 'Rodatge', d: 'Direcció amb equip cinematogràfic: RED, ARRI, òptiques Zeiss/Cooke.' },
+        { n: '04', t: 'Rodatge', d: 'Direcció i captura amb enfocament cinematogràfic. Il·luminació, so i plans coreografiats segons el storyboard.' },
         { n: '05', t: 'Postproducció', d: 'Edició, color grading, sound design, mescla i motion graphics.' },
         { n: '06', t: 'Delivery', d: 'Màsters per a tots els formats i adaptacions per a cada canal.' },
       ],
@@ -232,8 +236,7 @@ const T = {
         { q: 'On et bases i viatges per als projectes?', a: 'Base a Barcelona i viatjo regularment per Espanya, Europa i projectes internacionals.' },
         { q: 'Quant costa un vídeo corporatiu o una campanya?', a: 'Cada projecte es cotitza segons brief, dies de rodatge, equip i postproducció.' },
         { q: 'Quin és el termini de lliurament habitual?', a: 'Un vídeo corporatiu es lliura en 3-4 setmanes. Campanyes publicitàries entre 6-10 setmanes.' },
-        { q: 'Treballes amb agències i productores?', a: 'Sí, com a director, DoP o filmmaker freelance amb agències i productores.' },
-        { q: 'Quin equip fas servir?', a: 'RED Komodo, Sony FX6/FX3, òptiques Zeiss Supreme i Cooke, gimbals, il·luminació Aputure/ARRI.' },
+        { q: 'Treballes amb agències i productores?', a: 'Sí, com a director, editor o videògraf freelance amb agències i productores. També assumeixo direcció creativa i disseny gràfic.' },
       ],
     },
     contact: {
@@ -312,7 +315,7 @@ function Nav({ locale, setLocale, t }) {
       <div className="max-w-[1600px] mx-auto px-6 md:px-10 py-4 md:py-5 flex items-center justify-between">
         <a href="#top" className="flex items-center gap-2 group" aria-label="Home">
           <div className="w-2 h-2 bg-white rounded-full group-hover:animate-pulse" />
-          <span className="font-display text-lg tracking-tight">Jared Duron</span>
+          <span className="font-display text-lg tracking-tight">Jared Durón</span>
         </a>
 
         <nav className="hidden md:flex items-center gap-10 text-[13px] tracking-wide uppercase">
@@ -376,15 +379,17 @@ function Hero({ t }) {
   const y = useTransform(scrollYProgress, [0, 1], [0, 200])
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0])
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1])
+  const [reelOpen, setReelOpen] = useState(false)
 
   return (
     <section ref={ref} id="top" className="relative h-screen w-full overflow-hidden">
       <motion.div style={{ y, scale }} className="absolute inset-0">
         <video
           className="absolute inset-0 w-full h-full object-cover"
-          autoPlay muted loop playsInline preload="auto"
+          autoPlay muted loop playsInline preload="metadata"
           poster="https://images.unsplash.com/photo-1568876694728-451bbf694b83?crop=entropy&cs=srgb&fm=jpg&w=1920&q=85"
         >
+          <source src="https://videos.pexels.com/video-files/3209828/3209828-hd_1920_1080_25fps.mp4" type="video/mp4" />
           <source src="https://videos.pexels.com/video-files/2022395/2022395-hd_1920_1080_30fps.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 hero-vignette" />
@@ -424,7 +429,7 @@ function Hero({ t }) {
 
           <motion.div
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 1.3 }}
-            className="mt-10 md:mt-12 flex flex-wrap gap-3 md:gap-4"
+            className="mt-10 md:mt-12 flex flex-wrap items-center gap-3 md:gap-4"
           >
             <a href="#work" data-cursor="View" className="inline-flex items-center gap-3 bg-white text-black px-6 md:px-7 py-3.5 rounded-full text-sm uppercase tracking-wider hover:bg-white/90 transition-all group">
               <span>{t.hero.cta1}</span>
@@ -433,6 +438,16 @@ function Hero({ t }) {
             <a href="#contact" className="inline-flex items-center gap-3 border border-white/20 px-6 md:px-7 py-3.5 rounded-full text-sm uppercase tracking-wider hover:bg-white/10 transition-all">
               <span>{t.hero.cta2}</span>
             </a>
+            <button
+              onClick={() => setReelOpen(true)}
+              data-cursor="Play"
+              className="inline-flex items-center gap-3 text-white/80 hover:text-white px-2 py-3.5 text-sm uppercase tracking-wider group"
+            >
+              <span className="w-9 h-9 rounded-full border border-white/40 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all">
+                <Play className="w-3.5 h-3.5 fill-current ml-0.5" />
+              </span>
+              <span>Play Reel</span>
+            </button>
           </motion.div>
         </div>
 
@@ -451,7 +466,54 @@ function Hero({ t }) {
           </div>
         </motion.div>
       </motion.div>
+
+      <ReelModal open={reelOpen} onClose={() => setReelOpen(false)} />
     </section>
+  )
+}
+
+function ReelModal({ open, onClose }) {
+  useEffect(() => {
+    if (!open) return
+    const onKey = (e) => { if (e.key === 'Escape') onClose() }
+    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', onKey)
+    return () => { document.body.style.overflow = ''; window.removeEventListener('keydown', onKey) }
+  }, [open, onClose])
+
+  return (
+    <AnimatePresence>
+      {open && (
+        <motion.div
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}
+          className="fixed inset-0 z-[90] bg-black/95 backdrop-blur-xl flex items-center justify-center p-4 md:p-8"
+          onClick={onClose}
+        >
+          <button
+            onClick={onClose} data-cursor="Close"
+            className="absolute top-6 right-6 md:top-8 md:right-10 z-10 w-12 h-12 rounded-full bg-white/10 backdrop-blur border border-white/20 flex items-center justify-center hover:bg-white hover:text-black transition-all"
+            aria-label="Close"
+          >
+            <X className="w-5 h-5" />
+          </button>
+          <motion.div
+            initial={{ scale: 0.94, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.94, opacity: 0 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-6xl aspect-video bg-black rounded-lg overflow-hidden shadow-2xl"
+          >
+            <video
+              className="w-full h-full object-cover"
+              controls autoPlay playsInline preload="auto"
+              poster="https://images.unsplash.com/photo-1568876694728-451bbf694b83?crop=entropy&cs=srgb&fm=jpg&w=1920&q=85"
+            >
+              <source src="https://videos.pexels.com/video-files/3209828/3209828-hd_1920_1080_25fps.mp4" type="video/mp4" />
+              <source src="https://videos.pexels.com/video-files/2022395/2022395-hd_1920_1080_30fps.mp4" type="video/mp4" />
+            </video>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   )
 }
 
@@ -471,36 +533,97 @@ function Marquee({ text }) {
   )
 }
 
+/* ---------- Floating WhatsApp (persistent on all pages) ---------- */
+function FloatingWhatsApp({ locale }) {
+  const [visible, setVisible] = useState(false)
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > 400)
+    window.addEventListener('scroll', onScroll)
+    onScroll()
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  const label = locale === 'en' ? 'Chat on WhatsApp' : locale === 'ca' ? 'Xateja per WhatsApp' : 'Chatea por WhatsApp'
+  const msg = locale === 'en' ? 'Hi Jared, I would love to work with you' : locale === 'ca' ? "Hola Jared, m'agradaria treballar amb tu" : 'Hola Jared, me gustaría trabajar contigo'
+
+  return (
+    <motion.a
+      href={`https://wa.me/34637434235?text=${encodeURIComponent(msg)}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      data-cursor="Chat"
+      aria-label={label}
+      initial={{ opacity: 0, y: 20, scale: 0.9 }}
+      animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 20, scale: visible ? 1 : 0.9 }}
+      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+      className="fixed z-[70] bottom-5 right-5 md:bottom-8 md:right-8 group flex items-center gap-3"
+      style={{ pointerEvents: visible ? 'auto' : 'none' }}
+    >
+      <span className="hidden md:block bg-white text-black text-xs uppercase tracking-widest px-4 py-2 rounded-full shadow-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+        {label}
+      </span>
+      <div className="relative">
+        <span className="absolute inset-0 rounded-full bg-[#25D366]/40 animate-ping" />
+        <div className="relative w-14 h-14 md:w-16 md:h-16 rounded-full bg-[#25D366] flex items-center justify-center shadow-2xl group-hover:scale-105 transition-transform duration-300">
+          <svg viewBox="0 0 32 32" className="w-7 h-7 md:w-8 md:h-8 fill-white" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19.11 17.205c-.372 0-1.088 1.39-1.518 1.39a.63.63 0 0 1-.315-.1c-.802-.402-1.504-.817-2.163-1.406-.545-.489-1.093-1.203-1.5-1.808-.043-.086-.087-.172-.087-.272 0-.316.977-.848.977-1.335 0-.114-.031-.242-.083-.362-.115-.263-.83-1.876-.985-2.155-.157-.283-.325-.436-.618-.436h-.618c-.199 0-.395.083-.535.222-.4.4-.945 1.146-.945 2.098 0 1.234.923 2.454 1.235 2.87 1.363 1.827 2.868 3.242 5.008 4.128.518.216 1.043.383 1.564.457.457.066.881.058 1.242-.006.55-.096 1.643-.669 1.87-1.322.086-.253.086-.472.048-.522-.031-.049-.101-.079-.202-.129-.099-.05-.622-.31-.79-.377-.132-.055-.284-.109-.415-.109zm-3.028 6.855h-.006a10.056 10.056 0 0 1-5.115-1.4l-.367-.218-3.803.996 1.015-3.71-.238-.379a10.078 10.078 0 0 1-1.545-5.383c.002-5.573 4.537-10.107 10.112-10.107a10.03 10.03 0 0 1 7.148 2.963c1.907 1.912 2.955 4.453 2.954 7.153-.003 5.573-4.537 10.086-10.112 10.086zm8.605-18.708C22.394 3.086 19.348 1.999 16.077 2 9.301 2 3.776 7.523 3.774 14.31c-.001 2.169.566 4.287 1.643 6.153L3.673 27.226l7.052-1.849a12.298 12.298 0 0 0 5.877 1.494h.006c6.775 0 12.302-5.523 12.305-12.31.001-3.288-1.276-6.379-3.598-8.703z" />
+          </svg>
+        </div>
+      </div>
+    </motion.a>
+  )
+}
+
 /* ---------- About ---------- */
 function About({ t }) {
   return (
     <section id="about" className="relative py-24 md:py-40 px-6 md:px-10">
       <div className="max-w-[1600px] mx-auto">
         <SectionKicker>{t.about.kicker}</SectionKicker>
-        <div className="grid md:grid-cols-12 gap-8 md:gap-12 mt-8">
+
+        <div className="grid md:grid-cols-12 gap-10 md:gap-16 items-center mt-8">
+          {/* Portrait — symmetric left */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-100px' }} transition={{ duration: 1 }}
+            initial={{ opacity: 0, scale: 0.96 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true, margin: '-100px' }} transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+            className="md:col-span-5 relative"
+          >
+            <div className="relative aspect-[4/5] overflow-hidden bg-neutral-900">
+              <img
+                src="https://customer-assets.emergentagent.com/job_filmmaker-barcelona/artifacts/fsyjfym3_Foto%20perfil.jpg"
+                alt="Jared Durón — Filmmaker & Graphic Designer Barcelona"
+                loading="lazy"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+              <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end text-[11px] uppercase tracking-widest text-white/70">
+                <span>Jared Durón</span>
+                <span className="font-mono-num">EST. 2017</span>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Copy — symmetric right */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-100px' }} transition={{ duration: 1, delay: 0.2 }}
             className="md:col-span-7"
           >
             <h2 className="font-display text-4xl md:text-6xl lg:text-7xl leading-[1.02] tracking-tight text-balance">
               {t.about.title}
             </h2>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-100px' }} transition={{ duration: 1, delay: 0.15 }}
-            className="md:col-span-5 md:pt-4 space-y-5 text-white/70 leading-relaxed text-base md:text-[17px]"
-          >
-            <p>{t.about.body1}</p>
-            <p>{t.about.body2}</p>
+            <div className="mt-8 space-y-5 text-white/70 leading-relaxed text-base md:text-[17px] max-w-2xl">
+              <p>{t.about.body1}</p>
+              <p>{t.about.body2}</p>
+            </div>
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-16 mt-16 md:mt-24 border-t border-white/10 pt-10 md:pt-16">
+        {/* Stats — perfectly symmetric 4 cols */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 mt-20 md:mt-28 border-t border-white/10 pt-10 md:pt-16">
           {t.about.stats.map((s, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: i * 0.1 }}
+              className="text-center md:text-left"
             >
               <div className="font-display text-5xl md:text-7xl leading-none">{s.n}</div>
               <div className="text-[11px] uppercase tracking-widest text-white/50 mt-3">{s.l}</div>
@@ -565,7 +688,7 @@ function ProjectCard({ project, index, locale, onOpen }) {
         <motion.div style={{ y }} className="absolute inset-0 -top-12 -bottom-12">
           <img
             src={project.cover}
-            alt={`${project.title} — ${project.client} — Jared Duron filmmaker Barcelona`}
+            alt={`${project.title} — ${project.client} — Jared Durón filmmaker Barcelona`}
             loading="lazy"
             className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
           />
@@ -642,7 +765,7 @@ function ProjectModal({ project, locale, onClose }) {
                 <MetaRow k="Role" v={project.role} />
                 <MetaRow k="Location" v={project.location} />
                 <MetaRow k="Year" v={project.year} />
-                {project.tools?.length > 0 && <MetaRow k="Tools" v={project.tools.join(' · ')} />}
+                {project.tools?.length > 0 && false && <MetaRow k="Tools" v={project.tools.join(' · ')} /> /* Tools intentionally hidden */}
                 {project.tags?.length > 0 && (
                   <div>
                     <div className="text-[11px] uppercase tracking-widest text-white/40 mb-2">Tags</div>
@@ -985,28 +1108,32 @@ function Contact({ t, locale }) {
           <p className="mt-6 text-white/60 leading-relaxed max-w-md">{t.contact.sub}</p>
 
           <div className="mt-12 space-y-4 text-sm">
-            <a href="https://calendly.com/jaredduron/30min" target="_blank" rel="noopener noreferrer" data-cursor="Book" className="flex items-center gap-4 text-white/80 hover:text-white transition-colors group">
-              <Calendar className="w-4 h-4" /> {locale === 'en' ? 'Book a call · Calendly' : locale === 'ca' ? 'Reserva una trucada · Calendly' : 'Reserva una llamada · Calendly'}
+            <a href="https://wa.me/34637434235?text=Hola%20Jared%2C%20me%20interesa%20trabajar%20contigo" target="_blank" rel="noopener noreferrer" data-cursor="Chat" className="flex items-center gap-4 text-white/80 hover:text-white transition-colors group">
+              <MessageCircle className="w-4 h-4" /> WhatsApp · +34 637 43 42 35
               <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
             </a>
-            <a href="mailto:hello@jaredduron.com" className="flex items-center gap-4 text-white/80 hover:text-white transition-colors group">
-              <Mail className="w-4 h-4" /> hello@jaredduron.com
+            <a href="mailto:jaredmisaelduron@gmail.com" className="flex items-center gap-4 text-white/80 hover:text-white transition-colors group">
+              <Mail className="w-4 h-4" /> jaredmisaelduron@gmail.com
               <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
             </a>
-            <a href="https://wa.me/34600000000" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-white/80 hover:text-white transition-colors group">
-              <MessageCircle className="w-4 h-4" /> WhatsApp
+            <a href="https://www.instagram.com/jared_duron10/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-white/80 hover:text-white transition-colors group">
+              <Instagram className="w-4 h-4" /> Instagram · @jared_duron10
               <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
             </a>
-            <a href="https://www.instagram.com/jaredduron" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-white/80 hover:text-white transition-colors group">
-              <Instagram className="w-4 h-4" /> Instagram
+            <a href="https://www.behance.net/jaredduron" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-white/80 hover:text-white transition-colors group">
+              <ExternalLink className="w-4 h-4" /> Behance · jaredduron
               <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
             </a>
-            <a href="https://www.linkedin.com/in/jaredduron" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-white/80 hover:text-white transition-colors group">
+            <a href="https://www.linkedin.com/in/jared-duron-87a041100/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-white/80 hover:text-white transition-colors group">
               <Linkedin className="w-4 h-4" /> LinkedIn
               <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
             </a>
+            <a href="https://www.tiktok.com/@jems2124?lang=es-419" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-white/80 hover:text-white transition-colors group">
+              <Play className="w-4 h-4" /> TikTok · @jems2124
+              <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
+            </a>
             <div className="flex items-center gap-4 text-white/60 pt-4">
-              <MapPin className="w-4 h-4" /> Barcelona, Catalunya
+              <MapPin className="w-4 h-4" /> Barcelona, Catalunya · Available worldwide
             </div>
           </div>
         </div>
@@ -1085,7 +1212,7 @@ function Footer({ t }) {
         <div className="grid md:grid-cols-12 gap-10">
           <div className="md:col-span-6">
             <h3 className="font-display text-4xl md:text-6xl leading-tight text-balance">
-              Jared Duron<span className="text-white/40">.</span>
+              Jared Durón<span className="text-white/40">.</span>
             </h3>
             <p className="mt-4 text-white/50 max-w-md">{t.footer.tagline}</p>
           </div>
@@ -1101,22 +1228,23 @@ function Footer({ t }) {
             <div className="text-[11px] uppercase tracking-widest text-white/40 mb-4">Social</div>
             <ul className="space-y-2 text-sm">
               <li><a href="https://www.behance.net/jaredduron" target="_blank" rel="noopener noreferrer" className="hover:text-white/60">Behance</a></li>
-              <li><a href="https://www.instagram.com/jaredduron" target="_blank" rel="noopener noreferrer" className="hover:text-white/60">Instagram</a></li>
-              <li><a href="https://www.linkedin.com/in/jaredduron" target="_blank" rel="noopener noreferrer" className="hover:text-white/60">LinkedIn</a></li>
-              <li><a href="https://vimeo.com" target="_blank" rel="noopener noreferrer" className="hover:text-white/60">Vimeo</a></li>
+              <li><a href="https://www.instagram.com/jared_duron10/" target="_blank" rel="noopener noreferrer" className="hover:text-white/60">Instagram</a></li>
+              <li><a href="https://www.linkedin.com/in/jared-duron-87a041100/" target="_blank" rel="noopener noreferrer" className="hover:text-white/60">LinkedIn</a></li>
+              <li><a href="https://www.tiktok.com/@jems2124?lang=es-419" target="_blank" rel="noopener noreferrer" className="hover:text-white/60">TikTok</a></li>
+              <li><a href="https://www.facebook.com/jaredmisael.duron/" target="_blank" rel="noopener noreferrer" className="hover:text-white/60">Facebook</a></li>
             </ul>
           </div>
           <div className="md:col-span-2">
             <div className="text-[11px] uppercase tracking-widest text-white/40 mb-4">Contact</div>
             <ul className="space-y-2 text-sm">
-              <li><a href="mailto:hello@jaredduron.com" className="hover:text-white/60">hello@jaredduron.com</a></li>
+              <li><a href="mailto:jaredmisaelduron@gmail.com" className="hover:text-white/60 break-all">jaredmisaelduron@gmail.com</a></li>
+              <li><a href="https://wa.me/34637434235" className="hover:text-white/60">+34 637 43 42 35</a></li>
               <li className="text-white/60">Barcelona, ES</li>
-              <li className="text-white/60">41.3874° N · 2.1686° E</li>
             </ul>
           </div>
         </div>
         <div className="mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between gap-4 text-xs uppercase tracking-widest text-white/40">
-          <div>© {new Date().getFullYear()} Jared Duron. {t.footer.rights}</div>
+          <div>© {new Date().getFullYear()} Jared Durón. {t.footer.rights}</div>
           <div className="flex gap-6">
             <span>Made in Barcelona</span>
             <span>v1.0</span>
@@ -1170,7 +1298,7 @@ function Loader() {
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }}
             className="text-center"
           >
-            <div className="font-display text-6xl md:text-8xl italic">Jared Duron</div>
+            <div className="font-display text-6xl md:text-8xl italic">Jared Durón</div>
             <div className="mt-2 text-[11px] uppercase tracking-[0.4em] text-white/50">Filmmaker · Barcelona</div>
           </motion.div>
           <div className="absolute bottom-16 left-6 right-6 md:left-10 md:right-10 flex items-end justify-between">
@@ -1221,6 +1349,7 @@ function App() {
           <Contact t={t} locale={locale} />
         </main>
         <Footer t={t} />
+        <FloatingWhatsApp locale={locale} />
       </div>
     </>
   )
