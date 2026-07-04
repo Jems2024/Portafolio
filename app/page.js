@@ -657,7 +657,7 @@ function Work({ t, locale }) {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-x-6 gap-y-20 md:gap-y-32">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
           {PROJECTS.map((p, i) => (
             <ProjectCard key={p.id} project={p} index={i} locale={locale} onOpen={() => setActive(p)} />
           ))}
@@ -670,50 +670,48 @@ function Work({ t, locale }) {
 
 function ProjectCard({ project, index, locale, onOpen }) {
   const ref = useRef(null)
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
-  const y = useTransform(scrollYProgress, [0, 1], [50, -50])
 
   return (
     <motion.button
       onClick={onOpen}
       ref={ref}
       data-cursor="View"
-      initial={{ opacity: 0, y: 60 }}
+      initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-50px' }}
-      transition={{ duration: 1, delay: (index % 2) * 0.1, ease: [0.22, 1, 0.36, 1] }}
-      className={`group block text-left w-full ${index % 2 === 1 ? 'md:mt-24' : ''}`}
+      viewport={{ once: true, margin: '-30px' }}
+      transition={{ duration: 0.8, delay: (index % 3) * 0.08, ease: [0.22, 1, 0.36, 1] }}
+      className="group block text-left w-full"
     >
       <div className="relative overflow-hidden aspect-[4/5] bg-neutral-900">
-        <motion.div style={{ y }} className="absolute inset-0 -top-12 -bottom-12">
+        <div className="absolute inset-0">
           <img
             src={project.cover}
             alt={`${project.title} — ${project.client} — Jared Durón filmmaker Barcelona`}
             loading="lazy"
-            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
           />
-        </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-70 group-hover:opacity-50 transition-opacity duration-500" />
 
-        <div className="absolute top-4 left-4 right-4 flex justify-between items-start text-[11px] uppercase tracking-widest text-white/80">
-          <span>{project.category[locale]}</span>
+        <div className="absolute top-3 left-3 right-3 flex justify-between items-start text-[10px] uppercase tracking-widest text-white/80">
+          <span className="truncate max-w-[60%]">{project.category[locale]}</span>
           <span className="font-mono-num">{project.year}</span>
         </div>
 
-        <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end text-white">
-          <div>
-            <div className="font-display text-2xl md:text-3xl leading-none">{project.title}</div>
-            <div className="text-xs text-white/70 mt-1">{project.client}</div>
+        <div className="absolute bottom-3 left-3 right-3 flex justify-between items-end text-white gap-3">
+          <div className="min-w-0">
+            <div className="font-display text-lg md:text-xl leading-tight tracking-tight truncate">{project.title}</div>
+            <div className="text-[11px] text-white/70 mt-0.5 truncate">{project.client}</div>
           </div>
-          <div className="w-11 h-11 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-500">
-            <ArrowUpRight className="w-4 h-4 text-white" />
+          <div className="w-9 h-9 shrink-0 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-500">
+            <ArrowUpRight className="w-3.5 h-3.5 text-white" />
           </div>
         </div>
       </div>
 
-      <div className="mt-4 flex items-start justify-between gap-6">
-        <div className="text-sm text-white/60">{project.subtitle} · {project.location}</div>
-        <div className="text-right text-[11px] uppercase tracking-widest text-white/40 shrink-0">{project.role}</div>
+      <div className="mt-3 flex items-start justify-between gap-3 text-[11px] uppercase tracking-widest text-white/40">
+        <span className="truncate">{project.location}</span>
+        <span className="text-right shrink-0">{project.role}</span>
       </div>
     </motion.button>
   )
