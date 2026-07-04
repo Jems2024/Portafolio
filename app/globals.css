@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 :root {
-  --bg: #0A0A0A;
+  --bg: #06080F;
   --fg: #F5F5F4;
   --muted: #737373;
   --line: #1F1F1F;
-  --accent: #E8E4D9;
+  --accent: #F5C518;
 }
 
 * {
@@ -17,12 +17,19 @@
 
 html {
   scroll-behavior: smooth;
-  background: var(--bg);
+  background: #06080F;
 }
 
 body {
   font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
   cursor: none;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 10%, rgba(30, 58, 138, 0.18), transparent 60%),
+    radial-gradient(ellipse 70% 60% at 90% 30%, rgba(15, 23, 42, 0.35), transparent 65%),
+    radial-gradient(ellipse 90% 80% at 50% 100%, rgba(8, 12, 30, 0.6), transparent 70%),
+    linear-gradient(180deg, #060814 0%, #080B1A 30%, #06080F 60%, #050609 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
 }
 
 @media (hover: none) and (pointer: coarse) {
@@ -53,6 +60,26 @@ body {
   border-radius: 9999px;
   background: #FFFFFF;
   will-change: transform;
+}
+
+/* Custom keyframes */
+@keyframes twinkle {
+  0%, 100% { opacity: var(--tw-op, 0.35); }
+  50% { opacity: calc(var(--tw-op, 0.35) * 0.3); }
+}
+.animate-twinkle {
+  animation: twinkle var(--tw-dur, 4s) ease-in-out infinite;
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(4deg); }
+}
+.animate-float-slow { animation: float-slow 6s ease-in-out infinite; }
+
+@keyframes accent-line {
+  0% { transform: scaleX(0); transform-origin: left; }
+  100% { transform: scaleX(1); transform-origin: left; }
 }
 
 /* Hide scrollbar on marquee */

@@ -188,7 +188,7 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessLd) }}
         />
       </head>
-      <body className="antialiased bg-[#0A0A0A] text-neutral-100 font-sans selection:bg-white selection:text-black">
+      <body className="antialiased text-neutral-100 font-sans selection:bg-[#F5C518] selection:text-black">
         {children}
       </body>
     </html>

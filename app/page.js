@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, useMemo } from 'react'
 import { motion, useScroll, useTransform, AnimatePresence, useMotionValue, useSpring } from 'framer-motion'
-import { ArrowUpRight, Play, Mail, Instagram, Linkedin, MessageCircle, MapPin, Plus, Minus, X, Calendar, ExternalLink } from 'lucide-react'
+import { ArrowUpRight, Play, Mail, Instagram, Linkedin, MessageCircle, MapPin, Plus, Minus, X, Calendar, ExternalLink, Sparkles, Zap, Star, Sun } from 'lucide-react'
 import { toast, Toaster } from 'sonner'
 import { PROJECTS, REAL_CLIENTS, BLOG_POSTS } from '@/lib/projects'
 
@@ -67,11 +67,12 @@ const T = {
     clients: { kicker: '05 — Clientes', title: 'Confían en el trabajo.' },
     testimonials: {
       kicker: '06 — Testimonios',
-      title: 'Lo que dicen los clientes.',
+      title: 'Lo que dicen quienes trabajan con él.',
       items: [
-        { q: 'Jared entiende la marca desde el primer briefing. El resultado superó todo lo que teníamos en mente.', a: 'Laia Serra', r: 'Head of Brand · Startup B2B Barcelona' },
-        { q: 'La cinematografía y el ritmo narrativo son de otro nivel. Un profesional al que volveríamos a contratar sin dudar.', a: 'Marc Puig', r: 'Creative Director · Agencia de publicidad' },
-        { q: 'Cubrió nuestro evento internacional con una sensibilidad documental impresionante. Material listo en tiempo récord.', a: 'Elena Rossi', r: 'Event Producer · Milano' },
+        { q: 'Jared entiende la producción como pocos. Rápido, cinematográfico y con criterio. Es de esas personas que dejas trabajar sin preocuparte por el resultado.', a: 'Nico', r: 'CEO · Ready.Barcelona' },
+        { q: 'Su capacidad de contar una historia con imagen es enorme. Con Jared no solo grabas contenido, construyes marca. Un aliado clave en Prósperos Podcast.', a: 'Juan Lucho', r: 'CEO · New Wave & Prósperos Podcast' },
+        { q: 'Talento, disciplina y una mirada única detrás de cámara. Jared elevó todas las campañas donde trabajamos juntos: dirección de arte impecable y ejecución impecable.', a: 'Bianka Culotta', r: 'Head of Marketing · Push Digital' },
+        { q: 'Es un profesional integral: dirige, filma, edita y diseña. En ACERTA fue pieza clave de proyectos con clientes como WWF y BCIE. Su rigor y sensibilidad marcan la diferencia.', a: 'Carlos Castañeda', r: 'CEO · ACERTA' },
       ],
     },
     faq: {
@@ -149,11 +150,12 @@ const T = {
     },
     clients: { kicker: '05 — Clients', title: 'Trusted work.' },
     testimonials: {
-      kicker: '06 — Testimonials', title: 'What clients say.',
+      kicker: '06 — Testimonials', title: 'What people who work with him say.',
       items: [
-        { q: 'Jared understood the brand from the first briefing. The result surpassed everything we had in mind.', a: 'Laia Serra', r: 'Head of Brand · B2B Startup Barcelona' },
-        { q: 'The cinematography and narrative pace are on another level. A professional we would hire again without hesitation.', a: 'Marc Puig', r: 'Creative Director · Advertising agency' },
-        { q: 'He covered our international event with impressive documentary sensitivity. Material delivered in record time.', a: 'Elena Rossi', r: 'Event Producer · Milano' },
+        { q: 'Jared gets production like few people do. Fast, cinematic and sharp. He is one of those people you can let work without worrying about the result.', a: 'Nico', r: 'CEO · Ready.Barcelona' },
+        { q: 'His ability to tell a story with visuals is huge. With Jared you don\'t just record content — you build a brand. A key ally on Prósperos Podcast.', a: 'Juan Lucho', r: 'CEO · New Wave & Prósperos Podcast' },
+        { q: 'Talent, discipline and a unique eye behind the camera. Jared elevated every campaign we worked on together: flawless art direction and execution.', a: 'Bianka Culotta', r: 'Head of Marketing · Push Digital' },
+        { q: 'He\'s a full-stack creative: directs, shoots, edits and designs. At ACERTA he was a key part of projects with WWF and BCIE. His rigor makes the difference.', a: 'Carlos Castañeda', r: 'CEO · ACERTA' },
       ],
     },
     faq: {
@@ -223,11 +225,12 @@ const T = {
     },
     clients: { kicker: '05 — Clients', title: 'Confien en el treball.' },
     testimonials: {
-      kicker: '06 — Testimonis', title: 'Què diuen els clients.',
+      kicker: '06 — Testimonis', title: 'Què diuen els qui hi treballen.',
       items: [
-        { q: 'En Jared entén la marca des del primer briefing. El resultat va superar tot el que teníem al cap.', a: 'Laia Serra', r: 'Head of Brand · Startup B2B Barcelona' },
-        { q: 'La cinematografia i el ritme narratiu són d\'un altre nivell.', a: 'Marc Puig', r: 'Creative Director · Agència de publicitat' },
-        { q: "Va cobrir el nostre esdeveniment internacional amb una sensibilitat documental impressionant.", a: 'Elena Rossi', r: 'Event Producer · Milano' },
+        { q: 'En Jared entén la producció com pocs. Ràpid, cinematogràfic i amb criteri. Un perfil en qui pots confiar plenament.', a: 'Nico', r: 'CEO · Ready.Barcelona' },
+        { q: 'La seva capacitat d\'explicar històries amb imatge és enorme. Amb ell no només graves contingut, construeixes marca.', a: 'Juan Lucho', r: 'CEO · New Wave & Prósperos Podcast' },
+        { q: 'Talent, disciplina i una mirada única darrere la càmera. En Jared va elevar totes les campanyes on vam treballar junts.', a: 'Bianka Culotta', r: 'Head of Marketing · Push Digital' },
+        { q: 'És un professional integral: dirigeix, filma, edita i dissenya. A ACERTA va ser peça clau en projectes amb WWF i BCIE.', a: 'Carlos Castañeda', r: 'CEO · ACERTA' },
       ],
     },
     faq: {
@@ -533,6 +536,68 @@ function Marquee({ text }) {
   )
 }
 
+/* ---------- Space Background (parallax stars, scroll-linked) ---------- */
+function SpaceBackground() {
+  const { scrollY } = useScroll()
+  const y1 = useTransform(scrollY, [0, 3000], [0, -150])
+  const y2 = useTransform(scrollY, [0, 3000], [0, -350])
+  const y3 = useTransform(scrollY, [0, 3000], [0, -600])
+
+  const layers = useMemo(() => {
+    const rand = (seed) => {
+      let x = Math.sin(seed) * 10000
+      return x - Math.floor(x)
+    }
+    const build = (count, seedOffset, sizeRange, opRange) => (
+      Array.from({ length: count }).map((_, i) => {
+        const s = seedOffset + i
+        return {
+          x: rand(s * 3.7) * 100,
+          y: rand(s * 7.3) * 400, // 400vh spread
+          size: rand(s * 2.1) * (sizeRange[1] - sizeRange[0]) + sizeRange[0],
+          opacity: rand(s * 5.9) * (opRange[1] - opRange[0]) + opRange[0],
+          dur: rand(s * 11) * 3 + 3,
+          delay: rand(s * 13) * 4,
+        }
+      })
+    )
+    return {
+      far: build(50, 1000, [0.6, 1.2], [0.15, 0.4]),
+      mid: build(28, 2000, [1.0, 1.8], [0.25, 0.55]),
+      near: build(10, 3000, [1.6, 2.6], [0.4, 0.8]),
+    }
+  }, [])
+
+  return (
+    <div aria-hidden className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+      {[
+        { data: layers.far, y: y1, color: 'bg-white' },
+        { data: layers.mid, y: y2, color: 'bg-[#DDE7FF]' },
+        { data: layers.near, y: y3, color: 'bg-[#F5C518]' },
+      ].map((L, li) => (
+        <motion.div key={li} style={{ y: L.y }} className="absolute inset-0 will-change-transform">
+          {L.data.map((s, i) => (
+            <span
+              key={i}
+              className={`absolute rounded-full ${L.color} animate-twinkle`}
+              style={{
+                left: `${s.x}%`,
+                top: `${s.y}vh`,
+                width: `${s.size}px`,
+                height: `${s.size}px`,
+                '--tw-op': s.opacity,
+                '--tw-dur': `${s.dur}s`,
+                animationDelay: `${s.delay}s`,
+                boxShadow: li === 2 ? `0 0 ${s.size * 2}px rgba(245,197,24,0.4)` : 'none',
+              }}
+            />
+          ))}
+        </motion.div>
+      ))}
+    </div>
+  )
+}
+
 /* ---------- Floating WhatsApp (persistent on all pages) ---------- */
 function FloatingWhatsApp({ locale }) {
   const [visible, setVisible] = useState(false)
@@ -826,51 +891,82 @@ function MetaRow({ k, v }) {
 
 /* ---------- Blog ---------- */
 function Blog({ t, locale }) {
+  const posts = BLOG_POSTS.slice(0, 6)
   return (
     <section id="blog" className="relative py-24 md:py-40 px-6 md:px-10 border-t border-white/5">
       <div className="max-w-[1600px] mx-auto">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16 md:mb-24">
           <div>
             <SectionKicker>08 — {locale === 'en' ? 'Journal' : 'Blog'}</SectionKicker>
-            <h2 className="font-display text-4xl md:text-6xl lg:text-7xl leading-[1.02] tracking-tight mt-6 max-w-3xl text-balance">
+            <h2 className="font-display text-4xl md:text-6xl lg:text-7xl leading-[1.02] tracking-tight mt-6 max-w-3xl text-balance flex items-baseline gap-4">
               {locale === 'es' ? 'Ideas sobre cine, marca y producción.' : locale === 'ca' ? 'Idees sobre cinema, marca i producció.' : 'Ideas on cinema, brand and production.'}
+              <motion.span animate={{ rotate: [0, 15, 0], scale: [1, 1.1, 1] }} transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }} className="inline-flex text-[#F5C518]">
+                <Sparkles className="w-8 h-8 md:w-10 md:h-10" strokeWidth={1.5} />
+              </motion.span>
             </h2>
           </div>
         </div>
-        <div className="grid md:grid-cols-3 gap-8 md:gap-10">
-          {BLOG_POSTS.slice(0, 6).map((post, i) => (
-            <motion.a
-              key={post.slug}
-              href={`#${post.slug}`}
-              data-cursor="Read"
-              initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-50px' }} transition={{ duration: 0.8, delay: (i % 3) * 0.1 }}
-              className="group block"
-            >
-              <div className="relative aspect-[4/3] overflow-hidden bg-neutral-900 mb-5">
-                <img src={post.cover} alt={post.title[locale]} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                <div className="absolute top-4 left-4 text-[11px] uppercase tracking-widest bg-black/50 backdrop-blur px-2.5 py-1 rounded-full border border-white/10">
-                  {post.category[locale]}
-                </div>
-              </div>
-              <div className="flex items-center gap-3 text-[11px] uppercase tracking-widest text-white/40 font-mono-num mb-3">
-                <span>{new Date(post.date).toLocaleDateString(locale === 'en' ? 'en-US' : locale === 'ca' ? 'ca-ES' : 'es-ES', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
-                <span>·</span>
-                <span>{post.read}</span>
-              </div>
-              <h3 className="font-display text-xl md:text-2xl leading-tight tracking-tight group-hover:text-white/70 transition-colors text-balance">
-                {post.title[locale]}
-              </h3>
-              <p className="mt-3 text-white/60 leading-relaxed text-sm">{post.excerpt[locale]}</p>
-              <div className="mt-4 inline-flex items-center gap-2 text-sm">
-                <span className="uppercase tracking-widest text-[11px]">Read</span>
-                <ArrowUpRight className="w-3.5 h-3.5 group-hover:rotate-45 transition-transform" />
-              </div>
-            </motion.a>
+        <div className="border-t border-white/10">
+          {posts.map((post, i) => (
+            <BlogRow key={post.slug} post={post} index={i} locale={locale} />
           ))}
         </div>
       </div>
     </section>
+  )
+}
+
+function BlogRow({ post, index, locale }) {
+  const [hover, setHover] = useState(false)
+  return (
+    <motion.a
+      href={`#${post.slug}`}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      data-cursor="Read"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-30px' }}
+      transition={{ duration: 0.7, delay: (index % 3) * 0.05 }}
+      className="group grid grid-cols-12 items-baseline gap-4 md:gap-6 py-8 md:py-10 border-b border-white/10 relative overflow-hidden"
+    >
+      <span
+        className="absolute left-0 bottom-0 h-[1px] bg-[#F5C518] transition-transform duration-700 ease-out origin-left"
+        style={{ width: '100%', transform: hover ? 'scaleX(1)' : 'scaleX(0)' }}
+      />
+
+      <div className="col-span-2 md:col-span-1 text-[11px] uppercase tracking-widest text-white/40 font-mono-num">
+        0{index + 1}
+      </div>
+
+      <div className="col-span-10 md:col-span-2 flex items-center gap-2">
+        <span className="inline-flex items-center gap-1.5 text-[10px] uppercase tracking-widest text-[#F5C518]">
+          <span className="w-1 h-1 rounded-full bg-[#F5C518]" />
+          {post.category[locale]}
+        </span>
+      </div>
+
+      <div className="col-span-12 md:col-span-6">
+        <h3 className={`font-display text-2xl md:text-3xl lg:text-4xl leading-[1.1] tracking-tight text-balance transition-all duration-500 ${hover ? 'italic translate-x-1' : ''}`}>
+          {post.title[locale]}
+        </h3>
+      </div>
+
+      <div className="hidden md:block md:col-span-2 text-[11px] uppercase tracking-widest text-white/40 font-mono-num text-right">
+        {new Date(post.date).toLocaleDateString(locale === 'en' ? 'en-US' : locale === 'ca' ? 'ca-ES' : 'es-ES', { month: 'short', day: 'numeric', year: 'numeric' })}
+        <div className="mt-1 text-white/30">{post.read}</div>
+      </div>
+
+      <div className="col-span-12 md:col-span-1 flex md:justify-end">
+        <motion.span
+          animate={hover ? { rotate: 45, backgroundColor: '#F5C518', color: '#000' } : { rotate: 0 }}
+          transition={{ duration: 0.4 }}
+          className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white/80"
+        >
+          <ArrowUpRight className="w-4 h-4" />
+        </motion.span>
+      </div>
+    </motion.a>
   )
 }
 
@@ -981,42 +1077,64 @@ function Testimonials({ t }) {
   }, [t.testimonials.items.length])
 
   const item = t.testimonials.items[i]
+  const initials = item.a.split(' ').map(w => w[0]).slice(0, 2).join('')
 
   return (
     <section id="testimonials" className="relative py-24 md:py-40 px-6 md:px-10 border-t border-white/5">
       <div className="max-w-[1600px] mx-auto">
         <SectionKicker>{t.testimonials.kicker}</SectionKicker>
-        <h2 className="font-display text-4xl md:text-6xl lg:text-7xl leading-[1.02] tracking-tight mt-6 max-w-3xl text-balance">
+        <h2 className="font-display text-4xl md:text-6xl lg:text-7xl leading-[1.02] tracking-tight mt-6 max-w-4xl text-balance flex items-baseline gap-4">
           {t.testimonials.title}
+          <motion.span animate={{ rotate: [-6, 6, -6] }} transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }} className="inline-flex text-[#F5C518]">
+            <Star className="w-7 h-7 md:w-9 md:h-9 fill-[#F5C518]" strokeWidth={0} />
+          </motion.span>
         </h2>
 
-        <div className="mt-16 md:mt-24 max-w-4xl">
+        <div className="mt-16 md:mt-24 max-w-5xl">
           <AnimatePresence mode="wait">
             <motion.blockquote
               key={i}
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.7 }}
             >
-              <p className="font-display text-3xl md:text-5xl leading-[1.15] italic text-balance">
+              <div className="flex items-start gap-2 mb-6">
+                {[0,1,2,3,4].map((n) => (
+                  <motion.span
+                    key={n}
+                    initial={{ scale: 0, rotate: -30 }}
+                    animate={{ scale: 1, rotate: 0 }}
+                    transition={{ duration: 0.4, delay: 0.2 + n * 0.08, type: 'spring' }}
+                    className="text-[#F5C518]"
+                  >
+                    <Star className="w-4 h-4 fill-[#F5C518]" strokeWidth={0} />
+                  </motion.span>
+                ))}
+              </div>
+              <p className="font-display text-2xl md:text-4xl lg:text-5xl leading-[1.2] italic text-balance">
                 &ldquo;{item.q}&rdquo;
               </p>
-              <footer className="mt-8 md:mt-12 flex items-center gap-4 text-sm">
-                <div className="w-10 h-[1px] bg-white/40" />
+              <footer className="mt-8 md:mt-12 flex items-center gap-4 md:gap-5 text-sm">
+                <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-[#F5C518] to-[#E8A800] flex items-center justify-center text-black font-display text-lg md:text-xl">
+                  {initials}
+                </div>
                 <div>
-                  <div className="font-medium">{item.a}</div>
-                  <div className="text-white/50">{item.r}</div>
+                  <div className="font-medium text-base">{item.a}</div>
+                  <div className="text-white/50 text-xs md:text-sm">{item.r}</div>
                 </div>
               </footer>
             </motion.blockquote>
           </AnimatePresence>
 
-          <div className="mt-12 flex gap-2">
-            {t.testimonials.items.map((_, idx) => (
+          <div className="mt-12 flex gap-3 flex-wrap">
+            {t.testimonials.items.map((item2, idx) => (
               <button
                 key={idx}
                 onClick={() => setI(idx)}
-                className={`h-[2px] transition-all duration-500 ${idx === i ? 'w-12 bg-white' : 'w-6 bg-white/20'}`}
+                className={`text-left transition-all duration-500 px-4 py-3 rounded-lg border ${idx === i ? 'bg-white/5 border-[#F5C518]/40' : 'border-white/10 hover:border-white/30'}`}
                 aria-label={`Testimonial ${idx + 1}`}
-              />
+              >
+                <div className={`text-xs font-medium ${idx === i ? 'text-[#F5C518]' : 'text-white/70'}`}>{item2.a}</div>
+                <div className="text-[10px] text-white/40 mt-0.5">{item2.r}</div>
+              </button>
             ))}
           </div>
         </div>
@@ -1270,7 +1388,12 @@ function SectionKicker({ children }) {
       initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
       className="flex items-center gap-3 text-[11px] uppercase tracking-[0.3em] text-white/50"
     >
-      <div className="w-6 h-[1px] bg-white/40" />
+      <div className="w-6 h-[1px] bg-[#F5C518]" />
+      <motion.span
+        animate={{ scale: [1, 1.15, 1], opacity: [1, 0.6, 1] }}
+        transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+        className="w-1.5 h-1.5 rounded-full bg-[#F5C518]"
+      />
       <span>{children}</span>
     </motion.div>
   )
@@ -1342,7 +1465,8 @@ function App() {
       <CustomCursor />
       <Loader />
       <Toaster position="bottom-right" theme="dark" />
-      <div className="grain">
+      <SpaceBackground />
+      <div className="grain relative z-10">
         <Nav locale={locale} setLocale={setLocale} t={t} />
         <main>
           <Hero t={t} />
