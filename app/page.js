@@ -88,7 +88,7 @@ const T = {
       kicker: '08 — Contacto',
       title: 'Trabajemos juntos.',
       sub: 'Cuéntame sobre tu proyecto. Respondo en menos de 24 horas.',
-      name: 'Nombre', email: 'Email', company: 'Empresa', budget: 'Presupuesto', type: 'Tipo de proyecto', message: 'Cuéntame tu proyecto',
+      name: 'Nombre', email: 'Email', phone: 'Teléfono', company: 'Empresa', budget: 'Presupuesto', type: 'Tipo de proyecto', message: 'Cuéntame tu proyecto',
       send: 'Enviar mensaje', sending: 'Enviando…', success: 'Mensaje enviado. Te respondo en breve.', error: 'Algo falló. Escribe a hello@jaredduron.com',
       types: ['Publicidad / Brand film', 'Vídeo corporativo', 'Documental', 'Evento', 'Redes sociales', 'Otro'],
       budgets: ['< 5.000€', '5.000€ - 15.000€', '15.000€ - 50.000€', '+ 50.000€'],
@@ -167,7 +167,7 @@ const T = {
     },
     contact: {
       kicker: '08 — Contact', title: "Let's work together.", sub: 'Tell me about your project. I reply within 24 hours.',
-      name: 'Name', email: 'Email', company: 'Company', budget: 'Budget', type: 'Project type', message: 'Tell me about your project',
+      name: 'Name', email: 'Email', phone: 'Phone', company: 'Company', budget: 'Budget', type: 'Project type', message: 'Tell me about your project',
       send: 'Send message', sending: 'Sending…', success: 'Message sent. I will reply soon.', error: 'Something failed. Write to hello@jaredduron.com',
       types: ['Advertising / Brand film', 'Corporate video', 'Documentary', 'Event', 'Social media', 'Other'],
       budgets: ['< €5k', '€5k - €15k', '€15k - €50k', '€50k+'],
@@ -241,7 +241,7 @@ const T = {
     },
     contact: {
       kicker: '08 — Contacte', title: 'Treballem junts.', sub: 'Explica\'m el teu projecte. Responc en menys de 24 hores.',
-      name: 'Nom', email: 'Email', company: 'Empresa', budget: 'Pressupost', type: 'Tipus de projecte', message: 'Explica\'m el teu projecte',
+      name: 'Nom', email: 'Email', phone: 'Telèfon', company: 'Empresa', budget: 'Pressupost', type: 'Tipus de projecte', message: 'Explica\'m el teu projecte',
       send: 'Enviar missatge', sending: 'Enviant…', success: 'Missatge enviat. Et responc aviat.', error: 'Alguna cosa ha fallat. Escriu a hello@jaredduron.com',
       types: ['Publicitat / Brand film', 'Vídeo corporatiu', 'Documental', 'Esdeveniment', 'Xarxes socials', 'Altres'],
       budgets: ['< 5.000€', '5.000€ - 15.000€', '15.000€ - 50.000€', '+ 50.000€'],
@@ -386,11 +386,11 @@ function Hero({ t }) {
       <motion.div style={{ y, scale }} className="absolute inset-0">
         <video
           className="absolute inset-0 w-full h-full object-cover"
-          autoPlay muted loop playsInline preload="metadata"
-          poster="https://images.unsplash.com/photo-1568876694728-451bbf694b83?crop=entropy&cs=srgb&fm=jpg&w=1920&q=85"
+          autoPlay muted loop playsInline preload="auto"
+          poster="https://mir-s3-cdn-cf.behance.net/projects/404/e9a7e7204648249.Y3JvcCwzMzY3LDI2MzMsMCww.png"
         >
+          <source src="https://customer-assets.emergentagent.com/job_filmmaker-barcelona/artifacts/qkv7mv6p_Toma%20Dron%201.mp4" type="video/mp4" />
           <source src="https://videos.pexels.com/video-files/3209828/3209828-hd_1920_1080_25fps.mp4" type="video/mp4" />
-          <source src="https://videos.pexels.com/video-files/2022395/2022395-hd_1920_1080_30fps.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 hero-vignette" />
       </motion.div>
@@ -405,7 +405,7 @@ function Hero({ t }) {
             <span className="text-xs md:text-sm uppercase tracking-[0.3em] text-white/70">{t.hero.eyebrow}</span>
           </motion.div>
 
-          <h1 className="font-display text-[13vw] md:text-[9vw] leading-[0.95] tracking-tight text-balance">
+          <h1 className="font-display text-[9vw] md:text-[5.5vw] leading-[0.98] tracking-tight text-balance">
             <motion.span
               initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.2, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
               className="block"
@@ -505,10 +505,10 @@ function ReelModal({ open, onClose }) {
             <video
               className="w-full h-full object-cover"
               controls autoPlay playsInline preload="auto"
-              poster="https://images.unsplash.com/photo-1568876694728-451bbf694b83?crop=entropy&cs=srgb&fm=jpg&w=1920&q=85"
+              poster="https://mir-s3-cdn-cf.behance.net/projects/404/e9a7e7204648249.Y3JvcCwzMzY3LDI2MzMsMCww.png"
             >
+              <source src="https://customer-assets.emergentagent.com/job_filmmaker-barcelona/artifacts/qkv7mv6p_Toma%20Dron%201.mp4" type="video/mp4" />
               <source src="https://videos.pexels.com/video-files/3209828/3209828-hd_1920_1080_25fps.mp4" type="video/mp4" />
-              <source src="https://videos.pexels.com/video-files/2022395/2022395-hd_1920_1080_30fps.mp4" type="video/mp4" />
             </video>
           </motion.div>
         </motion.div>
@@ -1075,7 +1075,7 @@ function FAQ({ t }) {
 
 /* ---------- Contact ---------- */
 function Contact({ t, locale }) {
-  const [form, setForm] = useState({ name: '', email: '', company: '', budget: '', projectType: '', message: '' })
+  const [form, setForm] = useState({ name: '', email: '', phone: '', company: '', budget: '', projectType: '', message: '' })
   const [loading, setLoading] = useState(false)
 
   const submit = async (e) => {
@@ -1089,7 +1089,7 @@ function Contact({ t, locale }) {
       })
       if (!res.ok) throw new Error('fail')
       toast.success(t.contact.success)
-      setForm({ name: '', email: '', company: '', budget: '', projectType: '', message: '' })
+      setForm({ name: '', email: '', phone: '', company: '', budget: '', projectType: '', message: '' })
     } catch {
       toast.error(t.contact.error)
     } finally { setLoading(false) }
@@ -1149,13 +1149,24 @@ function Contact({ t, locale }) {
             <FormField label={t.contact.company}>
               <input value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} className="w-full bg-transparent border-b border-white/20 focus:border-white outline-none py-3 text-lg transition-colors" />
             </FormField>
-            <FormField label={t.contact.budget}>
-              <select value={form.budget} onChange={(e) => setForm({ ...form, budget: e.target.value })} className="w-full bg-transparent border-b border-white/20 focus:border-white outline-none py-3 text-lg transition-colors cursor-pointer">
-                <option value="" className="bg-black">—</option>
-                {t.contact.budgets.map((b) => <option key={b} value={b} className="bg-black">{b}</option>)}
-              </select>
+            <FormField label={t.contact.phone}>
+              <input type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="+34 600 000 000" className="w-full bg-transparent border-b border-white/20 focus:border-white outline-none py-3 text-lg transition-colors placeholder:text-white/25" />
             </FormField>
           </div>
+          <FormField label={t.contact.budget}>
+            <div className="flex flex-wrap gap-2 pt-2">
+              {t.contact.budgets.map((b) => (
+                <button
+                  type="button"
+                  key={b}
+                  onClick={() => setForm({ ...form, budget: b })}
+                  className={`px-4 py-2 rounded-full text-sm border transition-all ${form.budget === b ? 'bg-white text-black border-white' : 'border-white/20 hover:border-white/60'}`}
+                >
+                  {b}
+                </button>
+              ))}
+            </div>
+          </FormField>
           <FormField label={t.contact.type}>
             <div className="flex flex-wrap gap-2 pt-2">
               {t.contact.types.map((typ) => (

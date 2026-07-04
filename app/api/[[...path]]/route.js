@@ -25,7 +25,8 @@ export async function OPTIONS() {
   return cors(new NextResponse(null, { status: 204 }))
 }
 
-export async function GET(request, { params }) {
+export async function GET(request, context) {
+  const params = await context.params
   const path = (params?.path || []).join('/')
   try {
     if (path === '' || path === 'health') {
@@ -37,12 +38,13 @@ export async function GET(request, { params }) {
   }
 }
 
-export async function POST(request, { params }) {
+export async function POST(request, context) {
+  const params = await context.params
   const path = (params?.path || []).join('/')
   try {
     const body = await request.json().catch(() => ({}))
     if (path === 'contact') {
-      const { name, email, company, budget, projectType, message, locale } = body
+      const { name, email, phone, company, budget, projectType, message, locale } = body
       if (!name || !email || !message) {
         return cors(NextResponse.json({ error: 'Missing required fields' }, { status: 400 }))
       }
@@ -51,6 +53,7 @@ export async function POST(request, { params }) {
         id: uuidv4(),
         name,
         email,
+        phone: phone || null,
         company: company || null,
         budget: budget || null,
         projectType: projectType || null,
