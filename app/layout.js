@@ -21,7 +21,7 @@ export const metadata = {
   },
   description: 'Filmmaker y videographer en Barcelona especializado en producción audiovisual cinematográfica para marcas premium, agencias creativas y productoras internacionales. Video corporativo, publicidad, documentales y eventos.',
   keywords: [
-    'filmmaker Barcelona',
+    'filmmaker Barcelona','videographer Barcelona','videógrafo Barcelona','video production Barcelona','video production services Barcelona','video production company Barcelona','corporate video Barcelona','corporate videographer Barcelona','corporate video production Spain','commercial filmmaker Spain','brand filmmaker Barcelona','cinematic videographer Barcelona','event videographer Barcelona','product video Barcelona','documentary filmmaker Barcelona','documentary videographer Spain','English speaking filmmaker Barcelona','English speaking video crew Spain','freelance filmmaker Barcelona','freelance videographer Barcelona','diseñador gráfico Barcelona','graphic designer Barcelona','motion graphics Barcelona','color grading Barcelona','videomapping Barcelona','brand identity Barcelona','creative director Barcelona','productora audiovisual Cataluña','trade show videographer Spain','Meta Ads video production','YouTube video production Barcelona','podcast video production Barcelona','Jared Durón',
     'videographer Barcelona',
     'director de fotografía Barcelona',
     'video production Barcelona',

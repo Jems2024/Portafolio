@@ -410,24 +410,24 @@ function Hero({ t }) {
 
           <h1 className="font-display text-[9vw] md:text-[5.5vw] leading-[0.98] tracking-tight text-balance">
             <motion.span
-              initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.2, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              className="block"
+              initial={{ opacity: 0, y: 40, filter: 'blur(20px)' }} animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }} transition={{ duration: 1.5, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className="block will-change-[filter,transform]"
             >
               {t.hero.title1}
             </motion.span>
             <motion.span
-              initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.2, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="block italic text-white/80"
+              initial={{ opacity: 0, y: 40, filter: 'blur(20px)' }} animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }} transition={{ duration: 1.5, delay: 0.85, ease: [0.22, 1, 0.36, 1] }}
+              className="block italic text-white/80 will-change-[filter,transform]"
             >
               {t.hero.title2}
             </motion.span>
           </h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 1.1 }}
+            initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }} animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }} transition={{ duration: 1.4, delay: 1.2, ease: [0.22, 1, 0.36, 1] }}
             className="mt-8 md:mt-10 max-w-xl text-base md:text-lg text-white/70 leading-relaxed"
           >
-            {t.hero.sub}
+            <Highlight text={t.hero.sub} />
           </motion.p>
 
           <motion.div
@@ -536,12 +536,49 @@ function Marquee({ text }) {
   )
 }
 
+/* ---------- Highlight helper: wraps keywords in yellow accent ---------- */
+const HIGHLIGHT_WORDS = [
+  // ES
+  'filmmaker', 'Filmmaker', 'FILMMAKER',
+  'videographer', 'Videographer', 'videógrafo',
+  'diseñador gráfico', 'Diseñador Gráfico', 'graphic designer', 'Graphic Designer',
+  'Barcelona', 'BARCELONA',
+  'cinematográfico', 'cinematográfica', 'cinematográficas', 'cinematográficos', 'cinematográfic',
+  'cinematic', 'Cinematic',
+  'premium', 'Premium',
+  'documental', 'documentales', 'Documental', 'documentary', 'Documentary',
+  'producción audiovisual', 'video production', 'productora audiovisual',
+  'vídeo corporativo', 'video corporativo', 'corporate video',
+  'marca', 'marcas', 'brand', 'brands',
+  'motion graphics', 'Motion Graphics',
+  'color grading', 'Color Grading',
+  'VideoMapping', 'videomapping',
+  'John Deere', 'WWF', 'KNX', 'BCIE', 'Messe Frankfurt', 'Grupo Roble', 'Miniso',
+  'ISE 2026', 'Light+Building',
+]
+
+function Highlight({ text, className = '' }) {
+  // Build a regex that captures all highlight words (longer first to prioritize multi-word matches)
+  const sorted = [...HIGHLIGHT_WORDS].sort((a, b) => b.length - a.length)
+  const pattern = new RegExp(`(${sorted.map(w => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})`, 'g')
+  const parts = text.split(pattern)
+  return (
+    <span className={className}>
+      {parts.map((p, i) => (
+        sorted.includes(p)
+          ? <span key={i} className="text-[#F5C518]">{p}</span>
+          : <span key={i}>{p}</span>
+      ))}
+    </span>
+  )
+}
+
 /* ---------- Space Background (parallax stars, scroll-linked) ---------- */
 function SpaceBackground() {
   const { scrollY } = useScroll()
-  const y1 = useTransform(scrollY, [0, 3000], [0, -150])
-  const y2 = useTransform(scrollY, [0, 3000], [0, -350])
-  const y3 = useTransform(scrollY, [0, 3000], [0, -600])
+  const y1 = useTransform(scrollY, [0, 3000], [0, -180])
+  const y2 = useTransform(scrollY, [0, 3000], [0, -420])
+  const y3 = useTransform(scrollY, [0, 3000], [0, -750])
 
   const layers = useMemo(() => {
     const rand = (seed) => {
@@ -553,45 +590,50 @@ function SpaceBackground() {
         const s = seedOffset + i
         return {
           x: rand(s * 3.7) * 100,
-          y: rand(s * 7.3) * 400, // 400vh spread
+          y: rand(s * 7.3) * 500, // 500vh spread
           size: rand(s * 2.1) * (sizeRange[1] - sizeRange[0]) + sizeRange[0],
           opacity: rand(s * 5.9) * (opRange[1] - opRange[0]) + opRange[0],
-          dur: rand(s * 11) * 3 + 3,
-          delay: rand(s * 13) * 4,
+          dur: rand(s * 11) * 4 + 3,
+          delay: rand(s * 13) * 5,
+          hue: rand(s * 17),
         }
       })
     )
     return {
-      far: build(50, 1000, [0.6, 1.2], [0.15, 0.4]),
-      mid: build(28, 2000, [1.0, 1.8], [0.25, 0.55]),
-      near: build(10, 3000, [1.6, 2.6], [0.4, 0.8]),
+      far: build(140, 1000, [0.7, 1.4], [0.35, 0.7]),
+      mid: build(70, 2000, [1.1, 2.0], [0.45, 0.85]),
+      near: build(24, 3000, [1.8, 3.0], [0.6, 1.0]),
     }
   }, [])
 
   return (
     <div aria-hidden className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
       {[
-        { data: layers.far, y: y1, color: 'bg-white' },
-        { data: layers.mid, y: y2, color: 'bg-[#DDE7FF]' },
-        { data: layers.near, y: y3, color: 'bg-[#F5C518]' },
+        { data: layers.far, y: y1, colorFn: (h) => h > 0.85 ? '#F5C518' : (h > 0.5 ? '#FFFFFF' : '#C9D6FF'), glow: false },
+        { data: layers.mid, y: y2, colorFn: (h) => h > 0.7 ? '#F5C518' : '#FFFFFF', glow: false },
+        { data: layers.near, y: y3, colorFn: () => '#F5C518', glow: true },
       ].map((L, li) => (
         <motion.div key={li} style={{ y: L.y }} className="absolute inset-0 will-change-transform">
-          {L.data.map((s, i) => (
-            <span
-              key={i}
-              className={`absolute rounded-full ${L.color} animate-twinkle`}
-              style={{
-                left: `${s.x}%`,
-                top: `${s.y}vh`,
-                width: `${s.size}px`,
-                height: `${s.size}px`,
-                '--tw-op': s.opacity,
-                '--tw-dur': `${s.dur}s`,
-                animationDelay: `${s.delay}s`,
-                boxShadow: li === 2 ? `0 0 ${s.size * 2}px rgba(245,197,24,0.4)` : 'none',
-              }}
-            />
-          ))}
+          {L.data.map((s, i) => {
+            const color = L.colorFn(s.hue)
+            return (
+              <span
+                key={i}
+                className="absolute rounded-full animate-twinkle"
+                style={{
+                  left: `${s.x}%`,
+                  top: `${s.y}vh`,
+                  width: `${s.size}px`,
+                  height: `${s.size}px`,
+                  background: color,
+                  '--tw-op': s.opacity,
+                  '--tw-dur': `${s.dur}s`,
+                  animationDelay: `${s.delay}s`,
+                  boxShadow: L.glow ? `0 0 ${s.size * 3}px ${color}` : (color === '#F5C518' ? `0 0 ${s.size * 1.5}px rgba(245,197,24,0.5)` : 'none'),
+                }}
+              />
+            )
+          })}
         </motion.div>
       ))}
     </div>
@@ -669,15 +711,15 @@ function About({ t }) {
 
           {/* Copy — symmetric right */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-100px' }} transition={{ duration: 1, delay: 0.2 }}
+            initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }} whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }} viewport={{ once: true, margin: '-100px' }} transition={{ duration: 1.2, delay: 0.2 }}
             className="md:col-span-7"
           >
             <h2 className="font-display text-4xl md:text-6xl lg:text-7xl leading-[1.02] tracking-tight text-balance">
               {t.about.title}
             </h2>
             <div className="mt-8 space-y-5 text-white/70 leading-relaxed text-base md:text-[17px] max-w-2xl">
-              <p>{t.about.body1}</p>
-              <p>{t.about.body2}</p>
+              <p><Highlight text={t.about.body1} /></p>
+              <p><Highlight text={t.about.body2} /></p>
             </div>
           </motion.div>
         </div>
@@ -1377,6 +1419,94 @@ function Footer({ t }) {
             <span>v1.0</span>
           </div>
         </div>
+
+        {/* SEO keywords cloud — helps organic discovery */}
+        <div className="mt-14 pt-10 border-t border-white/5">
+          <div className="text-[10px] uppercase tracking-[0.3em] text-white/40 mb-5 flex items-center gap-3">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#F5C518]" />
+            <span>Also known as · Also searching for</span>
+          </div>
+          <div className="flex flex-wrap gap-x-3 gap-y-2 text-[11px] text-white/35 leading-relaxed">
+            {[
+              'Filmmaker Barcelona',
+              'Videographer Barcelona',
+              'Videógrafo Barcelona',
+              'Director de fotografía Barcelona',
+              'Productora audiovisual Barcelona',
+              'Vídeo corporativo Barcelona',
+              'Corporate video Barcelona',
+              'Corporate videographer Barcelona',
+              'Corporate video production Spain',
+              'Commercial filmmaker Spain',
+              'Brand filmmaker Barcelona',
+              'Cinematic videographer Barcelona',
+              'Event videographer Barcelona',
+              'Product video Barcelona',
+              'Documentary filmmaker Barcelona',
+              'Documentary videographer Spain',
+              'English speaking filmmaker Barcelona',
+              'English speaking video crew Spain',
+              'Barcelona filmmaker for hire',
+              'Freelance filmmaker Barcelona',
+              'Freelance videographer Barcelona',
+              'Video production company Barcelona',
+              'Video production services Barcelona',
+              'Trade show videographer Spain',
+              'Corporate interviews Barcelona',
+              'Branded content Barcelona',
+              'Branded video Barcelona',
+              'Meta Ads video production',
+              'YouTube video production Barcelona',
+              'Reels & TikTok content creator Barcelona',
+              'Podcast video production Barcelona',
+              'Video marketing Barcelona',
+              'Diseñador gráfico Barcelona',
+              'Graphic designer Barcelona',
+              'Motion graphics Barcelona',
+              'Motion designer Barcelona',
+              'Color grading Barcelona',
+              'Colorist Barcelona',
+              'DaVinci Resolve colorist Barcelona',
+              'VideoMapping Barcelona',
+              'VideoMapping Spain',
+              'Brand identity designer Barcelona',
+              'Creative director Barcelona',
+              'Art director Barcelona',
+              'Cinematographer Barcelona',
+              'DoP Barcelona',
+              'Director of Photography Barcelona',
+              'Barcelona film production',
+              'Barcelona wedding videographer',
+              'Barcelona real estate videographer',
+              'Barcelona restaurant videographer',
+              'Barcelona hotel videographer',
+              'Barcelona fashion videographer',
+              'Producción audiovisual Cataluña',
+              'Filmmaker Cataluña',
+              'Filmmaker Sabadell',
+              'Filmmaker Terrassa',
+              'Filmmaker Girona',
+              'Filmmaker Madrid',
+              'Videographer Madrid',
+              'Videographer Valencia',
+              'Videographer Bilbao',
+              'Filmmaker Ibiza',
+              'Filmmaker Mallorca',
+              'Filmmaker Sitges',
+              'Video maker Barcelona',
+              'Video editor Barcelona',
+              'Post production Barcelona',
+              'Aerial videography Barcelona',
+              'Drone videographer Barcelona',
+              'Filmmaker per empreses Barcelona',
+              'Videògraf Barcelona',
+              'Productora audiovisual Catalunya',
+              'Producció audiovisual Barcelona',
+            ].map((k, i) => (
+              <span key={i} className="hover:text-[#F5C518] transition-colors cursor-default">{k}{i < 71 ? ' ·' : ''}</span>
+            ))}
+          </div>
+        </div>
       </div>
     </footer>
   )
@@ -1407,15 +1537,29 @@ function Loader() {
   useEffect(() => {
     let p = 0
     const id = setInterval(() => {
-      p += Math.random() * 15 + 5
+      p += Math.random() * 8 + 3
       if (p >= 100) {
         p = 100
         clearInterval(id)
-        setTimeout(() => setDone(true), 500)
+        setTimeout(() => setDone(true), 900)
       }
       setProgress(Math.floor(p))
-    }, 120)
+    }, 90)
     return () => clearInterval(id)
+  }, [])
+
+  // Deterministic star grid for loader
+  const stars = useMemo(() => {
+    const rand = (seed) => { const x = Math.sin(seed) * 10000; return x - Math.floor(x) }
+    return Array.from({ length: 180 }).map((_, i) => ({
+      x: rand(i * 3.1) * 100,
+      y: rand(i * 7.7) * 100,
+      s: rand(i * 2.3) * 2 + 0.6,
+      o: rand(i * 5.5) * 0.7 + 0.2,
+      d: rand(i * 11.1) * 3 + 2,
+      dl: rand(i * 13.3) * 4,
+      yellow: rand(i * 17.7) > 0.86,
+    }))
   }, [])
 
   return (
@@ -1423,23 +1567,91 @@ function Loader() {
       {!done && (
         <motion.div
           exit={{ y: '-100%' }}
-          transition={{ duration: 1.2, ease: [0.77, 0, 0.175, 1] }}
-          className="fixed inset-0 z-[100] bg-[#0A0A0A] flex flex-col items-center justify-center"
+          transition={{ duration: 1.6, ease: [0.77, 0, 0.175, 1] }}
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden"
+          style={{
+            background:
+              'radial-gradient(ellipse 90% 60% at 50% 30%, rgba(30,58,138,0.35), transparent 60%), radial-gradient(ellipse 70% 60% at 50% 100%, rgba(8,12,30,0.6), transparent 70%), linear-gradient(180deg, #050813 0%, #080B1A 50%, #050609 100%)',
+          }}
         >
-          <motion.div
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }}
-            className="text-center"
-          >
-            <div className="font-display text-6xl md:text-8xl italic">Jared Durón</div>
-            <div className="mt-2 text-[11px] uppercase tracking-[0.4em] text-white/50">Filmmaker · Barcelona</div>
-          </motion.div>
-          <div className="absolute bottom-16 left-6 right-6 md:left-10 md:right-10 flex items-end justify-between">
-            <div className="font-mono-num text-xs text-white/50">{String(progress).padStart(3, '0')}</div>
-            <div className="flex-1 mx-6 h-[1px] bg-white/10 relative overflow-hidden">
-              <motion.div className="absolute inset-y-0 left-0 bg-white" style={{ width: `${progress}%` }} />
-            </div>
-            <div className="text-xs uppercase tracking-widest text-white/50">Loading</div>
+          {/* Deep space stars */}
+          <div aria-hidden className="absolute inset-0 pointer-events-none">
+            {stars.map((s, i) => (
+              <span
+                key={i}
+                className="absolute rounded-full animate-twinkle"
+                style={{
+                  left: `${s.x}%`,
+                  top: `${s.y}%`,
+                  width: `${s.s}px`,
+                  height: `${s.s}px`,
+                  background: s.yellow ? '#F5C518' : '#FFFFFF',
+                  '--tw-op': s.o,
+                  '--tw-dur': `${s.d}s`,
+                  animationDelay: `${s.dl}s`,
+                  boxShadow: s.yellow ? `0 0 ${s.s * 3}px #F5C518` : `0 0 ${s.s * 2}px rgba(255,255,255,0.5)`,
+                }}
+              />
+            ))}
           </div>
+
+          {/* Cinematic drift particles (bigger yellow stars floating slowly) */}
+          <div aria-hidden className="absolute inset-0 pointer-events-none">
+            {[15, 40, 65, 82].map((left, i) => (
+              <motion.span
+                key={i}
+                initial={{ y: '110vh', opacity: 0 }}
+                animate={{ y: '-10vh', opacity: [0, 0.9, 0.9, 0] }}
+                transition={{ duration: 8 + i * 2, repeat: Infinity, delay: i * 1.5, ease: 'linear' }}
+                className="absolute w-1 h-1 rounded-full"
+                style={{ left: `${left}%`, background: '#F5C518', boxShadow: '0 0 10px #F5C518, 0 0 24px rgba(245,197,24,0.6)' }}
+              />
+            ))}
+          </div>
+
+          {/* Vignette */}
+          <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at center, transparent 0%, transparent 40%, rgba(0,0,0,0.6) 100%)' }} />
+
+          {/* Center name with cinematic reveal */}
+          <div className="relative z-10 text-center px-6">
+            <motion.div
+              initial={{ opacity: 0, letterSpacing: '0.6em', filter: 'blur(20px)' }}
+              animate={{ opacity: 1, letterSpacing: '-0.02em', filter: 'blur(0px)' }}
+              transition={{ duration: 2.4, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+              className="font-display text-6xl md:text-9xl italic will-change-[filter,letter-spacing]"
+              style={{ textShadow: '0 0 40px rgba(245,197,24,0.15)' }}
+            >
+              Jared <span className="text-[#F5C518]">Durón</span>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20, filter: 'blur(10px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              transition={{ duration: 1.5, delay: 1.2, ease: [0.22, 1, 0.36, 1] }}
+              className="mt-4 text-[11px] uppercase tracking-[0.5em] text-white/60"
+            >
+              <span className="text-[#F5C518]">✦</span> Filmmaker · Graphic Designer · Barcelona <span className="text-[#F5C518]">✦</span>
+            </motion.div>
+          </div>
+
+          {/* Progress bar with cinematic fade */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.6 }}
+            className="absolute bottom-14 left-6 right-6 md:left-14 md:right-14 flex items-end justify-between z-10"
+          >
+            <div className="font-mono-num text-xs text-[#F5C518]/80">{String(progress).padStart(3, '0')}</div>
+            <div className="flex-1 mx-6 h-[1px] bg-white/10 relative overflow-hidden">
+              <motion.div
+                className="absolute inset-y-0 left-0"
+                style={{
+                  width: `${progress}%`,
+                  background: 'linear-gradient(90deg, transparent 0%, #F5C518 40%, #ffffff 100%)',
+                  boxShadow: '0 0 12px #F5C518',
+                }}
+                transition={{ duration: 0.4, ease: 'easeOut' }}
+              />
+            </div>
+            <div className="text-xs uppercase tracking-widest text-white/60">Loading</div>
+          </motion.div>
         </motion.div>
       )}
     </AnimatePresence>
