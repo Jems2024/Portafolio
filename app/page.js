@@ -1521,11 +1521,12 @@ function Contact({ t, locale }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...form, locale }),
       })
-      if (!res.ok) throw new Error('fail')
+      const data = await res.json().catch(() => ({}))
+      if (!res.ok) throw new Error(data.detail || data.error || t.contact.error)
       toast.success(t.contact.success)
       setForm({ name: '', email: '', phone: '', company: '', budget: '', projectType: '', message: '' })
-    } catch {
-      toast.error(t.contact.error)
+    } catch (error) {
+      toast.error(error.message || t.contact.error)
     } finally { setLoading(false) }
   }
 
