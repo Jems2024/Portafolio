@@ -12,7 +12,7 @@ const T = {
     nav: { work: 'Proyectos', about: 'Sobre mí', services: 'Servicios', process: 'Proceso', blog: 'Blog', contact: 'Contacto' },
     hero: {
       eyebrow: 'Filmmaker & Graphic Designer · Barcelona',
-      title1: 'Stories that move people.',
+      title1: 'Jared Durón — Filmmaker in Barcelona.',
       title2: 'Films that grow brands.',
       sub: 'Producción audiovisual y diseño gráfico para marcas premium, agencias creativas y productoras internacionales. Más de 7 años transformando ideas en experiencias visuales.',
       cta1: 'Ver Proyectos',
@@ -103,7 +103,7 @@ const T = {
     nav: { work: 'Work', about: 'About', services: 'Services', process: 'Process', blog: 'Journal', contact: 'Contact' },
     hero: {
       eyebrow: 'Filmmaker & Graphic Designer · Barcelona',
-      title1: 'Stories that move people.',
+      title1: 'Jared Durón — Filmmaker in Barcelona.',
       title2: 'Films that grow brands.',
       sub: 'Audiovisual production and graphic design for premium brands, creative agencies and international production houses. 7+ years turning ideas into visual experiences.',
       cta1: 'View Work', cta2: "Let's Work Together", scroll: 'Scroll',
@@ -180,7 +180,7 @@ const T = {
     nav: { work: 'Projectes', about: 'Sobre mi', services: 'Serveis', process: 'Procés', blog: 'Blog', contact: 'Contacte' },
     hero: {
       eyebrow: 'Filmmaker & Graphic Designer · Barcelona',
-      title1: 'Històries que emocionen.',
+      title1: 'Jared Durón — Filmmaker a Barcelona.',
       title2: 'Pel·lícules que fan créixer marques.',
       sub: 'Producció audiovisual i disseny gràfic per a marques premium, agències creatives i productores internacionals.',
       cta1: 'Veure Projectes', cta2: 'Treballem junts', scroll: 'Baixa',
@@ -957,7 +957,7 @@ function ProjectModal({ project, locale, onClose }) {
                       key={idx}
                       className="overflow-hidden bg-[#030A18]/72 border border-white/10 shadow-[0_18px_60px_rgba(0,0,0,0.42)]"
                     >
-                      <img src={img} alt={`${project.title} — image ${idx + 1}`} loading="lazy" decoding="async" className="w-full h-auto" />
+                      <img src={img} alt={`Material visual de ${project.title} ${idx + 1}`} loading="lazy" decoding="async" className="w-full h-auto" />
                     </div>
                   ))}
                 </div>
@@ -1694,94 +1694,18 @@ function Footer({ t }) {
           </div>
         </div>
 
-        {/* SEO keywords cloud — helps organic discovery */}
+        {/* Natural SEO copy for organic discovery */}
         <div className="mt-14 pt-10 border-t border-white/5">
           <div className="text-[10px] uppercase tracking-[0.3em] text-white/40 mb-5 flex items-center gap-3">
             <span className="w-1.5 h-1.5 rounded-full bg-[#F5C518]" />
-            <span>Also known as · Also searching for</span>
+            <span>Produccion audiovisual en Barcelona</span>
           </div>
-          <div className="flex flex-wrap gap-x-3 gap-y-2 text-[11px] text-white/35 leading-relaxed">
-            {[
-              'Filmmaker Barcelona',
-              'Videographer Barcelona',
-              'Videógrafo Barcelona',
-              'Director de fotografía Barcelona',
-              'Productora audiovisual Barcelona',
-              'Vídeo corporativo Barcelona',
-              'Corporate video Barcelona',
-              'Corporate videographer Barcelona',
-              'Corporate video production Spain',
-              'Commercial filmmaker Spain',
-              'Brand filmmaker Barcelona',
-              'Cinematic videographer Barcelona',
-              'Event videographer Barcelona',
-              'Product video Barcelona',
-              'Documentary filmmaker Barcelona',
-              'Documentary videographer Spain',
-              'English speaking filmmaker Barcelona',
-              'English speaking video crew Spain',
-              'Barcelona filmmaker for hire',
-              'Freelance filmmaker Barcelona',
-              'Freelance videographer Barcelona',
-              'Video production company Barcelona',
-              'Video production services Barcelona',
-              'Trade show videographer Spain',
-              'Corporate interviews Barcelona',
-              'Branded content Barcelona',
-              'Branded video Barcelona',
-              'Meta Ads video production',
-              'YouTube video production Barcelona',
-              'Reels & TikTok content creator Barcelona',
-              'Podcast video production Barcelona',
-              'Video marketing Barcelona',
-              'Diseñador gráfico Barcelona',
-              'Graphic designer Barcelona',
-              'Motion graphics Barcelona',
-              'Motion designer Barcelona',
-              'Color grading Barcelona',
-              'Colorist Barcelona',
-              'DaVinci Resolve colorist Barcelona',
-              'VideoMapping Barcelona',
-              'VideoMapping Spain',
-              'Brand identity designer Barcelona',
-              'Creative director Barcelona',
-              'Art director Barcelona',
-              'Cinematographer Barcelona',
-              'DoP Barcelona',
-              'Director of Photography Barcelona',
-              'Barcelona film production',
-              'Barcelona wedding videographer',
-              'Barcelona real estate videographer',
-              'Barcelona restaurant videographer',
-              'Barcelona hotel videographer',
-              'Barcelona fashion videographer',
-              'Producción audiovisual Cataluña',
-              'Filmmaker Cataluña',
-              'Filmmaker Sabadell',
-              'Filmmaker Terrassa',
-              'Filmmaker Girona',
-              'Filmmaker Madrid',
-              'Videographer Madrid',
-              'Videographer Valencia',
-              'Videographer Bilbao',
-              'Filmmaker Ibiza',
-              'Filmmaker Mallorca',
-              'Filmmaker Sitges',
-              'Video maker Barcelona',
-              'Video editor Barcelona',
-              'Post production Barcelona',
-              'Aerial videography Barcelona',
-              'Drone videographer Barcelona',
-              'Filmmaker per empreses Barcelona',
-              'Videògraf Barcelona',
-              'Productora audiovisual Catalunya',
-              'Producció audiovisual Barcelona',
-            ].map((k, i) => (
-              <span key={i} className="hover:text-[#F5C518] transition-colors cursor-default">{k}{i < 71 ? ' ·' : ''}</span>
-            ))}
-          </div>
-        </div>
-      </div>
+          <p className="max-w-4xl text-sm md:text-base text-white/45 leading-relaxed">
+            Trabajo con marcas, agencias y proyectos creativos que necesitan produccion audiovisual en Barcelona:
+            brand films, video corporativo, cobertura de eventos, contenido para redes sociales, edicion de video,
+            motion graphics, diseno grafico y piezas cinematograficas pensadas para comunicar con claridad.
+          </p>
+        </div>      </div>
     </footer>
   )
 }

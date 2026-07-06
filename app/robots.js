@@ -1,13 +1,9 @@
 export default function robots() {
   return {
-    rules: [
-      {
-        userAgent: '*',
-        allow: '/',
-        disallow: ['/api/'],
-      },
-    ],
-    sitemap: 'https://jaredduron.com/sitemap.xml',
-    host: 'https://jaredduron.com',
+    rules: {
+      userAgent: '*',
+      allow: '/',
+    },
+    sitemap: 'https://portafolio-olive-beta-79.vercel.app/sitemap.xml',
   }
 }

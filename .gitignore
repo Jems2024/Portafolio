@@ -34,6 +34,8 @@ dist
 .env
 .env.*
 !.env.example
+.env.local
+.env.production
 *token.json*
 *credentials.json*
 
@@ -67,11 +69,11 @@ chainlit.md
 agenthub/agents/youtube/db
 
 # Archive files and large assets
+APP.zip
 **/*.zip
 **/*.tar.gz
 **/*.tar
 **/*.tgz
-package-lock.json
 *.pack
 *.deb
 *.dylib
@@ -92,3 +94,4 @@ memory/test_credentials.md
 android-sdk/node_modules/@next/swc-linux-arm64-musl/next-swc.linux-arm64-musl.node
 node_modules/@next/swc-linux-arm64-gnu/next-swc.linux-arm64-gnu.node
 node_modules/@next/swc-linux-arm64-musl/next-swc.linux-arm64-musl.node
+node_modules/@next/swc-win32-x64-msvc/next-swc.win32-x64-msvc.node
