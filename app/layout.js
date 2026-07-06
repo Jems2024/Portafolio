@@ -1,4 +1,5 @@
 import { Inter, Playfair_Display } from 'next/font/google'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import './globals.css'
 
 const siteUrl = 'https://portafolio-olive-beta-79.vercel.app'
@@ -124,6 +125,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className="antialiased text-neutral-100 font-sans selection:bg-[#F5C518] selection:text-black">
         {children}
+        <SpeedInsights />
       </body>
     </html>
   )
