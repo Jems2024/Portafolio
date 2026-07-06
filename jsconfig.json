@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"],
+      "@/app/*": ["app/*"],
+      "@/components/*": ["components/*"],
+      "@/lib/*": ["lib/*"]
+    }
+  },
+  "include": [
+    "app/**/*.js",
+    "components/**/*.js",
+    "hooks/**/*.js",
+    "lib/**/*.js",
+    "next.config.js"
+  ],
+  "exclude": [
+    "node_modules",
+    ".next"
+  ]
+}
