@@ -8,6 +8,7 @@
   --muted: #737373;
   --line: #1F1F1F;
   --accent: #F5C518;
+  --css-build-version: 20260706;
 }
 
 * {
