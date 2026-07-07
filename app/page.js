@@ -621,11 +621,11 @@ function About({ t }) {
                 <motion.div
                   key={portrait}
                   animate={{
-                    opacity: activePortrait === index ? 1 : 0,
-                    scale: activePortrait === index ? 1 : 1.018,
+                    scale: activePortrait === index ? 1 : 1.012,
                   }}
                   transition={{ duration: 1.15, ease: [0.22, 1, 0.36, 1] }}
                   className="absolute inset-0"
+                  style={{ zIndex: activePortrait === index ? 2 : 1 }}
                 >
                   <Image
                     src={portrait}
@@ -633,6 +633,7 @@ function About({ t }) {
                     fill
                     sizes="(min-width: 768px) 38vw, 100vw"
                     quality={78}
+                    loading="eager"
                     className="object-cover"
                     priority={index === 0}
                   />
