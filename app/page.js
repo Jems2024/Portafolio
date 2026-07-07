@@ -616,25 +616,27 @@ function About({ t }) {
             className="md:col-span-5 relative"
           >
             <div className="relative aspect-[4/5] overflow-hidden bg-neutral-900">
-              <AnimatePresence mode="wait">
+              {ABOUT_PORTRAITS.map((portrait, index) => (
                 <motion.div
-                  key={ABOUT_PORTRAITS[activePortrait]}
-                  initial={{ opacity: 0, scale: 1.025 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.99 }}
-                  transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                  key={portrait}
+                  animate={{
+                    opacity: activePortrait === index ? 1 : 0,
+                    scale: activePortrait === index ? 1 : 1.018,
+                  }}
+                  transition={{ duration: 1.15, ease: [0.22, 1, 0.36, 1] }}
                   className="absolute inset-0"
                 >
                   <Image
-                    src={ABOUT_PORTRAITS[activePortrait]}
-                    alt={`Jared Durón — retrato ${activePortrait + 1}`}
+                    src={portrait}
+                    alt={`Jared Durón — retrato ${index + 1}`}
                     fill
                     sizes="(min-width: 768px) 38vw, 100vw"
                     quality={78}
                     className="object-cover"
+                    priority={index === 0}
                   />
                 </motion.div>
-              </AnimatePresence>
+              ))}
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end text-[11px] uppercase tracking-widest text-white/70">
                 <span>Jared Durón</span>
