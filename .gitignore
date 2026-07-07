@@ -70,6 +70,7 @@ agenthub/agents/youtube/db
 
 # Archive files and large assets
 APP.zip
+/IMG/
 **/*.zip
 **/*.tar.gz
 **/*.tar

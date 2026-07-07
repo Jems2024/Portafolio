@@ -577,8 +577,33 @@ function FloatingWhatsApp({ locale }) {
   )
 }
 
+const ABOUT_PORTRAITS = [
+  '/IMG/portrait-01.webp',
+  '/IMG/portrait-02.webp',
+  '/IMG/portrait-03.webp',
+  '/IMG/portrait-04.webp',
+  '/IMG/portrait-05.webp',
+  '/IMG/portrait-06.webp',
+  '/IMG/portrait-07.webp',
+  '/IMG/portrait-08.webp',
+  '/IMG/portrait-09.webp',
+  '/IMG/portrait-10.webp',
+  '/IMG/portrait-11.webp',
+]
+
 /* ---------- About ---------- */
 function About({ t }) {
+  const [activePortrait, setActivePortrait] = useState(0)
+
+  useEffect(() => {
+    const duration = activePortrait === 0 ? 5000 : 3000
+    const timeout = setTimeout(() => {
+      setActivePortrait((current) => (current + 1) % ABOUT_PORTRAITS.length)
+    }, duration)
+
+    return () => clearTimeout(timeout)
+  }, [activePortrait])
+
   return (
     <section id="about" className="relative py-24 md:py-40 px-6 md:px-10">
       <div className="max-w-[1600px] mx-auto">
@@ -591,14 +616,25 @@ function About({ t }) {
             className="md:col-span-5 relative"
           >
             <div className="relative aspect-[4/5] overflow-hidden bg-neutral-900">
-              <Image
-                src="https://customer-assets.emergentagent.com/job_filmmaker-barcelona/artifacts/fsyjfym3_Foto%20perfil.jpg"
-                alt="Jared Durón — Filmmaker & Graphic Designer Barcelona"
-                fill
-                sizes="(min-width: 768px) 38vw, 100vw"
-                quality={74}
-                className="object-cover"
-              />
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={ABOUT_PORTRAITS[activePortrait]}
+                  initial={{ opacity: 0, scale: 1.025 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.99 }}
+                  transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                  className="absolute inset-0"
+                >
+                  <Image
+                    src={ABOUT_PORTRAITS[activePortrait]}
+                    alt={`Jared Durón — retrato ${activePortrait + 1}`}
+                    fill
+                    sizes="(min-width: 768px) 38vw, 100vw"
+                    quality={78}
+                    className="object-cover"
+                  />
+                </motion.div>
+              </AnimatePresence>
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end text-[11px] uppercase tracking-widest text-white/70">
                 <span>Jared Durón</span>
