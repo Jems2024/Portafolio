@@ -740,7 +740,7 @@ function ProjectCard({ project, index, locale, onOpen }) {
 
 function ProjectModal({ project, locale, onClose }) {
   const [loadMedia, setLoadMedia] = useState(false)
-  const [lightboxImage, setLightboxImage] = useState(null)
+  const [lightboxIndex, setLightboxIndex] = useState(null)
   const lightboxRef = useRef(null)
   const behanceProjectId = project?.behanceUrl?.match(/\/gallery\/(\d+)/)?.[1]
   const behanceEmbedUrl = behanceProjectId && !project?.hideBehancePreview ? `https://www.behance.net/embed/project/${behanceProjectId}?ilo0=1` : null
@@ -750,19 +750,35 @@ function ProjectModal({ project, locale, onClose }) {
   const loadLabel = locale === 'en' ? 'Load video' : locale === 'ca' ? 'Carregar video' : 'Cargar video'
   const galleryLabel = locale === 'en' ? 'Visual material' : locale === 'ca' ? 'Material visual' : 'Material visual'
   const detailsLabel = locale === 'en' ? 'Project details' : locale === 'ca' ? 'Detalls del projecte' : 'Detalles del proyecto'
+  const lightboxImage = typeof lightboxIndex === 'number' ? project?.gallery?.[lightboxIndex] : null
+
+  const showPrevPhoto = () => {
+    if (!project?.gallery?.length) return
+    setLightboxIndex((current) => (current === null ? 0 : (current - 1 + project.gallery.length) % project.gallery.length))
+  }
+
+  const showNextPhoto = () => {
+    if (!project?.gallery?.length) return
+    setLightboxIndex((current) => (current === null ? 0 : (current + 1) % project.gallery.length))
+  }
 
   useEffect(() => {
-    lightboxRef.current = lightboxImage
-  }, [lightboxImage])
+    lightboxRef.current = lightboxIndex
+  }, [lightboxIndex])
 
   useEffect(() => {
     if (!project) return
     setLoadMedia(false)
-    setLightboxImage(null)
+    setLightboxIndex(null)
     const onKey = (e) => {
-      if (e.key !== 'Escape') return
-      if (lightboxRef.current) setLightboxImage(null)
-      else onClose()
+      if (e.key === 'Escape') {
+        if (lightboxRef.current !== null) setLightboxIndex(null)
+        else onClose()
+        return
+      }
+      if (lightboxRef.current === null) return
+      if (e.key === 'ArrowLeft') showPrevPhoto()
+      if (e.key === 'ArrowRight') showNextPhoto()
     }
     document.body.style.overflow = 'hidden'
     window.addEventListener('keydown', onKey)
@@ -903,7 +919,7 @@ function ProjectModal({ project, locale, onClose }) {
               <div className="relative mt-12 md:mt-16">
                 <div className="mb-4 border-t border-white/10 pt-5 text-[10px] uppercase tracking-[0.28em] text-white/55">{galleryLabel}</div>
                 {isPhotoProject ? (
-                  <PhotoMosaic project={project} onOpen={setLightboxImage} />
+                  <PhotoMosaic project={project} onOpen={setLightboxIndex} />
                 ) : (
                   <div className="space-y-4 md:space-y-6">
                     {project.gallery.map((img, idx) => (
@@ -1044,7 +1060,15 @@ function ProjectModal({ project, locale, onClose }) {
               </div>
             </div>
           </motion.div>
-          <PhotoLightbox image={lightboxImage} projectTitle={project.title} onClose={() => setLightboxImage(null)} />
+          <PhotoLightbox
+            image={lightboxImage}
+            images={project.gallery}
+            currentIndex={lightboxIndex}
+            projectTitle={project.title}
+            onClose={() => setLightboxIndex(null)}
+            onPrev={showPrevPhoto}
+            onNext={showNextPhoto}
+          />
         </motion.div>
       )}
     </AnimatePresence>
@@ -1063,7 +1087,7 @@ function PhotoMosaic({ project, onOpen }) {
           <button
             key={img}
             type="button"
-            onClick={() => onOpen(img)}
+            onClick={() => onOpen(idx)}
             className={`group relative overflow-hidden border border-white/10 bg-[#030A18]/72 shadow-[0_18px_60px_rgba(0,0,0,0.38)] ${tileClass}`}
             aria-label={`Abrir foto ${idx + 1} de ${project.title}`}
           >
@@ -1084,7 +1108,9 @@ function PhotoMosaic({ project, onOpen }) {
   )
 }
 
-function PhotoLightbox({ image, projectTitle, onClose }) {
+function PhotoLightbox({ image, images, currentIndex, projectTitle, onClose, onPrev, onNext }) {
+  const total = images?.length || 0
+
   return (
     <AnimatePresence>
       {image && (
@@ -1093,12 +1119,23 @@ function PhotoLightbox({ image, projectTitle, onClose }) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.22 }}
-          className="fixed inset-0 z-[140] flex items-center justify-center bg-black/92 p-4 md:p-10"
+          className="fixed inset-0 z-[140] flex items-center justify-center overflow-hidden bg-black/82 p-4 backdrop-blur-2xl md:p-10"
           onClick={(e) => {
             e.stopPropagation()
             onClose()
           }}
         >
+          <div className="absolute inset-0 opacity-28 blur-3xl">
+            <Image
+              src={image}
+              alt=""
+              fill
+              sizes="100vw"
+              quality={40}
+              className="scale-110 object-cover"
+            />
+          </div>
+          <div className="absolute inset-0 bg-gradient-to-b from-[#030711]/85 via-black/72 to-[#030711]/90" />
           <button
             type="button"
             onClick={(e) => {
@@ -1110,6 +1147,32 @@ function PhotoLightbox({ image, projectTitle, onClose }) {
           >
             <X className="h-5 w-5" />
           </button>
+          {total > 1 && (
+            <>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  onPrev()
+                }}
+                className="absolute left-4 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/45 text-white backdrop-blur-md transition-colors hover:bg-white hover:text-black md:left-8 md:h-12 md:w-12"
+                aria-label="Foto anterior"
+              >
+                <span className="text-2xl leading-none">‹</span>
+              </button>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  onNext()
+                }}
+                className="absolute right-4 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/45 text-white backdrop-blur-md transition-colors hover:bg-white hover:text-black md:right-8 md:h-12 md:w-12"
+                aria-label="Foto siguiente"
+              >
+                <span className="text-2xl leading-none">›</span>
+              </button>
+            </>
+          )}
           <motion.div
             initial={{ scale: 0.96, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -1127,6 +1190,11 @@ function PhotoLightbox({ image, projectTitle, onClose }) {
               className="object-contain"
             />
           </motion.div>
+          {total > 1 && (
+            <div className="absolute bottom-5 left-1/2 z-10 -translate-x-1/2 rounded-full border border-white/15 bg-black/45 px-4 py-2 font-mono-num text-[11px] tracking-[0.24em] text-white/70 backdrop-blur-md">
+              {String((currentIndex ?? 0) + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
+            </div>
+          )}
         </motion.div>
       )}
     </AnimatePresence>
