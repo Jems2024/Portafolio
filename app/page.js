@@ -1832,6 +1832,60 @@ function Loader() {
   )
 }
 
+function IntroLoader() {
+  const [done, setDone] = useState(false)
+  const [progress, setProgress] = useState(0)
+
+  useEffect(() => {
+    let value = 0
+    const id = setInterval(() => {
+      value = Math.min(value + 2, 100)
+      setProgress(value)
+      if (value === 100) {
+        clearInterval(id)
+        setTimeout(() => setDone(true), 350)
+      }
+    }, 24)
+
+    return () => clearInterval(id)
+  }, [])
+
+  return (
+    <AnimatePresence>
+      {!done && (
+        <motion.div
+          initial={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.45, ease: 'easeOut' }}
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-[#050609]"
+        >
+          <div className="w-full max-w-[260px] px-6 text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, ease: 'easeOut' }}
+              className="font-display text-4xl md:text-5xl italic text-white"
+            >
+              Jared Durón
+            </motion.div>
+
+            <div className="mt-8 h-px w-full overflow-hidden bg-white/18">
+              <div
+                className="h-full bg-white transition-[width] duration-75 ease-linear"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+
+            <div className="mt-3 font-mono-num text-[10px] tracking-[0.28em] text-white/60">
+              {String(progress).padStart(3, '0')}%
+            </div>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  )
+}
+
 /* ---------- Root ---------- */
 function App() {
   const [locale, setLocale] = useState('es')
@@ -1848,6 +1902,7 @@ function App() {
 
   return (
     <>
+      <IntroLoader />
       <Toaster position="bottom-right" theme="dark" />
       <div className="grain relative z-10">
         <Nav locale={locale} setLocale={setLocale} t={t} />
