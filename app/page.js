@@ -700,7 +700,7 @@ function ProjectCard({ project, index, locale, onOpen }) {
       transition={{ duration: 0.8, delay: (index % 3) * 0.08, ease: [0.22, 1, 0.36, 1] }}
       className="group block text-left w-full"
     >
-      <div className="relative overflow-hidden aspect-[4/5] bg-neutral-900">
+      <div className="relative overflow-hidden aspect-square bg-neutral-900">
         <div className="absolute inset-0">
           <Image
             src={project.cover}
@@ -740,18 +740,30 @@ function ProjectCard({ project, index, locale, onOpen }) {
 
 function ProjectModal({ project, locale, onClose }) {
   const [loadMedia, setLoadMedia] = useState(false)
+  const [lightboxImage, setLightboxImage] = useState(null)
+  const lightboxRef = useRef(null)
   const behanceProjectId = project?.behanceUrl?.match(/\/gallery\/(\d+)/)?.[1]
   const behanceEmbedUrl = behanceProjectId && !project?.hideBehancePreview ? `https://www.behance.net/embed/project/${behanceProjectId}?ilo0=1` : null
   const hasVideos = Boolean(project?.videoEmbeds?.length)
+  const isPhotoProject = project?.type === 'photo'
   const mediaLabel = locale === 'en' ? 'Project film' : locale === 'ca' ? 'Film del projecte' : 'Video del proyecto'
   const loadLabel = locale === 'en' ? 'Load video' : locale === 'ca' ? 'Carregar video' : 'Cargar video'
   const galleryLabel = locale === 'en' ? 'Visual material' : locale === 'ca' ? 'Material visual' : 'Material visual'
   const detailsLabel = locale === 'en' ? 'Project details' : locale === 'ca' ? 'Detalls del projecte' : 'Detalles del proyecto'
 
   useEffect(() => {
+    lightboxRef.current = lightboxImage
+  }, [lightboxImage])
+
+  useEffect(() => {
     if (!project) return
     setLoadMedia(false)
-    const onKey = (e) => { if (e.key === 'Escape') onClose() }
+    setLightboxImage(null)
+    const onKey = (e) => {
+      if (e.key !== 'Escape') return
+      if (lightboxRef.current) setLightboxImage(null)
+      else onClose()
+    }
     document.body.style.overflow = 'hidden'
     window.addEventListener('keydown', onKey)
     return () => {
@@ -795,8 +807,10 @@ function ProjectModal({ project, locale, onClose }) {
                 <h2 className="mx-auto max-w-5xl font-display text-5xl md:text-8xl lg:text-9xl leading-[0.92] tracking-tight text-balance">
                   {project.title}
                 </h2>
-                <div className="mt-4 font-display italic text-2xl md:text-4xl text-white/68">{project.subtitle}</div>
-                <p className="mx-auto mt-6 max-w-3xl text-sm md:text-base leading-relaxed text-white/60">{project.description[locale]}</p>
+                <div className="mt-6 md:mt-8 font-display italic text-2xl md:text-4xl text-white/68">{project.subtitle}</div>
+                <div className="mx-auto mt-8 md:mt-10 max-w-3xl border border-white/10 bg-white/[0.035] px-6 py-6 text-sm leading-relaxed text-white/68 shadow-[0_24px_80px_rgba(0,0,0,0.32)] md:px-10 md:py-8 md:text-base">
+                  {project.description[locale]}
+                </div>
 
                 <div className="hidden">
                   <div className="lg:col-span-4">
@@ -833,7 +847,7 @@ function ProjectModal({ project, locale, onClose }) {
                 </div>
               </div>
               {hasVideos && (
-                <section className="relative mt-12 md:mt-16">
+                <section className="relative mt-16 md:mt-24">
                   <div className="mb-4 flex items-center justify-between gap-4 border-t border-white/10 pt-5">
                     <div className="text-[10px] uppercase tracking-[0.28em] text-[#F5C518]/85">{mediaLabel}</div>
                     {!loadMedia && (
@@ -888,25 +902,29 @@ function ProjectModal({ project, locale, onClose }) {
 
               <div className="relative mt-12 md:mt-16">
                 <div className="mb-4 border-t border-white/10 pt-5 text-[10px] uppercase tracking-[0.28em] text-white/55">{galleryLabel}</div>
-                <div className="space-y-4 md:space-y-6">
-                  {project.gallery.map((img, idx) => (
-                    <div
-                      key={idx}
-                      className="overflow-hidden bg-[#030A18]/72 border border-white/10 shadow-[0_18px_60px_rgba(0,0,0,0.42)]"
-                    >
-                      <Image
-                        src={img}
-                        alt={`Material visual de ${project.title} ${idx + 1}`}
-                        width={1400}
-                        height={900}
-                        loading="lazy"
-                        sizes="(min-width: 1280px) 1180px, 100vw"
-                        quality={72}
-                        className="h-auto w-full"
-                      />
-                    </div>
-                  ))}
-                </div>
+                {isPhotoProject ? (
+                  <PhotoMosaic project={project} onOpen={setLightboxImage} />
+                ) : (
+                  <div className="space-y-4 md:space-y-6">
+                    {project.gallery.map((img, idx) => (
+                      <div
+                        key={idx}
+                        className="overflow-hidden bg-[#030A18]/72 border border-white/10 shadow-[0_18px_60px_rgba(0,0,0,0.42)]"
+                      >
+                        <Image
+                          src={img}
+                          alt={`Material visual de ${project.title} ${idx + 1}`}
+                          width={1400}
+                          height={900}
+                          loading="lazy"
+                          sizes="(min-width: 1280px) 1180px, 100vw"
+                          quality={72}
+                          className="h-auto w-full"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
 
                 <section className="mt-10 md:mt-14 border border-white/10 bg-[#061126]/88 p-5 md:p-8">
                   <div className="mb-6 text-[10px] uppercase tracking-[0.28em] text-white/55">{detailsLabel}</div>
@@ -1025,6 +1043,89 @@ function ProjectModal({ project, locale, onClose }) {
                 </div>
               </div>
             </div>
+          </motion.div>
+          <PhotoLightbox image={lightboxImage} projectTitle={project.title} onClose={() => setLightboxImage(null)} />
+        </motion.div>
+      )}
+    </AnimatePresence>
+  )
+}
+
+function PhotoMosaic({ project, onOpen }) {
+  return (
+    <div className="grid auto-rows-[150px] grid-cols-2 gap-3 md:auto-rows-[190px] md:grid-cols-4 md:gap-5">
+      {project.gallery.map((img, idx) => {
+        const featured = idx % 7 === 0
+        const wide = idx % 7 === 3
+        const tileClass = featured ? 'md:col-span-2 md:row-span-2' : wide ? 'md:col-span-2' : ''
+
+        return (
+          <button
+            key={img}
+            type="button"
+            onClick={() => onOpen(img)}
+            className={`group relative overflow-hidden border border-white/10 bg-[#030A18]/72 shadow-[0_18px_60px_rgba(0,0,0,0.38)] ${tileClass}`}
+            aria-label={`Abrir foto ${idx + 1} de ${project.title}`}
+          >
+            <Image
+              src={img}
+              alt={`Fotografia de ${project.title} ${idx + 1}`}
+              fill
+              loading="lazy"
+              sizes="(min-width: 1280px) 560px, (min-width: 768px) 45vw, 50vw"
+              quality={72}
+              className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+            />
+            <div className="absolute inset-0 bg-black/0 transition-colors duration-500 group-hover:bg-black/18" />
+          </button>
+        )
+      })}
+    </div>
+  )
+}
+
+function PhotoLightbox({ image, projectTitle, onClose }) {
+  return (
+    <AnimatePresence>
+      {image && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.22 }}
+          className="fixed inset-0 z-[140] flex items-center justify-center bg-black/92 p-4 md:p-10"
+          onClick={(e) => {
+            e.stopPropagation()
+            onClose()
+          }}
+        >
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation()
+              onClose()
+            }}
+            className="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white text-black transition-colors hover:bg-[#F5C518] md:right-8 md:top-8"
+            aria-label="Cerrar imagen"
+          >
+            <X className="h-5 w-5" />
+          </button>
+          <motion.div
+            initial={{ scale: 0.96, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.98, opacity: 0 }}
+            transition={{ duration: 0.28, ease: 'easeOut' }}
+            className="relative h-[82dvh] w-full max-w-6xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Image
+              src={image}
+              alt={`Foto ampliada de ${projectTitle}`}
+              fill
+              sizes="100vw"
+              quality={82}
+              className="object-contain"
+            />
           </motion.div>
         </motion.div>
       )}
@@ -1866,12 +1967,12 @@ function IntroLoader() {
               transition={{ duration: 0.45, ease: 'easeOut' }}
               className="whitespace-nowrap font-display text-[2.55rem] leading-none text-white italic sm:text-5xl"
             >
-              Jared Durón
+              Jared <span className="text-[#F5C518]">Durón</span>
             </motion.div>
 
-            <div className="mt-7 h-px w-full overflow-hidden bg-white/18 sm:mt-8">
+            <div className="mt-7 h-3 w-full overflow-hidden rounded-full border border-white/70 bg-transparent p-[2px] shadow-[0_0_26px_rgba(255,255,255,0.22)] sm:mt-8">
               <div
-                className="h-full bg-white transition-[width] duration-75 ease-linear"
+                className="h-full rounded-full bg-white shadow-[0_0_18px_rgba(255,255,255,0.75)] transition-[width] duration-75 ease-linear"
                 style={{ width: `${progress}%` }}
               />
             </div>
