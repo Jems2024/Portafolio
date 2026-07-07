@@ -659,18 +659,20 @@ function About({ t }) {
 function Work({ t, locale }) {
   const [active, setActive] = useState(null)
   const orderedProjects = useMemo(() => {
-    const shortFilm = PROJECTS.find((project) => project.id === 'cortometraje')
+    const pinnedIds = ['pallapupas-videos', 'ayudas-invisibles-bts', 'cortometraje']
+    const pinnedProjects = pinnedIds
+      .map((id) => PROJECTS.find((project) => project.id === id))
+      .filter(Boolean)
     const barcelonaProjects = PROJECTS.filter((project) => (
-      project.id !== 'cortometraje' && project.location?.toLowerCase().includes('barcelona')
+      !pinnedIds.includes(project.id) && project.location?.toLowerCase().includes('barcelona')
     ))
     const otherProjects = PROJECTS.filter((project) => (
-      project.id !== 'cortometraje' && !project.location?.toLowerCase().includes('barcelona')
+      !pinnedIds.includes(project.id) && !project.location?.toLowerCase().includes('barcelona')
     ))
 
     return [
-      ...barcelonaProjects.slice(0, 2),
-      ...(shortFilm ? [shortFilm] : []),
-      ...barcelonaProjects.slice(2),
+      ...pinnedProjects,
+      ...barcelonaProjects,
       ...otherProjects,
     ]
   }, [])
