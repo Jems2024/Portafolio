@@ -658,6 +658,23 @@ function About({ t }) {
 /* ---------- Work ---------- */
 function Work({ t, locale }) {
   const [active, setActive] = useState(null)
+  const orderedProjects = useMemo(() => {
+    const shortFilm = PROJECTS.find((project) => project.id === 'cortometraje')
+    const barcelonaProjects = PROJECTS.filter((project) => (
+      project.id !== 'cortometraje' && project.location?.toLowerCase().includes('barcelona')
+    ))
+    const otherProjects = PROJECTS.filter((project) => (
+      project.id !== 'cortometraje' && !project.location?.toLowerCase().includes('barcelona')
+    ))
+
+    return [
+      ...barcelonaProjects.slice(0, 2),
+      ...(shortFilm ? [shortFilm] : []),
+      ...barcelonaProjects.slice(2),
+      ...otherProjects,
+    ]
+  }, [])
+
   return (
     <section id="work" className="relative py-24 md:py-40 px-6 md:px-10 border-t border-white/5">
       <div className="max-w-[1600px] mx-auto">
@@ -678,7 +695,7 @@ function Work({ t, locale }) {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
-          {PROJECTS.map((p, i) => (
+          {orderedProjects.map((p, i) => (
             <ProjectCard key={p.id} project={p} index={i} locale={locale} onOpen={() => setActive(p)} />
           ))}
         </div>
