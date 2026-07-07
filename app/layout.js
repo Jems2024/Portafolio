@@ -1,5 +1,11 @@
 import { Inter, Playfair_Display } from 'next/font/google'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import './globals.css'
+
+const siteUrl = 'https://portafolio-olive-beta-79.vercel.app'
+const siteName = 'Jared Duron Portfolio'
+const siteTitle = 'Jared Duron - Filmmaker and Videographer in Barcelona'
+const siteDescription = 'Jared Duron is a filmmaker, videographer and visual creator based in Barcelona, creating cinematic videos, brand films, corporate videos, event coverage, social media content and visual storytelling for brands, agencies and creative projects.'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -14,60 +20,30 @@ const playfair = Playfair_Display({
 })
 
 export const metadata = {
-  metadataBase: new URL('https://jaredduron.com'),
+  metadataBase: new URL(siteUrl),
   title: {
-    default: 'Jared Duron — Filmmaker Barcelona | Cinematic Video Production',
-    template: '%s | Jared Duron — Filmmaker Barcelona',
+    default: siteTitle,
+    template: `%s | ${siteName}`,
   },
-  description: 'Filmmaker y videographer en Barcelona especializado en producción audiovisual cinematográfica para marcas premium, agencias creativas y productoras internacionales. Video corporativo, publicidad, documentales y eventos.',
+  description: siteDescription,
   keywords: [
-    'filmmaker Barcelona','videographer Barcelona','videógrafo Barcelona','video production Barcelona','video production services Barcelona','video production company Barcelona','corporate video Barcelona','corporate videographer Barcelona','corporate video production Spain','commercial filmmaker Spain','brand filmmaker Barcelona','cinematic videographer Barcelona','event videographer Barcelona','product video Barcelona','documentary filmmaker Barcelona','documentary videographer Spain','English speaking filmmaker Barcelona','English speaking video crew Spain','freelance filmmaker Barcelona','freelance videographer Barcelona','diseñador gráfico Barcelona','graphic designer Barcelona','motion graphics Barcelona','color grading Barcelona','videomapping Barcelona','brand identity Barcelona','creative director Barcelona','productora audiovisual Cataluña','trade show videographer Spain','Meta Ads video production','YouTube video production Barcelona','podcast video production Barcelona','Jared Durón',
-    'videographer Barcelona',
-    'director de fotografía Barcelona',
-    'video production Barcelona',
-    'corporate videographer Barcelona',
-    'commercial filmmaker Spain',
-    'product video Barcelona',
-    'brand filmmaker Barcelona',
-    'event videographer Barcelona',
-    'cinematic video Barcelona',
-    'productora audiovisual Barcelona',
-    'vídeo corporativo Barcelona',
     'Jared Duron',
+    'Jared Duron filmmaker',
+    'filmmaker Barcelona',
+    'videographer Barcelona',
+    'produccion audiovisual Barcelona',
+    'brand films',
+    'video corporativo',
+    'event coverage',
+    'social media content',
+    'visual storytelling',
+    'diseno grafico',
   ],
   authors: [{ name: 'Jared Duron' }],
   creator: 'Jared Duron',
   publisher: 'Jared Duron',
   alternates: {
-    canonical: '/',
-    languages: {
-      'es-ES': '/es',
-      'en-US': '/en',
-      'ca-ES': '/ca',
-    },
-  },
-  openGraph: {
-    type: 'website',
-    locale: 'es_ES',
-    url: 'https://jaredduron.com',
-    siteName: 'Jared Durón — Filmmaker Barcelona',
-    title: 'Jared Durón — Filmmaker & Graphic Designer Barcelona',
-    description: 'Stories that move people. Films that grow brands. Filmmaker y diseñador gráfico basado en Barcelona.',
-    images: [
-      {
-        url: 'https://customer-assets.emergentagent.com/job_filmmaker-barcelona/artifacts/fsyjfym3_Foto%20perfil.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Jared Durón Filmmaker & Graphic Designer Barcelona',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Jared Durón — Filmmaker Barcelona',
-    description: 'Stories that move people. Films that grow brands.',
-    images: ['https://customer-assets.emergentagent.com/job_filmmaker-barcelona/artifacts/fsyjfym3_Foto%20perfil.jpg'],
-    creator: '@jared_duron10',
+    canonical: siteUrl,
   },
   robots: {
     index: true,
@@ -80,10 +56,23 @@ export const metadata = {
       'max-snippet': -1,
     },
   },
-  icons: {
-    icon: '/favicon.ico',
+  openGraph: {
+    type: 'website',
+    locale: 'es_ES',
+    url: siteUrl,
+    siteName,
+    title: siteTitle,
+    description: siteDescription,
   },
-  category: 'creative',
+  twitter: {
+    card: 'summary',
+    title: siteTitle,
+    description: siteDescription,
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
+  },
+  category: 'creative portfolio',
 }
 
 export const viewport = {
@@ -92,104 +81,51 @@ export const viewport = {
   initialScale: 1,
 }
 
-const jsonLd = {
+const personJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
-  name: 'Jared Durón',
-  alternateName: 'Jared Duron',
-  jobTitle: 'Filmmaker & Graphic Designer',
-  description: 'Filmmaker y Diseñador Gráfico basado en Barcelona con más de 7 años de experiencia en producción audiovisual, video comercial, documental, eventos internacionales y diseño gráfico integral.',
-  url: 'https://jaredduron.com',
-  image: 'https://customer-assets.emergentagent.com/job_filmmaker-barcelona/artifacts/fsyjfym3_Foto%20perfil.jpg',
-  email: 'jaredmisaelduron@gmail.com',
-  telephone: '+34-637-434-235',
-  sameAs: [
-    'https://www.behance.net/jaredduron',
-    'https://www.instagram.com/jared_duron10/',
-    'https://www.linkedin.com/in/jared-duron-87a041100/',
-    'https://www.tiktok.com/@jems2124',
-    'https://www.facebook.com/jaredmisael.duron/',
-  ],
+  name: 'Jared Duron',
+  jobTitle: 'Filmmaker / Videographer / Visual Creator',
+  url: siteUrl,
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Barcelona',
-    addressRegion: 'Cataluña',
-    addressCountry: 'ES',
+    addressCountry: 'Spain',
   },
-  worksFor: {
-    '@type': 'Organization',
-    name: 'Jared Durón Films',
-  },
-  knowsAbout: [
-    'Cinematography',
-    'Filmmaking',
-    'Video Production',
-    'Graphic Design',
-    'Documentary',
-    'Commercial Video',
-    'Color Grading',
-    'Motion Graphics',
-    'VideoMapping',
-    'Event Videography',
-  ],
 }
 
-const localBusinessLd = {
+const websiteJsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  '@id': 'https://jaredduron.com/#business',
-  name: 'Jared Durón Films — Filmmaker & Graphic Designer Barcelona',
-  image: 'https://customer-assets.emergentagent.com/job_filmmaker-barcelona/artifacts/fsyjfym3_Foto%20perfil.jpg',
-  url: 'https://jaredduron.com',
-  telephone: '+34-637-434-235',
-  email: 'jaredmisaelduron@gmail.com',
-  priceRange: '€€€',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: 'Barcelona',
-    addressLocality: 'Barcelona',
-    postalCode: '08001',
-    addressRegion: 'Cataluña',
-    addressCountry: 'ES',
+  '@type': 'WebSite',
+  name: siteName,
+  url: siteUrl,
+  inLanguage: ['es', 'en', 'ca'],
+  description: siteDescription,
+  publisher: {
+    '@type': 'Person',
+    name: 'Jared Duron',
   },
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: 41.3874,
-    longitude: 2.1686,
-  },
-  areaServed: ['Barcelona', 'Cataluña', 'Spain', 'Europe', 'Worldwide'],
-  serviceType: [
-    'Video Production',
-    'Cinematography',
-    'Commercial Filmmaking',
-    'Documentary Production',
-    'Corporate Video',
-    'Event Videography',
-    'Color Grading',
-    'Motion Graphics',
-    'Graphic Design',
-    'VideoMapping',
-    'Brand Identity',
-  ],
 }
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="es" className={`${inter.variable} ${playfair.variable}`} suppressHydrationWarning>
+    <html lang="es" className={`${inter.variable} ${playfair.variable}`}>
       <head>
-        <link rel="preconnect" href="https://images.unsplash.com" />
+        <link rel="preconnect" href="https://customer-assets.emergentagent.com" />
+        <link rel="preconnect" href="https://mir-s3-cdn-cf.behance.net" />
         <link rel="preconnect" href="https://videos.pexels.com" />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
       </head>
       <body className="antialiased text-neutral-100 font-sans selection:bg-[#F5C518] selection:text-black">
         {children}
+        <SpeedInsights />
       </body>
     </html>
   )

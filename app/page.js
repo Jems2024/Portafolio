@@ -1,8 +1,8 @@
 'use client'
 
 import { useEffect, useRef, useState, useMemo } from 'react'
-import { motion, useScroll, useTransform, AnimatePresence, useMotionValue, useSpring } from 'framer-motion'
-import { ArrowUpRight, Play, Mail, Instagram, Linkedin, MessageCircle, MapPin, Plus, Minus, X, Calendar, ExternalLink, Sparkles, Zap, Star, Sun } from 'lucide-react'
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
+import { ArrowUpRight, Play, Mail, Instagram, Linkedin, MessageCircle, MapPin, Plus, Minus, X, Calendar, ExternalLink, Sparkles, Zap, Star, Sun, Clock3, Clapperboard, BadgeCheck, Layers3 } from 'lucide-react'
 import { toast, Toaster } from 'sonner'
 import { PROJECTS, REAL_CLIENTS, BLOG_POSTS } from '@/lib/projects'
 
@@ -12,7 +12,7 @@ const T = {
     nav: { work: 'Proyectos', about: 'Sobre mí', services: 'Servicios', process: 'Proceso', blog: 'Blog', contact: 'Contacto' },
     hero: {
       eyebrow: 'Filmmaker & Graphic Designer · Barcelona',
-      title1: 'Stories that move people.',
+      title1: 'Jared Durón — Filmmaker in Barcelona.',
       title2: 'Films that grow brands.',
       sub: 'Producción audiovisual y diseño gráfico para marcas premium, agencias creativas y productoras internacionales. Más de 7 años transformando ideas en experiencias visuales.',
       cta1: 'Ver Proyectos',
@@ -80,7 +80,7 @@ const T = {
       title: 'Preguntas frecuentes.',
       items: [
         { q: '¿Dónde estás basado y viajas para proyectos?', a: 'Estoy basado en Barcelona y viajo regularmente por España, Europa y proyectos internacionales. Trabajo con equipos locales en cada destino.' },
-        { q: '¿Cuánto cuesta un vídeo corporativo o una campaña?', a: 'Cada proyecto se cotiza según brief, días de rodaje, equipo y postproducción. Los proyectos típicos van desde 3.000€ hasta producciones publicitarias de +50.000€.' },
+        { q: '¿Cuánto cuesta un vídeo corporativo o una campaña?', a: 'Cada proyecto se cotiza según brief, días de rodaje, equipo y postproducción. Podemos empezar desde 350€ para piezas sencillas y crecer hasta donde la creatividad y el alcance del cliente quieran llegar.' },
         { q: '¿Cuál es el plazo de entrega habitual?', a: 'Un vídeo corporativo suele entregarse en 3-4 semanas. Campañas publicitarias entre 6-10 semanas dependiendo del alcance.' },
         { q: '¿Trabajas con agencias y productoras?', a: 'Sí. Colaboro como director, editor o videografo freelance con agencias creativas y productoras nacionales e internacionales. También asumo dirección creativa y diseño gráfico para campañas integrales.' },
       ],
@@ -90,9 +90,9 @@ const T = {
       title: 'Trabajemos juntos.',
       sub: 'Cuéntame sobre tu proyecto. Respondo en menos de 24 horas.',
       name: 'Nombre', email: 'Email', phone: 'Teléfono', company: 'Empresa', budget: 'Presupuesto', type: 'Tipo de proyecto', message: 'Cuéntame tu proyecto',
-      send: 'Enviar mensaje', sending: 'Enviando…', success: 'Mensaje enviado. Te respondo en breve.', error: 'Algo falló. Escribe a hello@jaredduron.com',
+      send: 'Enviar mensaje', sending: 'Enviando…', success: 'Mensaje enviado. Te respondo en breve.', error: 'Algo falló. Escribe a jaredmisaelduron@gmail.com',
       types: ['Publicidad / Brand film', 'Vídeo corporativo', 'Documental', 'Evento', 'Redes sociales', 'Otro'],
-      budgets: ['< 5.000€', '5.000€ - 15.000€', '15.000€ - 50.000€', '+ 50.000€'],
+      budgets: ['Desde 350€', '350€ - 1.500€', '1.500€ - 5.000€', '5.000€ - 15.000€', 'A medida / sin límite creativo'],
     },
     footer: {
       tagline: 'Cinematic video production. Made in Barcelona.',
@@ -103,7 +103,7 @@ const T = {
     nav: { work: 'Work', about: 'About', services: 'Services', process: 'Process', blog: 'Journal', contact: 'Contact' },
     hero: {
       eyebrow: 'Filmmaker & Graphic Designer · Barcelona',
-      title1: 'Stories that move people.',
+      title1: 'Jared Durón — Filmmaker in Barcelona.',
       title2: 'Films that grow brands.',
       sub: 'Audiovisual production and graphic design for premium brands, creative agencies and international production houses. 7+ years turning ideas into visual experiences.',
       cta1: 'View Work', cta2: "Let's Work Together", scroll: 'Scroll',
@@ -162,7 +162,7 @@ const T = {
       kicker: '07 — FAQ', title: 'Frequently asked.',
       items: [
         { q: 'Where are you based and do you travel?', a: 'Based in Barcelona and traveling regularly across Spain, Europe and international projects. I work with local crews in each destination.' },
-        { q: 'How much does a corporate video or a campaign cost?', a: 'Each project is quoted based on brief, shoot days, crew and post-production. Typical projects range from €3,000 to advertising productions of €50,000+.' },
+        { q: 'How much does a corporate video or a campaign cost?', a: 'Each project is quoted based on brief, shoot days, crew and post-production. We can start from €350 for simple pieces and scale as far as the client’s creativity and project scope want to go.' },
         { q: 'What is the usual delivery timeline?', a: 'A corporate video is usually delivered in 3-4 weeks. Advertising campaigns between 6-10 weeks depending on scope.' },
         { q: 'Do you work with agencies and production companies?', a: 'Yes. I collaborate as director, editor or freelance videographer with national and international creative agencies. I also take on creative direction and graphic design for integrated campaigns.' },
       ],
@@ -170,9 +170,9 @@ const T = {
     contact: {
       kicker: '08 — Contact', title: "Let's work together.", sub: 'Tell me about your project. I reply within 24 hours.',
       name: 'Name', email: 'Email', phone: 'Phone', company: 'Company', budget: 'Budget', type: 'Project type', message: 'Tell me about your project',
-      send: 'Send message', sending: 'Sending…', success: 'Message sent. I will reply soon.', error: 'Something failed. Write to hello@jaredduron.com',
+      send: 'Send message', sending: 'Sending…', success: 'Message sent. I will reply soon.', error: 'Something failed. Write to jaredmisaelduron@gmail.com',
       types: ['Advertising / Brand film', 'Corporate video', 'Documentary', 'Event', 'Social media', 'Other'],
-      budgets: ['< €5k', '€5k - €15k', '€15k - €50k', '€50k+'],
+      budgets: ['From €350', '€350 - €1.5k', '€1.5k - €5k', '€5k - €15k', 'Custom / no creative limit'],
     },
     footer: { tagline: 'Cinematic video production. Made in Barcelona.', rights: 'All rights reserved.' },
   },
@@ -180,7 +180,7 @@ const T = {
     nav: { work: 'Projectes', about: 'Sobre mi', services: 'Serveis', process: 'Procés', blog: 'Blog', contact: 'Contacte' },
     hero: {
       eyebrow: 'Filmmaker & Graphic Designer · Barcelona',
-      title1: 'Històries que emocionen.',
+      title1: 'Jared Durón — Filmmaker a Barcelona.',
       title2: 'Pel·lícules que fan créixer marques.',
       sub: 'Producció audiovisual i disseny gràfic per a marques premium, agències creatives i productores internacionals.',
       cta1: 'Veure Projectes', cta2: 'Treballem junts', scroll: 'Baixa',
@@ -237,7 +237,7 @@ const T = {
       kicker: '07 — FAQ', title: 'Preguntes freqüents.',
       items: [
         { q: 'On et bases i viatges per als projectes?', a: 'Base a Barcelona i viatjo regularment per Espanya, Europa i projectes internacionals.' },
-        { q: 'Quant costa un vídeo corporatiu o una campanya?', a: 'Cada projecte es cotitza segons brief, dies de rodatge, equip i postproducció.' },
+        { q: 'Quant costa un vídeo corporatiu o una campanya?', a: 'Cada projecte es cotitza segons brief, dies de rodatge, equip i postproducció. Podem començar des de 350€ per peces senzilles i créixer fins on la creativitat i l’abast del client vulguin arribar.' },
         { q: 'Quin és el termini de lliurament habitual?', a: 'Un vídeo corporatiu es lliura en 3-4 setmanes. Campanyes publicitàries entre 6-10 setmanes.' },
         { q: 'Treballes amb agències i productores?', a: 'Sí, com a director, editor o videògraf freelance amb agències i productores. També assumeixo direcció creativa i disseny gràfic.' },
       ],
@@ -245,62 +245,15 @@ const T = {
     contact: {
       kicker: '08 — Contacte', title: 'Treballem junts.', sub: 'Explica\'m el teu projecte. Responc en menys de 24 hores.',
       name: 'Nom', email: 'Email', phone: 'Telèfon', company: 'Empresa', budget: 'Pressupost', type: 'Tipus de projecte', message: 'Explica\'m el teu projecte',
-      send: 'Enviar missatge', sending: 'Enviant…', success: 'Missatge enviat. Et responc aviat.', error: 'Alguna cosa ha fallat. Escriu a hello@jaredduron.com',
+      send: 'Enviar missatge', sending: 'Enviant…', success: 'Missatge enviat. Et responc aviat.', error: 'Alguna cosa ha fallat. Escriu a jaredmisaelduron@gmail.com',
       types: ['Publicitat / Brand film', 'Vídeo corporatiu', 'Documental', 'Esdeveniment', 'Xarxes socials', 'Altres'],
-      budgets: ['< 5.000€', '5.000€ - 15.000€', '15.000€ - 50.000€', '+ 50.000€'],
+      budgets: ['Des de 350€', '350€ - 1.500€', '1.500€ - 5.000€', '5.000€ - 15.000€', 'A mida / sense límit creatiu'],
     },
     footer: { tagline: 'Cinematic video production. Made in Barcelona.', rights: 'Tots els drets reservats.' },
   },
 }
 
 /* ---------- Portfolio Data (imported from /lib/projects) ---------- */
-
-/* ---------- Custom Cursor ---------- */
-function CustomCursor() {
-  const cursorX = useMotionValue(-100)
-  const cursorY = useMotionValue(-100)
-  const springX = useSpring(cursorX, { damping: 25, stiffness: 400, mass: 0.4 })
-  const springY = useSpring(cursorY, { damping: 25, stiffness: 400, mass: 0.4 })
-  const [size, setSize] = useState(12)
-  const [label, setLabel] = useState('')
-
-  useEffect(() => {
-    const move = (e) => { cursorX.set(e.clientX); cursorY.set(e.clientY) }
-    const over = (e) => {
-      const t = e.target.closest('[data-cursor]')
-      if (t) {
-        setSize(72)
-        setLabel(t.getAttribute('data-cursor') || '')
-      } else if (e.target.closest('a, button')) {
-        setSize(40); setLabel('')
-      } else {
-        setSize(12); setLabel('')
-      }
-    }
-    window.addEventListener('mousemove', move)
-    window.addEventListener('mouseover', over)
-    return () => {
-      window.removeEventListener('mousemove', move)
-      window.removeEventListener('mouseover', over)
-    }
-  }, [cursorX, cursorY])
-
-  return (
-    <motion.div
-      className="custom-cursor flex items-center justify-center text-[10px] uppercase tracking-widest text-black font-medium"
-      style={{
-        translateX: springX,
-        translateY: springY,
-        width: size,
-        height: size,
-        marginLeft: -size / 2,
-        marginTop: -size / 2,
-      }}
-    >
-      {label}
-    </motion.div>
-  )
-}
 
 /* ---------- Nav ---------- */
 function Nav({ locale, setLocale, t }) {
@@ -575,23 +528,35 @@ function Highlight({ text, className = '' }) {
 
 /* ---------- Space Background (parallax stars, scroll-linked) ---------- */
 function SpaceBackground() {
-  const { scrollY } = useScroll()
-  const y1 = useTransform(scrollY, [0, 3000], [0, -180])
-  const y2 = useTransform(scrollY, [0, 3000], [0, -420])
-  const y3 = useTransform(scrollY, [0, 3000], [0, -750])
+  const [mounted, setMounted] = useState(false)
+  const { scrollYProgress } = useScroll()
+  const xDust = useTransform(scrollYProgress, [0, 1], ['0vw', '6vw'])
+  const y0 = useTransform(scrollYProgress, [0, 1], ['0vh', '-300vh'])
+  const y1 = useTransform(scrollYProgress, [0, 1], ['0vh', '-520vh'])
+  const y2 = useTransform(scrollYProgress, [0, 1], ['0vh', '-900vh'])
+  const y3 = useTransform(scrollYProgress, [0, 1], ['0vh', '-1300vh'])
+
+  useEffect(() => {
+    const idle = window.requestIdleCallback || ((callback) => window.setTimeout(callback, 250))
+    const cancelIdle = window.cancelIdleCallback || window.clearTimeout
+    const id = idle(() => setMounted(true))
+    return () => cancelIdle(id)
+  }, [])
 
   const layers = useMemo(() => {
     const rand = (seed) => {
       let x = Math.sin(seed) * 10000
       return x - Math.floor(x)
     }
-    const build = (count, seedOffset, sizeRange, opRange) => (
+    const build = (count, seedOffset, sizeRange, opRange, spreadVh) => (
       Array.from({ length: count }).map((_, i) => {
         const s = seedOffset + i
+        const baseSize = rand(s * 2.1) * (sizeRange[1] - sizeRange[0]) + sizeRange[0]
+        const depth = rand(s * 19.7)
         return {
           x: rand(s * 3.7) * 100,
-          y: rand(s * 7.3) * 500, // 500vh spread
-          size: rand(s * 2.1) * (sizeRange[1] - sizeRange[0]) + sizeRange[0],
+          y: rand(s * 7.3) * spreadVh,
+          size: baseSize * (depth > 0.965 ? 2.35 : depth > 0.9 ? 1.45 : depth < 0.18 ? 0.68 : 1),
           opacity: rand(s * 5.9) * (opRange[1] - opRange[0]) + opRange[0],
           dur: rand(s * 11) * 4 + 3,
           delay: rand(s * 13) * 5,
@@ -600,26 +565,29 @@ function SpaceBackground() {
       })
     )
     return {
-      far: build(140, 1000, [0.7, 1.4], [0.35, 0.7]),
-      mid: build(70, 2000, [1.1, 2.0], [0.45, 0.85]),
-      near: build(24, 3000, [1.8, 3.0], [0.6, 1.0]),
+      dust: build(64, 500, [0.45, 0.85], [0.08, 0.2], 760),
+      far: build(52, 1000, [0.7, 1.3], [0.22, 0.5], 820),
+      mid: build(32, 2000, [1.1, 1.9], [0.32, 0.68], 1250),
+      near: build(12, 3000, [1.8, 2.8], [0.48, 0.86], 1600),
     }
   }, [])
 
   return (
     <div aria-hidden className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-      {[
+      <div className="absolute inset-0 opacity-35 bg-[radial-gradient(ellipse_at_18%_12%,rgba(56,189,248,0.14),transparent_38%),radial-gradient(ellipse_at_86%_42%,rgba(245,197,24,0.08),transparent_42%),radial-gradient(ellipse_at_45%_82%,rgba(99,102,241,0.10),transparent_46%)]" />
+      {mounted && [
+        { data: layers.dust, y: y0, x: xDust, colorFn: (h) => h > 0.75 ? 'rgba(245,197,24,0.42)' : (h > 0.45 ? 'rgba(255,255,255,0.38)' : 'rgba(160,190,255,0.35)'), glow: false },
         { data: layers.far, y: y1, colorFn: (h) => h > 0.85 ? '#F5C518' : (h > 0.5 ? '#FFFFFF' : '#C9D6FF'), glow: false },
         { data: layers.mid, y: y2, colorFn: (h) => h > 0.7 ? '#F5C518' : '#FFFFFF', glow: false },
         { data: layers.near, y: y3, colorFn: () => '#F5C518', glow: true },
       ].map((L, li) => (
-        <motion.div key={li} style={{ y: L.y }} className="absolute inset-0 will-change-transform">
+        <motion.div key={li} style={{ y: L.y, x: L.x || 0 }} className="absolute inset-0 will-change-transform">
           {L.data.map((s, i) => {
             const color = L.colorFn(s.hue)
             return (
               <span
                 key={i}
-                className="absolute rounded-full animate-twinkle"
+                className="absolute rounded-full"
                 style={{
                   left: `${s.x}%`,
                   top: `${s.y}vh`,
@@ -627,8 +595,6 @@ function SpaceBackground() {
                   height: `${s.size}px`,
                   background: color,
                   '--tw-op': s.opacity,
-                  '--tw-dur': `${s.dur}s`,
-                  animationDelay: `${s.delay}s`,
                   boxShadow: L.glow ? `0 0 ${s.size * 3}px ${color}` : (color === '#F5C518' ? `0 0 ${s.size * 1.5}px rgba(245,197,24,0.5)` : 'none'),
                 }}
               />
@@ -699,6 +665,7 @@ function About({ t }) {
                 src="https://customer-assets.emergentagent.com/job_filmmaker-barcelona/artifacts/fsyjfym3_Foto%20perfil.jpg"
                 alt="Jared Durón — Filmmaker & Graphic Designer Barcelona"
                 loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
@@ -730,9 +697,24 @@ function About({ t }) {
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: i * 0.1 }}
-              className="text-center md:text-left"
+              className="group text-center md:text-left"
             >
-              <div className="font-display text-5xl md:text-7xl leading-none">{s.n}</div>
+              <motion.div
+                initial={{ scale: 0.85, opacity: 0, rotate: -8 }}
+                whileInView={{ scale: 1, opacity: 1, rotate: 0 }}
+                whileHover={{ y: -4, scale: 1.06 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, delay: 0.12 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                className="mx-auto md:mx-0 mb-5 w-11 h-11 rounded-full border border-white/15 bg-white/[0.03] text-[#F5C518] flex items-center justify-center shadow-[0_0_28px_rgba(245,197,24,0.08)] group-hover:border-[#F5C518]/45 group-hover:bg-[#F5C518]/10 transition-colors"
+              >
+                {i === 0 && <Clock3 className="w-5 h-5" strokeWidth={1.5} />}
+                {i === 1 && <Clapperboard className="w-5 h-5" strokeWidth={1.5} />}
+                {i === 2 && <BadgeCheck className="w-5 h-5" strokeWidth={1.5} />}
+                {i === 3 && <Layers3 className="w-5 h-5" strokeWidth={1.5} />}
+              </motion.div>
+              <motion.div whileHover={{ x: 2 }} className="font-display text-5xl md:text-7xl leading-none">
+                {s.n}
+              </motion.div>
               <div className="text-[11px] uppercase tracking-widest text-white/50 mt-3">{s.l}</div>
             </motion.div>
           ))}
@@ -780,6 +762,7 @@ function ProjectCard({ project, index, locale, onOpen }) {
 
   return (
     <motion.button
+      type="button"
       onClick={onOpen}
       ref={ref}
       data-cursor="View"
@@ -795,6 +778,7 @@ function ProjectCard({ project, index, locale, onOpen }) {
             src={project.cover}
             alt={`${project.title} — ${project.client} — Jared Durón filmmaker Barcelona`}
             loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
           />
         </div>
@@ -825,8 +809,18 @@ function ProjectCard({ project, index, locale, onOpen }) {
 }
 
 function ProjectModal({ project, locale, onClose }) {
+  const [loadMedia, setLoadMedia] = useState(false)
+  const behanceProjectId = project?.behanceUrl?.match(/\/gallery\/(\d+)/)?.[1]
+  const behanceEmbedUrl = behanceProjectId && !project?.hideBehancePreview ? `https://www.behance.net/embed/project/${behanceProjectId}?ilo0=1` : null
+  const hasVideos = Boolean(project?.videoEmbeds?.length)
+  const mediaLabel = locale === 'en' ? 'Project film' : locale === 'ca' ? 'Film del projecte' : 'Video del proyecto'
+  const loadLabel = locale === 'en' ? 'Load video' : locale === 'ca' ? 'Carregar video' : 'Cargar video'
+  const galleryLabel = locale === 'en' ? 'Visual material' : locale === 'ca' ? 'Material visual' : 'Material visual'
+  const detailsLabel = locale === 'en' ? 'Project details' : locale === 'ca' ? 'Detalls del projecte' : 'Detalles del proyecto'
+
   useEffect(() => {
     if (!project) return
+    setLoadMedia(false)
     const onKey = (e) => { if (e.key === 'Escape') onClose() }
     document.body.style.overflow = 'hidden'
     window.addEventListener('keydown', onKey)
@@ -841,79 +835,249 @@ function ProjectModal({ project, locale, onClose }) {
       {project && (
         <motion.div
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-          transition={{ duration: 0.4 }}
-          className="fixed inset-0 z-[80] bg-[#0A0A0A]/98 backdrop-blur-xl overflow-y-auto"
+          transition={{ duration: 0.24 }}
+          className="fixed inset-0 z-[120] overflow-y-auto bg-[#030711]"
+          onClick={onClose}
         >
-          <button
-            onClick={onClose}
-            data-cursor="Close"
-            className="fixed top-6 right-6 md:top-8 md:right-10 z-10 w-12 h-12 rounded-full bg-white/10 backdrop-blur border border-white/20 flex items-center justify-center hover:bg-white hover:text-black transition-all"
-            aria-label="Close"
-          >
-            <X className="w-5 h-5" />
-          </button>
-
+          <div className="fixed inset-x-0 top-0 z-20 h-28 bg-gradient-to-b from-[#030711] via-[#030711]/92 to-transparent pointer-events-none" />
           <motion.div
-            initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 40, opacity: 0 }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="max-w-[1400px] mx-auto px-6 md:px-10 py-20 md:py-28"
+            role="dialog"
+            aria-modal="true"
+            onClick={(e) => e.stopPropagation()}
+            initial={{ y: 18, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 18, opacity: 0 }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
+            className="relative min-h-screen w-full px-5 py-24 md:px-10 md:py-28"
           >
-            <div className="text-[11px] uppercase tracking-[0.3em] text-white/50 mb-4">{project.category[locale]} · {project.year}</div>
-            <h2 className="font-display text-5xl md:text-8xl leading-[0.95] tracking-tight text-balance">
-              {project.title}
-            </h2>
-            <div className="mt-3 font-display italic text-2xl md:text-3xl text-white/60">{project.subtitle}</div>
+            <button
+              type="button"
+              onClick={onClose}
+              data-cursor="Close"
+              className="fixed right-4 top-4 md:right-8 md:top-7 z-30 w-12 h-12 rounded-full bg-white text-black flex items-center justify-center hover:bg-[#F5C518] transition-colors shadow-[0_14px_40px_rgba(0,0,0,0.45)]"
+              aria-label="Close"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <div className="relative mx-auto w-full max-w-[1280px] overflow-visible">
+              <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_50%_0%,rgba(28,67,138,0.30),transparent_42%),linear-gradient(180deg,#061126_0%,#030711_48%,#02040A_100%)]" />
 
-            <div className="mt-10 md:mt-14 grid md:grid-cols-12 gap-8 md:gap-12 border-t border-white/10 pt-8 md:pt-12">
-              <div className="md:col-span-4 space-y-6">
-                <MetaRow k="Client" v={project.client} />
-                <MetaRow k="Role" v={project.role} />
-                <MetaRow k="Location" v={project.location} />
-                <MetaRow k="Year" v={project.year} />
-                {project.tools?.length > 0 && false && <MetaRow k="Tools" v={project.tools.join(' · ')} /> /* Tools intentionally hidden */}
-                {project.tags?.length > 0 && (
-                  <div>
-                    <div className="text-[11px] uppercase tracking-widest text-white/40 mb-2">Tags</div>
-                    <div className="flex flex-wrap gap-2">
-                      {project.tags.map(tag => (
-                        <span key={tag} className="text-[11px] px-2.5 py-1 border border-white/15 rounded-full text-white/70">{tag}</span>
+              <div className="relative text-center">
+                <div className="text-[11px] uppercase tracking-[0.3em] text-white/55 mb-4">{project.category[locale]} · {project.year}</div>
+                <h2 className="mx-auto max-w-5xl font-display text-5xl md:text-8xl lg:text-9xl leading-[0.92] tracking-tight text-balance">
+                  {project.title}
+                </h2>
+                <div className="mt-4 font-display italic text-2xl md:text-4xl text-white/68">{project.subtitle}</div>
+                <p className="mx-auto mt-6 max-w-3xl text-sm md:text-base leading-relaxed text-white/60">{project.description[locale]}</p>
+
+                <div className="hidden">
+                  <div className="lg:col-span-4">
+                    <div className="grid grid-cols-2 lg:grid-cols-1 gap-5">
+                      <MetaRow k="Client" v={project.client} />
+                      <MetaRow k="Role" v={project.role} />
+                      <MetaRow k="Location" v={project.location} />
+                      <MetaRow k="Year" v={project.year} />
+                    </div>
+                    {project.tools?.length > 0 && false && <MetaRow k="Tools" v={project.tools.join(' · ')} /> /* Tools intentionally hidden */}
+                    {project.tags?.length > 0 && (
+                      <div className="mt-6">
+                        <div className="text-[11px] uppercase tracking-widest text-white/45 mb-2">Tags</div>
+                        <div className="flex flex-wrap gap-2">
+                          {project.tags.map(tag => (
+                            <span key={tag} className="text-[11px] px-2.5 py-1 border border-white/15 rounded-full bg-black/35 text-white/75">{tag}</span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                    {project.behanceUrl && (
+                      <a
+                        href={project.behanceUrl}
+                        target="_blank" rel="noopener noreferrer"
+                        className="mt-6 inline-flex items-center gap-3 bg-white text-black px-5 py-3 rounded-full text-xs uppercase tracking-wider hover:bg-[#F5C518] transition-colors group"
+                      >
+                        View on Behance <ExternalLink className="w-4 h-4 group-hover:rotate-12 transition-transform" />
+                      </a>
+                    )}
+                  </div>
+                  <div className="lg:col-span-8 bg-[#08152B] border border-white/10 p-5 md:p-7">
+                    <p className="text-base md:text-lg text-white/88 leading-relaxed">{project.description[locale]}</p>
+                  </div>
+                </div>
+              </div>
+              {hasVideos && (
+                <section className="relative mt-12 md:mt-16">
+                  <div className="mb-4 flex items-center justify-between gap-4 border-t border-white/10 pt-5">
+                    <div className="text-[10px] uppercase tracking-[0.28em] text-[#F5C518]/85">{mediaLabel}</div>
+                    {!loadMedia && (
+                      <button
+                        type="button"
+                        onClick={() => setLoadMedia(true)}
+                        className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-[11px] uppercase tracking-widest text-black hover:bg-[#F5C518] transition-colors"
+                      >
+                        {loadLabel}
+                        <Play className="w-3.5 h-3.5" />
+                      </button>
+                    )}
+                  </div>
+
+                  {loadMedia ? (
+                    <div className="grid gap-5">
+                      {project.videoEmbeds.map((src, idx) => (
+                        <div key={src} className="relative aspect-video overflow-hidden border border-white/10 bg-black shadow-[0_30px_120px_rgba(0,0,0,0.55)]">
+                          <iframe
+                            src={src}
+                            title={`${project.title} video ${idx + 1}`}
+                            loading="lazy"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
+                            allowFullScreen
+                            className="absolute inset-0 h-full w-full border-0"
+                          />
+                        </div>
                       ))}
                     </div>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => setLoadMedia(true)}
+                      className="group relative flex aspect-video w-full items-center justify-center overflow-hidden border border-white/10 bg-black text-white shadow-[0_30px_120px_rgba(0,0,0,0.55)]"
+                    >
+                      <img src={project.cover} alt="" className="absolute inset-0 h-full w-full object-cover opacity-70 transition-transform duration-700 group-hover:scale-[1.03]" loading="eager" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#02040A]/90 via-[#031026]/30 to-transparent" />
+                      <span className="relative flex h-16 w-16 items-center justify-center rounded-full bg-white text-black transition-transform duration-300 group-hover:scale-105">
+                        <Play className="h-6 w-6 translate-x-0.5" />
+                      </span>
+                    </button>
+                  )}
+                </section>
+              )}
+
+              <div className="relative mt-12 md:mt-16">
+                <div className="mb-4 border-t border-white/10 pt-5 text-[10px] uppercase tracking-[0.28em] text-white/55">{galleryLabel}</div>
+                <div className="space-y-4 md:space-y-6">
+                  {project.gallery.map((img, idx) => (
+                    <div
+                      key={idx}
+                      className="overflow-hidden bg-[#030A18]/72 border border-white/10 shadow-[0_18px_60px_rgba(0,0,0,0.42)]"
+                    >
+                      <img src={img} alt={`Material visual de ${project.title} ${idx + 1}`} loading="lazy" decoding="async" className="w-full h-auto" />
+                    </div>
+                  ))}
+                </div>
+
+                <section className="mt-10 md:mt-14 border border-white/10 bg-[#061126]/88 p-5 md:p-8">
+                  <div className="mb-6 text-[10px] uppercase tracking-[0.28em] text-white/55">{detailsLabel}</div>
+                  <div className="grid gap-6 md:grid-cols-4">
+                    <MetaRow k="Client" v={project.client} />
+                    <MetaRow k="Role" v={project.role} />
+                    <MetaRow k="Location" v={project.location} />
+                    <MetaRow k="Year" v={project.year} />
+                  </div>
+                  {project.tags?.length > 0 && (
+                    <div className="mt-7 flex flex-wrap justify-center gap-2 md:justify-start">
+                      {project.tags.map(tag => (
+                        <span key={tag} className="rounded-full border border-white/12 bg-black/30 px-3 py-1.5 text-[11px] text-white/65">{tag}</span>
+                      ))}
+                    </div>
+                  )}
+                  {project.behanceUrl && (
+                    <a
+                      href={project.behanceUrl}
+                      target="_blank" rel="noopener noreferrer"
+                      className="mt-7 inline-flex items-center gap-3 rounded-full bg-white px-5 py-3 text-xs uppercase tracking-wider text-black transition-colors hover:bg-[#F5C518] group"
+                    >
+                      View on Behance <ExternalLink className="w-4 h-4 group-hover:rotate-12 transition-transform" />
+                    </a>
+                  )}
+                </section>
+
+                {false && project.videoEmbeds?.length > 0 && (
+                  <div className="mt-10 md:mt-14 border border-white/10 bg-[#030A18]/72 shadow-[0_18px_60px_rgba(0,0,0,0.42)] overflow-hidden">
+                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 px-4 md:px-6 py-4 border-b border-white/10">
+                      <div>
+                        <div className="text-[10px] uppercase tracking-[0.28em] text-[#F5C518]/80">Videos del proyecto</div>
+                        <div className="mt-1 text-sm text-white/65">Carga los players solo cuando los necesites</div>
+                      </div>
+                      {!loadMedia && (
+                        <button
+                          type="button"
+                          onClick={() => setLoadMedia(true)}
+                          className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-[11px] uppercase tracking-widest text-black hover:bg-[#F5C518] transition-colors"
+                        >
+                          Cargar videos
+                          <Play className="w-3.5 h-3.5" />
+                        </button>
+                      )}
+                    </div>
+                    {loadMedia ? (
+                      <div className="grid gap-4 md:gap-6 p-4 md:p-6">
+                        {project.videoEmbeds.map((src, idx) => (
+                          <div key={src} className="relative aspect-video overflow-hidden bg-[#050A16] border border-white/10">
+                            <iframe
+                              src={src}
+                              title={`${project.title} video ${idx + 1}`}
+                              loading="lazy"
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
+                              allowFullScreen
+                              className="absolute inset-0 w-full h-full border-0"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="p-6 text-sm text-white/55">Los videos no se cargan automáticamente para mantener fluido el scroll y el popup.</div>
+                    )}
                   </div>
                 )}
-                <a
-                  href={project.behanceUrl}
-                  target="_blank" rel="noopener noreferrer"
-                  className="mt-6 inline-flex items-center gap-3 bg-white text-black px-6 py-3.5 rounded-full text-sm uppercase tracking-wider hover:bg-white/90 transition-all group"
-                >
-                  View on Behance <ExternalLink className="w-4 h-4 group-hover:rotate-12 transition-transform" />
-                </a>
-              </div>
-              <div className="md:col-span-8">
-                <p className="text-lg md:text-xl text-white/80 leading-relaxed">{project.description[locale]}</p>
-              </div>
-            </div>
 
-            <div className="mt-16 md:mt-24 space-y-4 md:space-y-6">
-              {project.gallery.map((img, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-100px' }}
-                  transition={{ duration: 0.8 }}
-                  className="overflow-hidden bg-neutral-950"
-                >
-                  <img src={img} alt={`${project.title} — image ${idx + 1}`} loading="lazy" className="w-full h-auto" />
-                </motion.div>
-              ))}
-            </div>
+                {behanceEmbedUrl && (
+                  <div className="mt-10 md:mt-14 border border-white/10 bg-[#030A18]/72 shadow-[0_18px_60px_rgba(0,0,0,0.42)] overflow-hidden">
+                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 px-4 md:px-6 py-4 border-b border-white/10">
+                      <div>
+                        <div className="text-[10px] uppercase tracking-[0.28em] text-[#F5C518]/80">Preview sacado de Behance</div>
+                        <div className="mt-1 text-sm text-white/65">Video, fotos y case study publicado del proyecto</div>
+                      </div>
+                      <a
+                        href={project.behanceUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-[11px] uppercase tracking-widest text-white/70 hover:text-white transition-colors"
+                      >
+                        Abrir en Behance
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                    </div>
+                    {loadMedia ? (
+                      <div className="relative h-[520px] md:h-[680px] bg-[#050A16]">
+                        <iframe
+                          src={behanceEmbedUrl}
+                          title={`${project.title} Behance preview`}
+                          loading="lazy"
+                          allowFullScreen
+                          allow="clipboard-write; fullscreen"
+                          className="absolute inset-0 w-full h-full border-0"
+                        />
+                      </div>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => setLoadMedia(true)}
+                        className="flex min-h-[220px] w-full flex-col items-center justify-center gap-4 bg-[#050A16] px-6 text-center text-white/70 hover:text-white transition-colors"
+                      >
+                        <span className="w-14 h-14 rounded-full bg-white text-black flex items-center justify-center">
+                          <Play className="w-5 h-5" />
+                        </span>
+                        <span className="text-sm uppercase tracking-widest">Cargar preview de Behance</span>
+                        <span className="max-w-md text-xs normal-case tracking-normal text-white/45">Se carga bajo demanda para mantener fluido el scroll y la apertura del popup.</span>
+                      </button>
+                    )}
+                  </div>
+                )}
 
-            <div className="mt-16 md:mt-24 text-center border-t border-white/10 pt-16">
-              <div className="text-[11px] uppercase tracking-[0.3em] text-white/50 mb-4">Next chapter</div>
-              <a href="#contact" onClick={onClose} className="font-display text-4xl md:text-6xl italic hover:text-white/60 transition-colors">
-                Let&apos;s work together →
-              </a>
+                <div className="mt-14 md:mt-20 text-center border-t border-white/10 pt-12 md:pt-16">
+                  <div className="text-[11px] uppercase tracking-[0.3em] text-white/50 mb-4">Next chapter</div>
+                  <a href="#contact" onClick={onClose} className="font-display text-4xl md:text-6xl italic hover:text-white/60 transition-colors">
+                    Let&apos;s work together →
+                  </a>
+                </div>
+              </div>
             </div>
           </motion.div>
         </motion.div>
@@ -934,6 +1098,8 @@ function MetaRow({ k, v }) {
 /* ---------- Blog ---------- */
 function Blog({ t, locale }) {
   const posts = BLOG_POSTS.slice(0, 6)
+  const [activePost, setActivePost] = useState(null)
+
   return (
     <section id="blog" className="relative py-24 md:py-40 px-6 md:px-10 border-t border-white/5">
       <div className="max-w-[1600px] mx-auto">
@@ -950,19 +1116,21 @@ function Blog({ t, locale }) {
         </div>
         <div className="border-t border-white/10">
           {posts.map((post, i) => (
-            <BlogRow key={post.slug} post={post} index={i} locale={locale} />
+            <BlogRow key={post.slug} post={post} index={i} locale={locale} onOpen={() => setActivePost(post)} />
           ))}
         </div>
       </div>
+      <BlogModal post={activePost} locale={locale} onClose={() => setActivePost(null)} />
     </section>
   )
 }
 
-function BlogRow({ post, index, locale }) {
+function BlogRow({ post, index, locale, onOpen }) {
   const [hover, setHover] = useState(false)
   return (
-    <motion.a
-      href={`#${post.slug}`}
+    <motion.button
+      type="button"
+      onClick={onOpen}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       data-cursor="Read"
@@ -970,7 +1138,7 @@ function BlogRow({ post, index, locale }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-30px' }}
       transition={{ duration: 0.7, delay: (index % 3) * 0.05 }}
-      className="group grid grid-cols-12 items-baseline gap-4 md:gap-6 py-8 md:py-10 border-b border-white/10 relative overflow-hidden"
+      className="group grid grid-cols-12 items-baseline gap-4 md:gap-6 py-8 md:py-10 border-b border-white/10 relative overflow-hidden text-left w-full"
     >
       <span
         className="absolute left-0 bottom-0 h-[1px] bg-[#F5C518] transition-transform duration-700 ease-out origin-left"
@@ -1008,7 +1176,111 @@ function BlogRow({ post, index, locale }) {
           <ArrowUpRight className="w-4 h-4" />
         </motion.span>
       </div>
-    </motion.a>
+    </motion.button>
+  )
+}
+
+function BlogModal({ post, locale, onClose }) {
+  useEffect(() => {
+    if (!post) return
+    const onKey = (e) => { if (e.key === 'Escape') onClose() }
+    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', onKey)
+    return () => {
+      document.body.style.overflow = ''
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [post, onClose])
+
+  const content = post ? (post.content?.[locale] || post.content?.es || [post.excerpt?.[locale] || post.excerpt?.es]) : []
+  const dateLocale = locale === 'en' ? 'en-US' : locale === 'ca' ? 'ca-ES' : 'es-ES'
+
+  return (
+    <AnimatePresence>
+      {post && (
+        <motion.div
+          initial={{ opacity: 0, backdropFilter: 'blur(0px)' }}
+          animate={{ opacity: 1, backdropFilter: 'blur(18px)' }}
+          exit={{ opacity: 0, backdropFilter: 'blur(0px)' }}
+          transition={{ duration: 0.35 }}
+          onClick={onClose}
+          className="fixed inset-0 z-[85] bg-black/70 px-4 py-5 md:px-10 md:py-10 overflow-y-auto"
+        >
+          <motion.article
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="blog-modal-title"
+            onClick={(e) => e.stopPropagation()}
+            initial={{ opacity: 0, scale: 0.82, y: 36, filter: 'blur(14px)' }}
+            animate={{ opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }}
+            exit={{ opacity: 0, scale: 0.9, y: 24, filter: 'blur(10px)' }}
+            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+            className="relative mx-auto w-full max-w-5xl overflow-hidden border border-white/15 bg-[#080A12]/95 shadow-[0_30px_120px_rgba(0,0,0,0.65)]"
+          >
+            <button
+              onClick={onClose}
+              data-cursor="Close"
+              className="absolute right-4 top-4 z-20 w-11 h-11 rounded-full bg-black/45 backdrop-blur-md border border-white/15 flex items-center justify-center text-white hover:bg-white hover:text-black transition-all"
+              aria-label="Close blog article"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <div className="grid lg:grid-cols-12 min-h-[70vh]">
+              <div className="relative lg:col-span-5 min-h-[260px] lg:min-h-full bg-neutral-950">
+                <img
+                  src={post.cover}
+                  alt={post.title[locale]}
+                  loading="lazy"
+                  decoding="async"
+                  className="absolute inset-0 w-full h-full object-cover opacity-80"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#080A12] via-[#080A12]/25 to-black/10" />
+                <div className="absolute left-5 bottom-5 right-5 flex items-end justify-between gap-4 text-[10px] uppercase tracking-[0.28em] text-white/70">
+                  <span className="text-[#F5C518]">{post.category[locale]}</span>
+                  <span className="font-mono-num">{post.read}</span>
+                </div>
+              </div>
+
+              <div className="lg:col-span-7 p-6 md:p-10 lg:p-12">
+                <div className="text-[11px] uppercase tracking-[0.32em] text-white/45 font-mono-num">
+                  {new Date(post.date).toLocaleDateString(dateLocale, { month: 'long', day: 'numeric', year: 'numeric' })}
+                </div>
+                <h3 id="blog-modal-title" className="font-display text-4xl md:text-6xl leading-[1.02] tracking-tight mt-5 text-balance">
+                  {post.title[locale]}
+                </h3>
+                <p className="mt-6 text-white/55 leading-relaxed max-w-2xl">
+                  {post.excerpt[locale]}
+                </p>
+
+                <div className="my-8 h-[1px] bg-gradient-to-r from-[#F5C518] via-white/15 to-transparent" />
+
+                <div className="space-y-5 text-white/75 leading-relaxed text-[15px] md:text-[17px]">
+                  {content.map((paragraph, i) => (
+                    <p key={i}>{paragraph}</p>
+                  ))}
+                </div>
+
+                <div className="mt-10 pt-8 border-t border-white/10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
+                  <div className="text-[11px] uppercase tracking-[0.28em] text-white/40">
+                    Jared Durón · Barcelona
+                  </div>
+                  <a
+                    href="#contact"
+                    onClick={onClose}
+                    data-cursor="Contact"
+                    className="inline-flex items-center justify-center gap-3 bg-white text-black px-5 py-3 rounded-full text-[11px] uppercase tracking-widest hover:bg-[#F5C518] transition-colors"
+                  >
+                    Trabajemos juntos
+                    <ArrowUpRight className="w-4 h-4" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </motion.article>
+        </motion.div>
+      )}
+    </AnimatePresence>
   )
 }
 
@@ -1123,22 +1395,24 @@ function Testimonials({ t }) {
 
   return (
     <section id="testimonials" className="relative py-24 md:py-40 px-6 md:px-10 border-t border-white/5">
-      <div className="max-w-[1600px] mx-auto">
-        <SectionKicker>{t.testimonials.kicker}</SectionKicker>
-        <h2 className="font-display text-4xl md:text-6xl lg:text-7xl leading-[1.02] tracking-tight mt-6 max-w-4xl text-balance flex items-baseline gap-4">
+      <div className="max-w-[1600px] mx-auto flex flex-col items-center text-center">
+        <div className="flex justify-center">
+          <SectionKicker>{t.testimonials.kicker}</SectionKicker>
+        </div>
+        <h2 className="font-display text-4xl md:text-6xl lg:text-7xl leading-[1.02] tracking-tight mt-6 max-w-4xl text-balance flex items-baseline justify-center gap-4">
           {t.testimonials.title}
           <motion.span animate={{ rotate: [-6, 6, -6] }} transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }} className="inline-flex text-[#F5C518]">
             <Star className="w-7 h-7 md:w-9 md:h-9 fill-[#F5C518]" strokeWidth={0} />
           </motion.span>
         </h2>
 
-        <div className="mt-16 md:mt-24 max-w-5xl">
+        <div className="mt-16 md:mt-24 max-w-5xl mx-auto">
           <AnimatePresence mode="wait">
             <motion.blockquote
               key={i}
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.7 }}
             >
-              <div className="flex items-start gap-2 mb-6">
+              <div className="flex items-center justify-center gap-2 mb-6">
                 {[0,1,2,3,4].map((n) => (
                   <motion.span
                     key={n}
@@ -1154,7 +1428,7 @@ function Testimonials({ t }) {
               <p className="font-display text-2xl md:text-4xl lg:text-5xl leading-[1.2] italic text-balance">
                 &ldquo;{item.q}&rdquo;
               </p>
-              <footer className="mt-8 md:mt-12 flex items-center gap-4 md:gap-5 text-sm">
+              <footer className="mt-8 md:mt-12 flex items-center justify-center gap-4 md:gap-5 text-sm">
                 <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-[#F5C518] to-[#E8A800] flex items-center justify-center text-black font-display text-lg md:text-xl">
                   {initials}
                 </div>
@@ -1166,12 +1440,12 @@ function Testimonials({ t }) {
             </motion.blockquote>
           </AnimatePresence>
 
-          <div className="mt-12 flex gap-3 flex-wrap">
+          <div className="mt-12 flex justify-center gap-3 flex-wrap">
             {t.testimonials.items.map((item2, idx) => (
               <button
                 key={idx}
                 onClick={() => setI(idx)}
-                className={`text-left transition-all duration-500 px-4 py-3 rounded-lg border ${idx === i ? 'bg-white/5 border-[#F5C518]/40' : 'border-white/10 hover:border-white/30'}`}
+                className={`text-center transition-all duration-500 px-4 py-3 rounded-lg border ${idx === i ? 'bg-white/5 border-[#F5C518]/40' : 'border-white/10 hover:border-white/30'}`}
                 aria-label={`Testimonial ${idx + 1}`}
               >
                 <div className={`text-xs font-medium ${idx === i ? 'text-[#F5C518]' : 'text-white/70'}`}>{item2.a}</div>
@@ -1247,11 +1521,12 @@ function Contact({ t, locale }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...form, locale }),
       })
-      if (!res.ok) throw new Error('fail')
+      const data = await res.json().catch(() => ({}))
+      if (!res.ok) throw new Error(data.detail || data.error || t.contact.error)
       toast.success(t.contact.success)
       setForm({ name: '', email: '', phone: '', company: '', budget: '', projectType: '', message: '' })
-    } catch {
-      toast.error(t.contact.error)
+    } catch (error) {
+      toast.error(error.message || t.contact.error)
     } finally { setLoading(false) }
   }
 
@@ -1420,94 +1695,18 @@ function Footer({ t }) {
           </div>
         </div>
 
-        {/* SEO keywords cloud — helps organic discovery */}
+        {/* Natural SEO copy for organic discovery */}
         <div className="mt-14 pt-10 border-t border-white/5">
           <div className="text-[10px] uppercase tracking-[0.3em] text-white/40 mb-5 flex items-center gap-3">
             <span className="w-1.5 h-1.5 rounded-full bg-[#F5C518]" />
-            <span>Also known as · Also searching for</span>
+            <span>Produccion audiovisual en Barcelona</span>
           </div>
-          <div className="flex flex-wrap gap-x-3 gap-y-2 text-[11px] text-white/35 leading-relaxed">
-            {[
-              'Filmmaker Barcelona',
-              'Videographer Barcelona',
-              'Videógrafo Barcelona',
-              'Director de fotografía Barcelona',
-              'Productora audiovisual Barcelona',
-              'Vídeo corporativo Barcelona',
-              'Corporate video Barcelona',
-              'Corporate videographer Barcelona',
-              'Corporate video production Spain',
-              'Commercial filmmaker Spain',
-              'Brand filmmaker Barcelona',
-              'Cinematic videographer Barcelona',
-              'Event videographer Barcelona',
-              'Product video Barcelona',
-              'Documentary filmmaker Barcelona',
-              'Documentary videographer Spain',
-              'English speaking filmmaker Barcelona',
-              'English speaking video crew Spain',
-              'Barcelona filmmaker for hire',
-              'Freelance filmmaker Barcelona',
-              'Freelance videographer Barcelona',
-              'Video production company Barcelona',
-              'Video production services Barcelona',
-              'Trade show videographer Spain',
-              'Corporate interviews Barcelona',
-              'Branded content Barcelona',
-              'Branded video Barcelona',
-              'Meta Ads video production',
-              'YouTube video production Barcelona',
-              'Reels & TikTok content creator Barcelona',
-              'Podcast video production Barcelona',
-              'Video marketing Barcelona',
-              'Diseñador gráfico Barcelona',
-              'Graphic designer Barcelona',
-              'Motion graphics Barcelona',
-              'Motion designer Barcelona',
-              'Color grading Barcelona',
-              'Colorist Barcelona',
-              'DaVinci Resolve colorist Barcelona',
-              'VideoMapping Barcelona',
-              'VideoMapping Spain',
-              'Brand identity designer Barcelona',
-              'Creative director Barcelona',
-              'Art director Barcelona',
-              'Cinematographer Barcelona',
-              'DoP Barcelona',
-              'Director of Photography Barcelona',
-              'Barcelona film production',
-              'Barcelona wedding videographer',
-              'Barcelona real estate videographer',
-              'Barcelona restaurant videographer',
-              'Barcelona hotel videographer',
-              'Barcelona fashion videographer',
-              'Producción audiovisual Cataluña',
-              'Filmmaker Cataluña',
-              'Filmmaker Sabadell',
-              'Filmmaker Terrassa',
-              'Filmmaker Girona',
-              'Filmmaker Madrid',
-              'Videographer Madrid',
-              'Videographer Valencia',
-              'Videographer Bilbao',
-              'Filmmaker Ibiza',
-              'Filmmaker Mallorca',
-              'Filmmaker Sitges',
-              'Video maker Barcelona',
-              'Video editor Barcelona',
-              'Post production Barcelona',
-              'Aerial videography Barcelona',
-              'Drone videographer Barcelona',
-              'Filmmaker per empreses Barcelona',
-              'Videògraf Barcelona',
-              'Productora audiovisual Catalunya',
-              'Producció audiovisual Barcelona',
-            ].map((k, i) => (
-              <span key={i} className="hover:text-[#F5C518] transition-colors cursor-default">{k}{i < 71 ? ' ·' : ''}</span>
-            ))}
-          </div>
-        </div>
-      </div>
+          <p className="max-w-4xl text-sm md:text-base text-white/45 leading-relaxed">
+            Trabajo con marcas, agencias y proyectos creativos que necesitan produccion audiovisual en Barcelona:
+            brand films, video corporativo, cobertura de eventos, contenido para redes sociales, edicion de video,
+            motion graphics, diseno grafico y piezas cinematograficas pensadas para comunicar con claridad.
+          </p>
+        </div>      </div>
     </footer>
   )
 }
@@ -1531,10 +1730,13 @@ function SectionKicker({ children }) {
 
 /* ---------- Loader ---------- */
 function Loader() {
+  const [mounted, setMounted] = useState(false)
   const [done, setDone] = useState(false)
   const [progress, setProgress] = useState(0)
 
   useEffect(() => {
+    setMounted(true)
+
     let p = 0
     const id = setInterval(() => {
       p += Math.random() * 8 + 3
@@ -1551,7 +1753,7 @@ function Loader() {
   // Deterministic star grid for loader
   const stars = useMemo(() => {
     const rand = (seed) => { const x = Math.sin(seed) * 10000; return x - Math.floor(x) }
-    return Array.from({ length: 180 }).map((_, i) => ({
+    return Array.from({ length: 100 }).map((_, i) => ({
       x: rand(i * 3.1) * 100,
       y: rand(i * 7.7) * 100,
       s: rand(i * 2.3) * 2 + 0.6,
@@ -1576,7 +1778,7 @@ function Loader() {
         >
           {/* Deep space stars */}
           <div aria-hidden className="absolute inset-0 pointer-events-none">
-            {stars.map((s, i) => (
+            {mounted && stars.map((s, i) => (
               <span
                 key={i}
                 className="absolute rounded-full animate-twinkle"
@@ -1633,24 +1835,48 @@ function Loader() {
             </motion.div>
           </div>
 
-          {/* Progress bar with cinematic fade */}
+          {/* Render timeline */}
           <motion.div
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.6 }}
-            className="absolute bottom-14 left-6 right-6 md:left-14 md:right-14 flex items-end justify-between z-10"
+            className="absolute bottom-10 left-6 right-6 md:left-14 md:right-14 z-10"
           >
-            <div className="font-mono-num text-xs text-[#F5C518]/80">{String(progress).padStart(3, '0')}</div>
-            <div className="flex-1 mx-6 h-[1px] bg-white/10 relative overflow-hidden">
+            <div className="flex items-center justify-between gap-4 text-[10px] md:text-xs uppercase tracking-[0.28em]">
+              <div className="text-[#F5C518]/85">Rendering intro</div>
+              <div className="font-mono-num text-white/70">{String(progress).padStart(3, '0')}%</div>
+            </div>
+
+            <div className="relative mt-3 h-9 md:h-10 overflow-hidden border border-white/15 bg-black/35 shadow-[0_0_30px_rgba(245,197,24,0.08)]">
+              <div className="absolute inset-0 grid grid-cols-12">
+                {Array.from({ length: 12 }).map((_, frame) => (
+                  <div key={frame} className="border-r border-white/10 last:border-r-0" />
+                ))}
+              </div>
               <motion.div
-                className="absolute inset-y-0 left-0"
+                className="absolute inset-y-0 left-0 overflow-hidden"
                 style={{
                   width: `${progress}%`,
-                  background: 'linear-gradient(90deg, transparent 0%, #F5C518 40%, #ffffff 100%)',
-                  boxShadow: '0 0 12px #F5C518',
+                  background: 'linear-gradient(90deg, rgba(245,197,24,0.15) 0%, rgba(245,197,24,0.85) 72%, #ffffff 100%)',
+                  boxShadow: '0 0 18px rgba(245,197,24,0.65)',
                 }}
                 transition={{ duration: 0.4, ease: 'easeOut' }}
+              >
+                <div
+                  className="absolute inset-0 opacity-35"
+                  style={{ backgroundImage: 'repeating-linear-gradient(90deg, transparent 0 14px, rgba(0,0,0,0.45) 14px 16px)' }}
+                />
+              </motion.div>
+              <motion.div
+                className="absolute top-0 bottom-0 w-[2px] bg-white"
+                style={{ left: `${progress}%`, boxShadow: '0 0 16px #ffffff, 0 0 28px #F5C518' }}
+                animate={{ opacity: [0.55, 1, 0.55] }}
+                transition={{ duration: 0.7, repeat: Infinity, ease: 'easeInOut' }}
               />
             </div>
-            <div className="text-xs uppercase tracking-widest text-white/60">Loading</div>
+
+            <div className="mt-2 flex items-center justify-between gap-4 font-mono-num text-[10px] uppercase tracking-[0.22em] text-white/45">
+              <span>Frame {String(Math.round(progress * 2.4)).padStart(3, '0')} / 240</span>
+              <span>24 FPS</span>
+            </div>
           </motion.div>
         </motion.div>
       )}
@@ -1674,10 +1900,8 @@ function App() {
 
   return (
     <>
-      <CustomCursor />
       <Loader />
       <Toaster position="bottom-right" theme="dark" />
-      <SpaceBackground />
       <div className="grain relative z-10">
         <Nav locale={locale} setLocale={setLocale} t={t} />
         <main>

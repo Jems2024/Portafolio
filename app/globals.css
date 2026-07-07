@@ -8,6 +8,7 @@
   --muted: #737373;
   --line: #1F1F1F;
   --accent: #F5C518;
+  --css-build-version: 20260706;
 }
 
 * {
@@ -16,25 +17,29 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
   background: #06080F;
 }
 
 body {
   font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
-  cursor: none;
+  cursor: auto;
   background:
     radial-gradient(ellipse 80% 60% at 20% 10%, rgba(30, 58, 138, 0.18), transparent 60%),
     radial-gradient(ellipse 70% 60% at 90% 30%, rgba(15, 23, 42, 0.35), transparent 65%),
     radial-gradient(ellipse 90% 80% at 50% 100%, rgba(8, 12, 30, 0.6), transparent 70%),
     linear-gradient(180deg, #060814 0%, #080B1A 30%, #06080F 60%, #050609 100%);
-  background-attachment: fixed;
+  background-attachment: scroll;
   min-height: 100vh;
 }
 
 @media (hover: none) and (pointer: coarse) {
   body { cursor: auto; }
   .custom-cursor { display: none !important; }
+}
+
+@media (max-width: 768px) {
+  body { background-attachment: scroll; }
 }
 
 .font-display {
@@ -55,10 +60,11 @@ body {
   left: 0;
   pointer-events: none;
   z-index: 9999;
-  mix-blend-mode: difference;
+  mix-blend-mode: normal;
   transition: width 0.25s cubic-bezier(0.22, 1, 0.36, 1), height 0.25s cubic-bezier(0.22, 1, 0.36, 1), background 0.2s;
   border-radius: 9999px;
-  background: #FFFFFF;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.18);
   will-change: transform;
 }
 
@@ -97,14 +103,7 @@ body {
 
 /* Grain overlay for cinematic feel */
 .grain::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  opacity: 0.05;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.5 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-  mix-blend-mode: overlay;
+  content: none;
 }
 
 /* Focus rings for accessibility */

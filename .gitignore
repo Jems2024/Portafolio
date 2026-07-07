@@ -31,6 +31,11 @@ dist/
 dist
 
 # Environment files (comprehensive coverage)
+.env
+.env.*
+!.env.example
+.env.local
+.env.production
 *token.json*
 *credentials.json*
 
@@ -64,6 +69,7 @@ chainlit.md
 agenthub/agents/youtube/db
 
 # Archive files and large assets
+APP.zip
 **/*.zip
 **/*.tar.gz
 **/*.tar
@@ -71,6 +77,13 @@ agenthub/agents/youtube/db
 *.pack
 *.deb
 *.dylib
+
+# Local platform/test artifacts
+.emergent/
+backend_test.py
+test_result.md
+tests/
+test_reports/
 
 # Build caches
 .cache/
@@ -81,3 +94,4 @@ memory/test_credentials.md
 android-sdk/node_modules/@next/swc-linux-arm64-musl/next-swc.linux-arm64-musl.node
 node_modules/@next/swc-linux-arm64-gnu/next-swc.linux-arm64-gnu.node
 node_modules/@next/swc-linux-arm64-musl/next-swc.linux-arm64-musl.node
+node_modules/@next/swc-win32-x64-msvc/next-swc.win32-x64-msvc.node
