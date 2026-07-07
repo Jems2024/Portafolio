@@ -113,7 +113,6 @@ export default function RootLayout({ children }) {
       <head>
         <link rel="preconnect" href="https://customer-assets.emergentagent.com" />
         <link rel="preconnect" href="https://mir-s3-cdn-cf.behance.net" />
-        <link rel="preconnect" href="https://videos.pexels.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}

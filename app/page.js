@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState, useMemo } from 'react'
+import Image from 'next/image'
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { ArrowUpRight, Play, Mail, Instagram, Linkedin, MessageCircle, MapPin, Plus, Minus, X, Calendar, ExternalLink, Sparkles, Zap, Star, Sun, Clock3, Clapperboard, BadgeCheck, Layers3 } from 'lucide-react'
 import { toast, Toaster } from 'sonner'
@@ -262,7 +263,7 @@ function Nav({ locale, setLocale, t }) {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
-    window.addEventListener('scroll', onScroll)
+    window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
@@ -340,9 +341,18 @@ function Hero({ t }) {
   return (
     <section ref={ref} id="top" className="relative h-screen w-full overflow-hidden">
       <motion.div style={{ y, scale }} className="absolute inset-0">
+        <Image
+          src="https://mir-s3-cdn-cf.behance.net/projects/404/e9a7e7204648249.Y3JvcCwzMzY3LDI2MzMsMCww.png"
+          alt="Cinematic documentary frame by Jared Duron"
+          fill
+          priority
+          sizes="100vw"
+          quality={72}
+          className="absolute inset-0 object-cover md:hidden"
+        />
         <video
-          className="absolute inset-0 w-full h-full object-cover"
-          autoPlay muted loop playsInline preload="auto"
+          className="absolute inset-0 hidden h-full w-full object-cover md:block"
+          autoPlay muted loop playsInline preload="metadata"
           poster="https://mir-s3-cdn-cf.behance.net/projects/404/e9a7e7204648249.Y3JvcCwzMzY3LDI2MzMsMCww.png"
         >
           <source src="https://customer-assets.emergentagent.com/job_filmmaker-barcelona/artifacts/qkv7mv6p_Toma%20Dron%201.mp4" type="video/mp4" />
@@ -354,7 +364,7 @@ function Hero({ t }) {
       <motion.div style={{ opacity }} className="relative z-10 h-full flex flex-col justify-between px-6 md:px-10 py-24 md:py-32 max-w-[1600px] mx-auto">
         <div className="flex-1 flex flex-col justify-center">
           <motion.div
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.3 }}
+            initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }}
             className="flex items-center gap-3 mb-6 md:mb-8"
           >
             <div className="w-8 h-[1px] bg-white/60" />
@@ -363,28 +373,28 @@ function Hero({ t }) {
 
           <h1 className="font-display text-[9vw] md:text-[5.5vw] leading-[0.98] tracking-tight text-balance">
             <motion.span
-              initial={{ opacity: 0, y: 40, filter: 'blur(20px)' }} animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }} transition={{ duration: 1.5, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              className="block will-change-[filter,transform]"
+              initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+              className="block will-change-transform"
             >
               {t.hero.title1}
             </motion.span>
             <motion.span
-              initial={{ opacity: 0, y: 40, filter: 'blur(20px)' }} animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }} transition={{ duration: 1.5, delay: 0.85, ease: [0.22, 1, 0.36, 1] }}
-              className="block italic text-white/80 will-change-[filter,transform]"
+              initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
+              className="block italic text-white/80 will-change-transform"
             >
               {t.hero.title2}
             </motion.span>
           </h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }} animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }} transition={{ duration: 1.4, delay: 1.2, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65, delay: 0.24, ease: [0.22, 1, 0.36, 1] }}
             className="mt-8 md:mt-10 max-w-xl text-base md:text-lg text-white/70 leading-relaxed"
           >
             <Highlight text={t.hero.sub} />
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 1.3 }}
+            initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}
             className="mt-10 md:mt-12 flex flex-wrap items-center gap-3 md:gap-4"
           >
             <a href="#work" data-cursor="View" className="inline-flex items-center gap-3 bg-white text-black px-6 md:px-7 py-3.5 rounded-full text-sm uppercase tracking-wider hover:bg-white/90 transition-all group">
@@ -408,7 +418,7 @@ function Hero({ t }) {
         </div>
 
         <motion.div
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 1.6 }}
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.4 }}
           className="flex items-end justify-between text-[11px] uppercase tracking-widest text-white/50"
         >
           <div className="flex items-center gap-2">
@@ -611,7 +621,7 @@ function FloatingWhatsApp({ locale }) {
   const [visible, setVisible] = useState(false)
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 400)
-    window.addEventListener('scroll', onScroll)
+    window.addEventListener('scroll', onScroll, { passive: true })
     onScroll()
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
@@ -661,12 +671,13 @@ function About({ t }) {
             className="md:col-span-5 relative"
           >
             <div className="relative aspect-[4/5] overflow-hidden bg-neutral-900">
-              <img
+              <Image
                 src="https://customer-assets.emergentagent.com/job_filmmaker-barcelona/artifacts/fsyjfym3_Foto%20perfil.jpg"
                 alt="Jared Durón — Filmmaker & Graphic Designer Barcelona"
-                loading="lazy"
-                decoding="async"
-                className="w-full h-full object-cover"
+                fill
+                sizes="(min-width: 768px) 38vw, 100vw"
+                quality={74}
+                className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end text-[11px] uppercase tracking-widest text-white/70">
@@ -774,12 +785,14 @@ function ProjectCard({ project, index, locale, onOpen }) {
     >
       <div className="relative overflow-hidden aspect-[4/5] bg-neutral-900">
         <div className="absolute inset-0">
-          <img
+          <Image
             src={project.cover}
             alt={`${project.title} — ${project.client} — Jared Durón filmmaker Barcelona`}
+            fill
             loading="lazy"
-            decoding="async"
-            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+            sizes="(min-width: 768px) 31vw, (min-width: 640px) 50vw, 100vw"
+            quality={68}
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-70 group-hover:opacity-50 transition-opacity duration-500" />
@@ -939,7 +952,14 @@ function ProjectModal({ project, locale, onClose }) {
                       onClick={() => setLoadMedia(true)}
                       className="group relative flex aspect-video w-full items-center justify-center overflow-hidden border border-white/10 bg-black text-white shadow-[0_30px_120px_rgba(0,0,0,0.55)]"
                     >
-                      <img src={project.cover} alt="" className="absolute inset-0 h-full w-full object-cover opacity-70 transition-transform duration-700 group-hover:scale-[1.03]" loading="eager" />
+                      <Image
+                        src={project.cover}
+                        alt=""
+                        fill
+                        sizes="(min-width: 1024px) 1024px, 100vw"
+                        quality={70}
+                        className="object-cover opacity-70 transition-transform duration-700 group-hover:scale-[1.03]"
+                      />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#02040A]/90 via-[#031026]/30 to-transparent" />
                       <span className="relative flex h-16 w-16 items-center justify-center rounded-full bg-white text-black transition-transform duration-300 group-hover:scale-105">
                         <Play className="h-6 w-6 translate-x-0.5" />
@@ -957,7 +977,16 @@ function ProjectModal({ project, locale, onClose }) {
                       key={idx}
                       className="overflow-hidden bg-[#030A18]/72 border border-white/10 shadow-[0_18px_60px_rgba(0,0,0,0.42)]"
                     >
-                      <img src={img} alt={`Material visual de ${project.title} ${idx + 1}`} loading="lazy" decoding="async" className="w-full h-auto" />
+                      <Image
+                        src={img}
+                        alt={`Material visual de ${project.title} ${idx + 1}`}
+                        width={1400}
+                        height={900}
+                        loading="lazy"
+                        sizes="(min-width: 1280px) 1180px, 100vw"
+                        quality={72}
+                        className="h-auto w-full"
+                      />
                     </div>
                   ))}
                 </div>
@@ -1228,12 +1257,14 @@ function BlogModal({ post, locale, onClose }) {
 
             <div className="grid lg:grid-cols-12 min-h-[70vh]">
               <div className="relative lg:col-span-5 min-h-[260px] lg:min-h-full bg-neutral-950">
-                <img
+                <Image
                   src={post.cover}
                   alt={post.title[locale]}
+                  fill
                   loading="lazy"
-                  decoding="async"
-                  className="absolute inset-0 w-full h-full object-cover opacity-80"
+                  sizes="(min-width: 1024px) 420px, 100vw"
+                  quality={70}
+                  className="object-cover opacity-80"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#080A12] via-[#080A12]/25 to-black/10" />
                 <div className="absolute left-5 bottom-5 right-5 flex items-end justify-between gap-4 text-[10px] uppercase tracking-[0.28em] text-white/70">
@@ -1900,7 +1931,6 @@ function App() {
 
   return (
     <>
-      <Loader />
       <Toaster position="bottom-right" theme="dark" />
       <div className="grain relative z-10">
         <Nav locale={locale} setLocale={setLocale} t={t} />

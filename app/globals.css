@@ -40,6 +40,21 @@ body {
 
 @media (max-width: 768px) {
   body { background-attachment: scroll; }
+  .animate-marquee { animation-duration: 70s; }
+  .hero-vignette {
+    background:
+      radial-gradient(ellipse at center, transparent 0%, transparent 48%, rgba(0,0,0,0.76) 100%),
+      linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.18) 40%, rgba(10,10,10,0.92) 100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
 }
 
 .font-display {
