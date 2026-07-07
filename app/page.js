@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, useMemo } from 'react'
 import Image from 'next/image'
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
-import { ArrowUpRight, Play, Mail, Instagram, Linkedin, MessageCircle, MapPin, Plus, Minus, X, Calendar, ExternalLink, Sparkles, Zap, Star, Sun, Clock3, Clapperboard, BadgeCheck, Layers3 } from 'lucide-react'
+import { ArrowUpRight, Play, Mail, Instagram, Linkedin, MessageCircle, MapPin, Plus, Minus, X, ExternalLink, Sparkles, Star, Clock3, Clapperboard, BadgeCheck, Layers3 } from 'lucide-react'
 import { toast, Toaster } from 'sonner'
 import { PROJECTS, REAL_CLIENTS, BLOG_POSTS } from '@/lib/projects'
 
@@ -536,86 +536,6 @@ function Highlight({ text, className = '' }) {
   )
 }
 
-/* ---------- Space Background (parallax stars, scroll-linked) ---------- */
-function SpaceBackground() {
-  const [mounted, setMounted] = useState(false)
-  const { scrollYProgress } = useScroll()
-  const xDust = useTransform(scrollYProgress, [0, 1], ['0vw', '6vw'])
-  const y0 = useTransform(scrollYProgress, [0, 1], ['0vh', '-300vh'])
-  const y1 = useTransform(scrollYProgress, [0, 1], ['0vh', '-520vh'])
-  const y2 = useTransform(scrollYProgress, [0, 1], ['0vh', '-900vh'])
-  const y3 = useTransform(scrollYProgress, [0, 1], ['0vh', '-1300vh'])
-
-  useEffect(() => {
-    const idle = window.requestIdleCallback || ((callback) => window.setTimeout(callback, 250))
-    const cancelIdle = window.cancelIdleCallback || window.clearTimeout
-    const id = idle(() => setMounted(true))
-    return () => cancelIdle(id)
-  }, [])
-
-  const layers = useMemo(() => {
-    const rand = (seed) => {
-      let x = Math.sin(seed) * 10000
-      return x - Math.floor(x)
-    }
-    const build = (count, seedOffset, sizeRange, opRange, spreadVh) => (
-      Array.from({ length: count }).map((_, i) => {
-        const s = seedOffset + i
-        const baseSize = rand(s * 2.1) * (sizeRange[1] - sizeRange[0]) + sizeRange[0]
-        const depth = rand(s * 19.7)
-        return {
-          x: rand(s * 3.7) * 100,
-          y: rand(s * 7.3) * spreadVh,
-          size: baseSize * (depth > 0.965 ? 2.35 : depth > 0.9 ? 1.45 : depth < 0.18 ? 0.68 : 1),
-          opacity: rand(s * 5.9) * (opRange[1] - opRange[0]) + opRange[0],
-          dur: rand(s * 11) * 4 + 3,
-          delay: rand(s * 13) * 5,
-          hue: rand(s * 17),
-        }
-      })
-    )
-    return {
-      dust: build(64, 500, [0.45, 0.85], [0.08, 0.2], 760),
-      far: build(52, 1000, [0.7, 1.3], [0.22, 0.5], 820),
-      mid: build(32, 2000, [1.1, 1.9], [0.32, 0.68], 1250),
-      near: build(12, 3000, [1.8, 2.8], [0.48, 0.86], 1600),
-    }
-  }, [])
-
-  return (
-    <div aria-hidden className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-      <div className="absolute inset-0 opacity-35 bg-[radial-gradient(ellipse_at_18%_12%,rgba(56,189,248,0.14),transparent_38%),radial-gradient(ellipse_at_86%_42%,rgba(245,197,24,0.08),transparent_42%),radial-gradient(ellipse_at_45%_82%,rgba(99,102,241,0.10),transparent_46%)]" />
-      {mounted && [
-        { data: layers.dust, y: y0, x: xDust, colorFn: (h) => h > 0.75 ? 'rgba(245,197,24,0.42)' : (h > 0.45 ? 'rgba(255,255,255,0.38)' : 'rgba(160,190,255,0.35)'), glow: false },
-        { data: layers.far, y: y1, colorFn: (h) => h > 0.85 ? '#F5C518' : (h > 0.5 ? '#FFFFFF' : '#C9D6FF'), glow: false },
-        { data: layers.mid, y: y2, colorFn: (h) => h > 0.7 ? '#F5C518' : '#FFFFFF', glow: false },
-        { data: layers.near, y: y3, colorFn: () => '#F5C518', glow: true },
-      ].map((L, li) => (
-        <motion.div key={li} style={{ y: L.y, x: L.x || 0 }} className="absolute inset-0 will-change-transform">
-          {L.data.map((s, i) => {
-            const color = L.colorFn(s.hue)
-            return (
-              <span
-                key={i}
-                className="absolute rounded-full"
-                style={{
-                  left: `${s.x}%`,
-                  top: `${s.y}vh`,
-                  width: `${s.size}px`,
-                  height: `${s.size}px`,
-                  background: color,
-                  '--tw-op': s.opacity,
-                  boxShadow: L.glow ? `0 0 ${s.size * 3}px ${color}` : (color === '#F5C518' ? `0 0 ${s.size * 1.5}px rgba(245,197,24,0.5)` : 'none'),
-                }}
-              />
-            )
-          })}
-        </motion.div>
-      ))}
-    </div>
-  )
-}
-
 /* ---------- Floating WhatsApp (persistent on all pages) ---------- */
 function FloatingWhatsApp({ locale }) {
   const [visible, setVisible] = useState(false)
@@ -769,13 +689,10 @@ function Work({ t, locale }) {
 }
 
 function ProjectCard({ project, index, locale, onOpen }) {
-  const ref = useRef(null)
-
   return (
     <motion.button
       type="button"
       onClick={onOpen}
-      ref={ref}
       data-cursor="View"
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -1437,7 +1354,7 @@ function Testimonials({ t }) {
           </motion.span>
         </h2>
 
-        <div className="mt-16 md:mt-24 max-w-5xl mx-auto">
+        <div className="mt-16 md:mt-24 max-w-5xl mx-auto min-h-[520px] sm:min-h-[460px] md:min-h-[440px] lg:min-h-[390px]">
           <AnimatePresence mode="wait">
             <motion.blockquote
               key={i}
@@ -1471,7 +1388,7 @@ function Testimonials({ t }) {
             </motion.blockquote>
           </AnimatePresence>
 
-          <div className="mt-12 flex justify-center gap-3 flex-wrap">
+          <div className="mt-12 flex min-h-[92px] justify-center gap-3 flex-wrap">
             {t.testimonials.items.map((item2, idx) => (
               <button
                 key={idx}
