@@ -578,7 +578,7 @@ function FloatingWhatsApp({ locale }) {
 }
 
 const ABOUT_PORTRAITS = [
-  'https://customer-assets.emergentagent.com/job_filmmaker-barcelona/artifacts/fsyjfym3_Foto%20perfil.jpg',
+  '/IMG/portrait-main.webp',
   '/IMG/portrait-01.webp',
   '/IMG/portrait-02.webp',
   '/IMG/portrait-03.webp',
