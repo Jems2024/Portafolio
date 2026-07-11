@@ -1,21 +1,18 @@
-import { Inter, Playfair_Display } from 'next/font/google'
+import { Poppins } from 'next/font/google'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import './globals.css'
 
 const siteUrl = 'https://portafolio-olive-beta-79.vercel.app'
-const siteName = 'Jared Duron Portfolio'
-const siteTitle = 'Jared Duron - Filmmaker and Videographer in Barcelona'
-const siteDescription = 'Jared Duron is a filmmaker, videographer and visual creator based in Barcelona, creating cinematic videos, brand films, corporate videos, event coverage, social media content and visual storytelling for brands, agencies and creative projects.'
+const siteName = 'Jared Durón Portfolio'
+const siteTitle = 'Jared Durón | Filmmaker y producción audiovisual en Barcelona'
+const siteDescription = 'Filmmaker en Barcelona especializado en producción audiovisual, edición de vídeo, dirección de fotografía y diseño gráfico para marcas, agencias y productoras.'
+const openGraphTitle = 'Jared Durón — Filmmaker in Barcelona'
+const openGraphDescription = 'Producción audiovisual, filmmaking y diseño gráfico para marcas, agencias y productoras.'
 
-const inter = Inter({
+const poppins = Poppins({
   subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-})
-
-const playfair = Playfair_Display({
-  subsets: ['latin'],
-  variable: '--font-playfair',
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-primary',
   display: 'swap',
 })
 
@@ -27,8 +24,8 @@ export const metadata = {
   },
   description: siteDescription,
   keywords: [
-    'Jared Duron',
-    'Jared Duron filmmaker',
+    'Jared Durón',
+    'Jared Durón filmmaker',
     'filmmaker Barcelona',
     'videographer Barcelona',
     'produccion audiovisual Barcelona',
@@ -39,9 +36,9 @@ export const metadata = {
     'visual storytelling',
     'diseno grafico',
   ],
-  authors: [{ name: 'Jared Duron' }],
-  creator: 'Jared Duron',
-  publisher: 'Jared Duron',
+  authors: [{ name: 'Jared Durón' }],
+  creator: 'Jared Durón',
+  publisher: 'Jared Durón',
   alternates: {
     canonical: siteUrl,
   },
@@ -61,13 +58,13 @@ export const metadata = {
     locale: 'es_ES',
     url: siteUrl,
     siteName,
-    title: siteTitle,
-    description: siteDescription,
+    title: openGraphTitle,
+    description: openGraphDescription,
   },
   twitter: {
     card: 'summary',
-    title: siteTitle,
-    description: siteDescription,
+    title: openGraphTitle,
+    description: openGraphDescription,
   },
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
@@ -84,7 +81,7 @@ export const viewport = {
 const personJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
-  name: 'Jared Duron',
+  name: 'Jared Durón',
   jobTitle: 'Filmmaker / Videographer / Visual Creator',
   url: siteUrl,
   address: {
@@ -103,13 +100,13 @@ const websiteJsonLd = {
   description: siteDescription,
   publisher: {
     '@type': 'Person',
-    name: 'Jared Duron',
+    name: 'Jared Durón',
   },
 }
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="es" className={`${inter.variable} ${playfair.variable}`}>
+    <html lang="es" className={poppins.variable}>
       <head>
         <link rel="preconnect" href="https://customer-assets.emergentagent.com" />
         <link rel="preconnect" href="https://mir-s3-cdn-cf.behance.net" />

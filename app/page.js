@@ -13,11 +13,15 @@ const T = {
     nav: { work: 'Proyectos', about: 'Sobre mí', services: 'Servicios', process: 'Proceso', blog: 'Blog', contact: 'Contacto' },
     hero: {
       eyebrow: 'Filmmaker & Graphic Designer · Barcelona',
+      title: 'JARED DURÓN · FILMMAKER EN BARCELONA',
       title1: 'Jared Durón — Filmmaker in Barcelona.',
       title2: 'Films that grow brands.',
       sub: 'Producción audiovisual y diseño gráfico para marcas premium, agencias creativas y productoras internacionales. Más de 7 años transformando ideas en experiencias visuales.',
       cta1: 'Ver Proyectos',
       cta2: 'Trabajemos juntos',
+      playReel: 'Reproducir reel',
+      reelAria: 'Reproducir reel de Jared Durón',
+      menuAria: 'Abrir menú de navegación',
       scroll: 'Desplázate',
     },
     marquee: 'Disponible para proyectos · Barcelona · Worldwide · Comercial · Documental · Eventos ·',
@@ -25,13 +29,22 @@ const T = {
       kicker: '01 — Sobre mí',
       title: 'Cine, marca y verdad en cada frame.',
       body1: 'Soy Jared Durón, filmmaker y diseñador gráfico con base en Barcelona. Originario de Honduras, cuento con más de 7 años transformando ideas en experiencias visuales para marcas, agencias y productoras internacionales.',
-      body2: 'He liderado proyectos para KNX (ISE 2026 Barcelona, Light+Building 2026 Frankfurt), WWF, BCIE, John Deere, Grupo Roble (Multiplaza, MetroMall), Miniso y clientes creadores como Juan Lucho o Prósperos Podcast. Especializado en producción integral: preproducción, rodaje, edición, motion, color grading y VideoMapping.',
+      body2: 'He participado en proyectos para KNX (ISE 2026 Barcelona, Light+Building 2026 Frankfurt), WWF, BCIE, John Deere, Grupo Roble (Multiplaza, MetroMall), Miniso y clientes creadores como Juan Lucho o Prósperos Podcast. Especializado en producción integral: preproducción, rodaje, edición, motion, color grading y VideoMapping.',
       stats: [
         { n: '7+', l: 'Años de experiencia' },
-        { n: '120+', l: 'Proyectos entregados' },
-        { n: '30+', l: 'Marcas premium' },
-        { n: '2', l: 'Disciplinas · Film & Design' },
+        { n: '30+', l: 'Proyectos audiovisuales' },
+        { n: '15+', l: 'Marcas y agencias' },
+        { n: '3', l: 'Disciplinas · Film, Foto & Design' },
       ],
+      experience: {
+        eyebrow: 'Experiencia · Producción · Diseño',
+        titleIntro: 'Crear un vídeo es fácil.',
+        titleHighlight: 'Hacer que una marca se recuerde,\nno tanto.',
+        body1: 'Producción audiovisual, filmmaking y diseño gráfico en Barcelona para marcas, agencias y productoras que buscan contenido cinematográfico, campañas visuales y piezas digitales capaces de conectar con su audiencia.',
+        body2: 'Desde la idea y el rodaje hasta la edición, el color y la entrega final, cada proyecto combina narrativa, estrategia y una ejecución visual cuidada.',
+        highlights1: ['Producción audiovisual', 'Barcelona', 'marcas'],
+        highlights2: ['color', 'narrativa'],
+      },
     },
     work: {
       kicker: '02 — Selected Work',
@@ -104,23 +117,33 @@ const T = {
     nav: { work: 'Work', about: 'About', services: 'Services', process: 'Process', blog: 'Journal', contact: 'Contact' },
     hero: {
       eyebrow: 'Filmmaker & Graphic Designer · Barcelona',
+      title: 'JARED DURÓN · FILMMAKER IN BARCELONA',
       title1: 'Jared Durón — Filmmaker in Barcelona.',
       title2: 'Films that grow brands.',
       sub: 'Audiovisual production and graphic design for premium brands, creative agencies and international production houses. 7+ years turning ideas into visual experiences.',
-      cta1: 'View Work', cta2: "Let's Work Together", scroll: 'Scroll',
+      cta1: 'View Work', cta2: "Let's Work Together", playReel: 'Play reel', reelAria: 'Play Jared Durón reel', menuAria: 'Open navigation menu', scroll: 'Scroll',
     },
     marquee: 'Available for projects · Barcelona · Worldwide · Commercial · Documentary · Events ·',
     about: {
       kicker: '01 — About',
       title: 'Cinema, brand and truth in every frame.',
       body1: "I'm Jared Durón, a filmmaker and graphic designer based in Barcelona. Originally from Honduras, I bring 7+ years turning ideas into visual experiences for premium brands, agencies and international production houses.",
-      body2: 'I have led projects for KNX (ISE 2026 Barcelona, Light+Building 2026 Frankfurt), WWF, BCIE, John Deere, Grupo Roble (Multiplaza, MetroMall), Miniso and creator clients like Juan Lucho and Prósperos Podcast. Specialized in end-to-end production: pre-production, shooting, editing, motion, color grading and VideoMapping.',
+      body2: 'I have participated in projects for KNX (ISE 2026 Barcelona, Light+Building 2026 Frankfurt), WWF, BCIE, John Deere, Grupo Roble (Multiplaza, MetroMall), Miniso and creator clients like Juan Lucho and Prósperos Podcast. Specialized in end-to-end production: pre-production, shooting, editing, motion, color grading and VideoMapping.',
       stats: [
         { n: '7+', l: 'Years of experience' },
-        { n: '120+', l: 'Projects delivered' },
-        { n: '30+', l: 'Premium brands' },
-        { n: '2', l: 'Disciplines · Film & Design' },
+        { n: '30+', l: 'Audiovisual projects' },
+        { n: '15+', l: 'Brands and agencies' },
+        { n: '3', l: 'Disciplines · Film, Photo & Design' },
       ],
+      experience: {
+        eyebrow: 'Experience · Production · Design',
+        titleIntro: 'Creating a video is easy.',
+        titleHighlight: 'Making a brand memorable\nis not.',
+        body1: 'Audiovisual production, filmmaking and graphic design in Barcelona for brands, agencies and production companies looking for cinematic content, visual campaigns and digital pieces that connect with their audience.',
+        body2: 'From concept and production to editing, color grading and final delivery, every project combines storytelling, strategy and carefully crafted visuals.',
+        highlights1: ['Audiovisual production', 'Barcelona', 'brands'],
+        highlights2: ['color grading', 'storytelling'],
+      },
     },
     work: { kicker: '02 — Selected Work', title: 'Selected Work', sub: 'A curated selection of commercial campaigns, documentaries and international coverage.' },
     services: {
@@ -181,22 +204,32 @@ const T = {
     nav: { work: 'Projectes', about: 'Sobre mi', services: 'Serveis', process: 'Procés', blog: 'Blog', contact: 'Contacte' },
     hero: {
       eyebrow: 'Filmmaker & Graphic Designer · Barcelona',
+      title: 'JARED DURÓN · FILMMAKER A BARCELONA',
       title1: 'Jared Durón — Filmmaker a Barcelona.',
       title2: 'Pel·lícules que fan créixer marques.',
       sub: 'Producció audiovisual i disseny gràfic per a marques premium, agències creatives i productores internacionals.',
-      cta1: 'Veure Projectes', cta2: 'Treballem junts', scroll: 'Baixa',
+      cta1: 'Veure Projectes', cta2: 'Treballem junts', playReel: 'Reproduir reel', reelAria: 'Reproduir reel de Jared Durón', menuAria: 'Obrir menú de navegació', scroll: "Desplaça't",
     },
     marquee: 'Disponible per a projectes · Barcelona · Worldwide · Comercial · Documental · Esdeveniments ·',
     about: {
       kicker: '01 — Sobre mi', title: 'Cinema, marca i veritat a cada frame.',
       body1: 'Sóc Jared Durón, filmmaker i dissenyador gràfic amb base a Barcelona. Originari d\'Hondures, tinc més de 7 anys transformant idees en experiències visuals per a marques, agències i productores internacionals.',
-      body2: "He liderat projectes per a KNX (ISE 2026 Barcelona, Light+Building 2026 Frankfurt), WWF, BCIE, John Deere, Grupo Roble, Miniso i creadors com Juan Lucho o Prósperos Podcast. Especialitzat en producció integral: preproducció, rodatge, edició, motion, color grading i VideoMapping.",
+      body2: "He participat en projectes per a KNX (ISE 2026 Barcelona, Light+Building 2026 Frankfurt), WWF, BCIE, John Deere, Grupo Roble, Miniso i creadors com Juan Lucho o Prósperos Podcast. Especialitzat en producció integral: preproducció, rodatge, edició, motion, color grading i VideoMapping.",
       stats: [
         { n: '7+', l: "Anys d'experiència" },
-        { n: '120+', l: 'Projectes lliurats' },
-        { n: '30+', l: 'Marques premium' },
-        { n: '2', l: 'Disciplines · Film & Design' },
+        { n: '30+', l: 'Projectes audiovisuals' },
+        { n: '15+', l: 'Marques i agències' },
+        { n: '3', l: 'Disciplines · Film, Foto & Design' },
       ],
+      experience: {
+        eyebrow: 'Experiència · Producció · Disseny',
+        titleIntro: 'Crear un vídeo és fàcil.',
+        titleHighlight: 'Fer que una marca sigui recordada\nno tant.',
+        body1: 'Producció audiovisual, filmmaking i disseny gràfic a Barcelona per a marques, agències i productores que busquen contingut cinematogràfic, campanyes visuals i peces digitals capaces de connectar amb la seva audiència.',
+        body2: "Des de la idea i el rodatge fins a l'edició, el color i el lliurament final, cada projecte combina narrativa, estratègia i una execució visual cuidada.",
+        highlights1: ['Producció audiovisual', 'Barcelona', 'marques'],
+        highlights2: ['color', 'narrativa'],
+      },
     },
     work: { kicker: '02 — Selected Work', title: 'Treball seleccionat', sub: 'Una selecció de campanyes comercials, documentals i cobertures internacionals.' },
     services: {
@@ -262,46 +295,67 @@ function Nav({ locale, setLocale, t }) {
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
+    let ticking = false
+    const update = () => {
+      setScrolled(window.scrollY > 96)
+      ticking = false
+    }
+    const onScroll = () => {
+      if (ticking) return
+      ticking = true
+      window.requestAnimationFrame(update)
+    }
+
+    update()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'bg-[#0A0A0A]/80 backdrop-blur-xl border-b border-white/5' : 'bg-transparent'}`}>
-      <div className="max-w-[1600px] mx-auto px-6 md:px-10 py-4 md:py-5 flex items-center justify-between">
+    <header className={`fixed left-0 right-0 top-0 z-50 transition-[background-color,border-color,box-shadow] duration-500 motion-reduce:transition-none ${scrolled ? 'border-b border-white/10 bg-[#070B1A]/78 shadow-[0_18px_60px_rgba(0,0,0,0.22)] backdrop-blur-xl' : 'border-transparent bg-transparent'}`}>
+      <div className="mx-auto flex max-w-[1600px] items-center justify-between px-6 py-4 md:px-10 md:py-5">
         <a href="#top" className="flex items-center gap-2 group" aria-label="Home">
           <div className="w-2 h-2 bg-white rounded-full group-hover:animate-pulse" />
           <span className="font-display text-lg tracking-tight">Jared Durón</span>
         </a>
 
-        <nav className="hidden md:flex items-center gap-10 text-[13px] tracking-wide uppercase">
-          <a href="#work" className="hover:text-white/60 transition-colors">{t.nav.work}</a>
-          <a href="#about" className="hover:text-white/60 transition-colors">{t.nav.about}</a>
-          <a href="#services" className="hover:text-white/60 transition-colors">{t.nav.services}</a>
-          <a href="#process" className="hover:text-white/60 transition-colors">{t.nav.process}</a>
-          <a href="#blog" className="hover:text-white/60 transition-colors">{t.nav.blog}</a>
-          <a href="#contact" className="hover:text-white/60 transition-colors">{t.nav.contact}</a>
+        <nav className={`hidden items-center gap-8 text-[11px] font-medium uppercase tracking-[0.22em] transition-all duration-500 motion-reduce:transition-none lg:flex ${scrolled ? 'translate-y-0 opacity-100' : 'pointer-events-none -translate-y-2 opacity-0'}`} aria-label="Primary navigation">
+          <a href="#work" className="hover:text-[#F5C518] transition-colors">{t.nav.work}</a>
+          <a href="#about" className="hover:text-[#F5C518] transition-colors">{t.nav.about}</a>
+          <a href="#services" className="hover:text-[#F5C518] transition-colors">{t.nav.services}</a>
+          <a href="#process" className="hover:text-[#F5C518] transition-colors">{t.nav.process}</a>
+          <a href="#blog" className="hover:text-[#F5C518] transition-colors">{t.nav.blog}</a>
+          <a href="#contact" className="hover:text-[#F5C518] transition-colors">{t.nav.contact}</a>
         </nav>
 
         <div className="flex items-center gap-4">
-          <div className="hidden md:flex items-center gap-1 text-[11px] uppercase tracking-widest border border-white/10 rounded-full p-1">
+          <div className={`hidden items-center gap-1 rounded-full border border-white/10 p-1 text-[11px] uppercase tracking-widest transition-all duration-500 motion-reduce:transition-none md:flex ${scrolled ? 'translate-y-0 opacity-100' : 'pointer-events-none -translate-y-2 opacity-0'}`}>
             {['es', 'en', 'ca'].map((l) => (
               <button
                 key={l}
                 onClick={() => setLocale(l)}
-                className={`px-2.5 py-0.5 rounded-full transition-all ${locale === l ? 'bg-white text-black' : 'text-white/60 hover:text-white'}`}
+                className={`px-2.5 py-0.5 rounded-full transition-all ${locale === l ? 'bg-white text-black font-semibold' : 'font-medium text-white/60 hover:text-[#F5C518]'}`}
+                aria-pressed={locale === l}
               >
                 {l.toUpperCase()}
               </button>
             ))}
           </div>
-          <a href="#contact" className="hidden md:inline-flex items-center gap-2 text-[13px] uppercase tracking-wide border border-white/20 rounded-full px-4 py-2 hover:bg-white hover:text-black transition-all duration-300">
+          <a href="#contact" className={`hidden items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] transition-all duration-500 hover:border-[#F5C518]/70 hover:text-[#F5C518] motion-reduce:transition-none md:inline-flex ${scrolled ? 'translate-y-0 opacity-100' : 'pointer-events-none -translate-y-2 opacity-0'}`}>
             {t.hero.cta2} <ArrowUpRight className="w-3.5 h-3.5" />
           </a>
-          <button className="md:hidden text-white" onClick={() => setOpen(!open)} aria-label="Menu">
-            <div className="w-6 h-[1px] bg-white mb-1.5"></div>
-            <div className="w-6 h-[1px] bg-white"></div>
+          <button
+            type="button"
+            className="group flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-black/10 text-white backdrop-blur-sm transition-colors hover:border-white/45 hover:bg-white/10 lg:hidden"
+            onClick={() => setOpen(!open)}
+            aria-label={t.hero.menuAria}
+            aria-expanded={open}
+          >
+            <span className="sr-only">{t.hero.menuAria}</span>
+            <span className="flex flex-col gap-1.5">
+              <span className={`block h-px w-5 bg-white transition-transform ${open ? 'translate-y-[3px] rotate-45' : ''}`} />
+              <span className={`block h-px w-5 bg-white transition-transform ${open ? '-translate-y-[4px] -rotate-45' : ''}`} />
+            </span>
           </button>
         </div>
       </div>
@@ -312,16 +366,20 @@ function Nav({ locale, setLocale, t }) {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="md:hidden bg-[#0A0A0A] border-t border-white/10 px-6 py-6 space-y-4"
+            className="mx-4 mb-4 rounded-[24px] border border-white/10 bg-[#070B1A]/95 px-6 py-6 shadow-[0_30px_80px_rgba(0,0,0,0.35)] backdrop-blur-xl md:mx-10 lg:ml-auto lg:max-w-sm"
           >
             {['work', 'about', 'services', 'process', 'blog', 'contact'].map((k) => (
-              <a key={k} href={`#${k}`} onClick={() => setOpen(false)} className="block text-xl font-display">{t.nav[k]}</a>
+              <a key={k} href={`#${k}`} onClick={() => setOpen(false)} className="block border-b border-white/10 py-3 text-2xl font-semibold leading-none transition-colors last:border-b-0 hover:text-[#F5C518]">{t.nav[k]}</a>
             ))}
             <div className="flex gap-2 pt-4">
               {['es', 'en', 'ca'].map((l) => (
-                <button key={l} onClick={() => setLocale(l)} className={`px-3 py-1 text-xs uppercase tracking-widest border border-white/20 rounded-full ${locale === l ? 'bg-white text-black' : ''}`}>{l}</button>
+                <button key={l} onClick={() => setLocale(l)} className={`rounded-full border border-white/20 px-3 py-1 text-xs uppercase tracking-widest ${locale === l ? 'bg-white text-black' : ''}`} aria-pressed={locale === l}>{l}</button>
               ))}
             </div>
+            <a href="#contact" onClick={() => setOpen(false)} className="mt-5 inline-flex items-center gap-2 rounded-full border border-[#F5C518]/55 px-4 py-2 text-[11px] uppercase tracking-[0.22em] text-[#F5C518]">
+              {t.hero.cta2}
+              <ArrowUpRight className="h-3.5 w-3.5" />
+            </a>
           </motion.div>
         )}
       </AnimatePresence>
@@ -333,54 +391,59 @@ function Nav({ locale, setLocale, t }) {
 function Hero({ t }) {
   const ref = useRef(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
-  const y = useTransform(scrollYProgress, [0, 1], [0, 200])
-  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0])
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1])
+  const y = useTransform(scrollYProgress, [0, 1], [0, 120])
+  const opacity = useTransform(scrollYProgress, [0, 0.75], [1, 0])
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.06])
   const [reelOpen, setReelOpen] = useState(false)
+  const [heroName, heroRoleLine = ''] = t.hero.title.split(' · ')
+  const [heroRole = '', ...heroPlaceParts] = heroRoleLine.split(' ')
+  const heroPlace = heroPlaceParts.join(' ')
 
   return (
-    <section ref={ref} id="top" className="relative h-screen w-full overflow-hidden">
+    <section ref={ref} id="top" className="cinematic-hero relative min-h-[100svh] w-full overflow-hidden">
       <motion.div style={{ y, scale }} className="absolute inset-0">
         <Image
           src="https://mir-s3-cdn-cf.behance.net/projects/404/e9a7e7204648249.Y3JvcCwzMzY3LDI2MzMsMCww.png"
           alt="Cinematic documentary frame by Jared Duron"
           fill
-          priority
           sizes="100vw"
           quality={72}
-          className="absolute inset-0 object-cover md:hidden"
+          className="hidden"
         />
         <video
-          className="absolute inset-0 hidden h-full w-full object-cover md:block"
+          className="absolute inset-0 h-full w-full object-cover"
           autoPlay muted loop playsInline preload="metadata"
           poster="https://mir-s3-cdn-cf.behance.net/projects/404/e9a7e7204648249.Y3JvcCwzMzY3LDI2MzMsMCww.png"
         >
           <source src="https://customer-assets.emergentagent.com/job_filmmaker-barcelona/artifacts/qkv7mv6p_Toma%20Dron%201.mp4" type="video/mp4" />
           <source src="https://videos.pexels.com/video-files/3209828/3209828-hd_1920_1080_25fps.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 hero-vignette" />
+        <div className="absolute inset-0 hero-vignette" aria-hidden="true" />
       </motion.div>
 
-      <motion.div style={{ opacity }} className="relative z-10 h-full flex flex-col justify-between px-6 md:px-10 py-24 md:py-32 max-w-[1600px] mx-auto">
-        <div className="flex-1 flex flex-col justify-center">
+      <motion.div style={{ opacity }} className="relative z-10 mx-auto flex min-h-[100svh] max-w-[1600px] flex-col justify-between px-6 py-24 md:px-10 md:py-32">
+        <div className="flex flex-1 flex-col items-center justify-center text-center">
           <motion.div
             initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }}
-            className="flex items-center gap-3 mb-6 md:mb-8"
+            className="sr-only"
           >
             <div className="w-8 h-[1px] bg-white/60" />
             <span className="text-xs md:text-sm uppercase tracking-[0.3em] text-white/70">{t.hero.eyebrow}</span>
           </motion.div>
 
-          <h1 className="font-display text-[9vw] md:text-[5.5vw] leading-[0.98] tracking-tight text-balance">
+          <h1 className="hero-viewfinder max-w-[min(92vw,1320px)] text-balance font-sans text-[clamp(0.98rem,2.05vw,2rem)] uppercase leading-[1.45] tracking-[0.16em] text-[#F6F4EF] md:tracking-[0.24em] 2xl:whitespace-nowrap">
             <motion.span
               initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
               className="block will-change-transform"
             >
-              {t.hero.title1}
+              <span className="font-semibold">{heroName}</span>
+              <span aria-hidden="true" className="px-2 text-white/64">·</span>
+              <span className="font-bold text-[#F5C518]">{heroRole}</span>
+              {heroPlace && <span className="font-medium text-white/82"> {heroPlace}</span>}
             </motion.span>
             <motion.span
               initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
-              className="block italic text-white/80 will-change-transform"
+              className="hidden"
             >
               {t.hero.title2}
             </motion.span>
@@ -388,14 +451,14 @@ function Hero({ t }) {
 
           <motion.p
             initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65, delay: 0.24, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-8 md:mt-10 max-w-xl text-base md:text-lg text-white/70 leading-relaxed"
+            className="hidden"
           >
             <Highlight text={t.hero.sub} />
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-10 md:mt-12 flex flex-wrap items-center gap-3 md:gap-4"
+            className="hidden"
           >
             <a href="#work" data-cursor="View" className="inline-flex items-center gap-3 bg-white text-black px-6 md:px-7 py-3.5 rounded-full text-sm uppercase tracking-wider hover:bg-white/90 transition-all group">
               <span>{t.hero.cta1}</span>
@@ -412,20 +475,35 @@ function Hero({ t }) {
               <span className="w-9 h-9 rounded-full border border-white/40 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all">
                 <Play className="w-3.5 h-3.5 fill-current ml-0.5" />
               </span>
-              <span>Play Reel</span>
+              <span>{t.hero.playReel}</span>
             </button>
           </motion.div>
         </div>
 
         <motion.div
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.4 }}
-          className="flex items-end justify-between text-[11px] uppercase tracking-widest text-white/50"
+          className="grid items-end gap-6 text-[11px] uppercase tracking-[0.26em] text-white/58 sm:grid-cols-3"
         >
-          <div className="flex items-center gap-2">
+          <div className="hidden text-white/35 sm:block">
+            <span>41.3874° N</span>
+          </div>
+          <button
+            type="button"
+            onClick={() => setReelOpen(true)}
+            data-cursor="Play"
+            aria-label={t.hero.reelAria}
+            className="group mx-auto inline-flex w-fit items-center gap-3 rounded-full border border-white/28 bg-white/[0.035] px-4 py-2.5 text-white/82 backdrop-blur-sm transition-all hover:border-white/60 hover:bg-white/10 hover:text-white"
+          >
+            <span className="flex h-8 w-8 items-center justify-center rounded-full border border-white/40 transition-all group-hover:bg-white group-hover:text-black">
+              <Play className="ml-0.5 h-3.5 w-3.5 fill-current" />
+            </span>
+            <span>{t.hero.playReel}</span>
+          </button>
+          <div className="flex justify-center gap-2 sm:justify-end">
             <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 2, repeat: Infinity }} className="w-[1px] h-8 bg-white/40" />
             <span>{t.hero.scroll}</span>
           </div>
-          <div className="hidden md:flex items-center gap-6">
+          <div className="hidden">
             <span>41.3874° N</span>
             <span>2.1686° E</span>
             <span>Barcelona / SP</span>
@@ -652,7 +730,7 @@ function About({ t }) {
             initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }} whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }} viewport={{ once: true, margin: '-100px' }} transition={{ duration: 1.2, delay: 0.2 }}
             className="md:col-span-7"
           >
-            <h2 className="font-display text-4xl md:text-6xl lg:text-7xl leading-[1.02] tracking-tight text-balance">
+            <h2 className="font-display max-w-4xl text-4xl leading-[1.05] tracking-normal text-balance md:text-5xl lg:text-6xl">
               {t.about.title}
             </h2>
             <div className="mt-8 space-y-5 text-white/70 leading-relaxed text-base md:text-[17px] max-w-2xl">
@@ -663,36 +741,138 @@ function About({ t }) {
         </div>
 
         {/* Stats — perfectly symmetric 4 cols */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 mt-20 md:mt-28 border-t border-white/10 pt-10 md:pt-16">
-          {t.about.stats.map((s, i) => (
+        <div className="experience-panel relative mt-16 scroll-mt-28 overflow-hidden border-t border-white/10 py-[46px] md:mt-22 md:py-[64px]">
+          <div className="grid items-start justify-between gap-10 lg:grid-cols-[38%_56%] lg:gap-10">
             <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: i * 0.1 }}
-              className="group text-center md:text-left"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+              className="relative z-10"
             >
-              <motion.div
-                initial={{ scale: 0.85, opacity: 0, rotate: -8 }}
-                whileInView={{ scale: 1, opacity: 1, rotate: 0 }}
-                whileHover={{ y: -4, scale: 1.06 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: 0.12 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                className="mx-auto md:mx-0 mb-5 w-11 h-11 rounded-full border border-white/15 bg-white/[0.03] text-[#F5C518] flex items-center justify-center shadow-[0_0_28px_rgba(245,197,24,0.08)] group-hover:border-[#F5C518]/45 group-hover:bg-[#F5C518]/10 transition-colors"
-              >
-                {i === 0 && <Clock3 className="w-5 h-5" strokeWidth={1.5} />}
-                {i === 1 && <Clapperboard className="w-5 h-5" strokeWidth={1.5} />}
-                {i === 2 && <BadgeCheck className="w-5 h-5" strokeWidth={1.5} />}
-                {i === 3 && <Layers3 className="w-5 h-5" strokeWidth={1.5} />}
-              </motion.div>
-              <motion.div whileHover={{ x: 2 }} className="font-display text-5xl md:text-7xl leading-none">
-                {s.n}
-              </motion.div>
-              <div className="text-[11px] uppercase tracking-widest text-white/50 mt-3">{s.l}</div>
+              <div className="mb-5 flex items-center gap-4 text-[10px] uppercase tracking-[0.26em] text-white/55">
+                <span className="h-px w-10 bg-[#F5C518]" />
+                <span>{t.about.experience.eyebrow}</span>
+              </div>
+              <h2 className="max-w-[590px] font-sans leading-[1] tracking-normal text-[#F6F4EF]">
+                <span className="block text-[clamp(1.55rem,2.15vw,2.55rem)] font-semibold leading-[1.12] text-white/88">{t.about.experience.titleIntro}</span>
+                <span className="mt-3 block whitespace-pre-line text-[clamp(2.05rem,3.35vw,4.1rem)] font-bold leading-[1] text-[#F5C518]">{t.about.experience.titleHighlight}</span>
+              </h2>
+              <div className="mt-5 h-px w-20 bg-[#F5C518]/70" />
+              <div className="mt-6 max-w-xl space-y-3 text-sm leading-relaxed text-white/68 md:text-[15px]">
+                <p><AccentText text={t.about.experience.body1} terms={t.about.experience.highlights1} /></p>
+                <p><AccentText text={t.about.experience.body2} terms={t.about.experience.highlights2} /></p>
+              </div>
             </motion.div>
-          ))}
+
+            <div className="relative z-10 grid w-full max-w-[980px] justify-self-end self-start gap-4 sm:grid-cols-2">
+              {t.about.stats.map((s, i) => (
+                <StatCard key={s.n} stat={s} index={i} />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
   )
+}
+
+function AccentText({ text, terms = [] }) {
+  if (!terms.length) return text
+
+  const escaped = terms
+    .filter(Boolean)
+    .sort((a, b) => b.length - a.length)
+    .map((term) => term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
+
+  const pattern = new RegExp(`(${escaped.join('|')})`, 'gi')
+  const parts = text.split(pattern)
+
+  return (
+    <>
+      {parts.map((part, index) => (
+        terms.some((term) => term.toLowerCase() === part.toLowerCase())
+          ? <strong key={`${part}-${index}`} className="font-semibold text-[#F5C518]">{part}</strong>
+          : <span key={`${part}-${index}`}>{part}</span>
+      ))}
+    </>
+  )
+}
+
+function StatCard({ stat, index }) {
+  const Icon = [Clock3, Clapperboard, BadgeCheck, Layers3][index] || Star
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24, scale: 0.98 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, margin: '-80px' }}
+      transition={{ duration: 0.65, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={{ y: -5 }}
+      className="group min-h-[150px] rounded-[22px] border border-[#F5C518]/45 bg-white/[0.025] p-5 transition-colors duration-300 hover:border-[#F5C518]/70 hover:bg-white/[0.045] md:min-h-[168px] md:p-5"
+    >
+      <div className="mb-5 flex items-center justify-between gap-4">
+        <span className="flex h-9 w-9 items-center justify-center rounded-[13px] border border-[#F5C518]/45 bg-[#F5C518]/10 text-[#F5C518]">
+          <Icon className="h-4 w-4" strokeWidth={1.5} aria-hidden="true" />
+        </span>
+        <span className="h-px flex-1 bg-[#F5C518]/25" aria-hidden="true" />
+      </div>
+      <div className="font-sans text-[clamp(3.15rem,5.45vw,5.05rem)] font-semibold leading-[0.84] tracking-[-0.03em] text-[#F6F4EF]">
+        <AnimatedStatNumber value={stat.n} />
+      </div>
+      <div className="mt-4 max-w-[14rem] text-[10px] font-medium uppercase leading-relaxed tracking-[0.2em] text-white/66">
+        {stat.l}
+      </div>
+    </motion.div>
+  )
+}
+
+function AnimatedStatNumber({ value }) {
+  const ref = useRef(null)
+  const [display, setDisplay] = useState(value)
+  const [played, setPlayed] = useState(false)
+
+  useEffect(() => {
+    const node = ref.current
+    if (!node || played) return
+
+    const match = String(value).match(/^(\d+)(.*)$/)
+    if (!match) return
+
+    const target = Number(match[1])
+    const suffix = match[2]
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting || played) return
+      setPlayed(true)
+
+      if (reduceMotion) {
+        setDisplay(value)
+        observer.disconnect()
+        return
+      }
+
+      const start = performance.now()
+      const duration = 950
+      const tick = (now) => {
+        const progress = Math.min((now - start) / duration, 1)
+        const eased = 1 - Math.pow(1 - progress, 3)
+        setDisplay(`${Math.round(target * eased)}${suffix}`)
+        if (progress < 1) requestAnimationFrame(tick)
+        else setDisplay(value)
+      }
+
+      setDisplay(`0${suffix}`)
+      requestAnimationFrame(tick)
+      observer.disconnect()
+    }, { threshold: 0.45 })
+
+    observer.observe(node)
+    return () => observer.disconnect()
+  }, [played, value])
+
+  return <span ref={ref}>{display}</span>
 }
 
 /* ---------- Work ---------- */
