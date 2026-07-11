@@ -2243,6 +2243,24 @@ function Loader() {
 function IntroLoader() {
   const [done, setDone] = useState(false)
   const [progress, setProgress] = useState(0)
+  const particles = useMemo(() => {
+    const rand = (seed) => {
+      const x = Math.sin(seed) * 10000
+      return x - Math.floor(x)
+    }
+
+    return Array.from({ length: 32 }).map((_, index) => ({
+      left: rand(index * 7.13) * 100,
+      top: rand(index * 11.37) * 100,
+      size: 1.2 + rand(index * 3.71) * 2.8,
+      opacity: 0.22 + rand(index * 5.91) * 0.42,
+      duration: 7 + rand(index * 2.43) * 7,
+      delay: -rand(index * 9.17) * 8,
+      driftX: (rand(index * 4.29) - 0.5) * 90,
+      driftY: (rand(index * 8.61) - 0.5) * 70,
+      accent: rand(index * 6.41) > 0.76,
+    }))
+  }, [])
 
   useEffect(() => {
     let value = 0
@@ -2265,14 +2283,40 @@ function IntroLoader() {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.45, ease: 'easeOut' }}
-          className="fixed inset-0 z-[100] flex h-dvh items-center justify-center bg-[#050609]"
+          className="fixed inset-0 z-[100] h-dvh overflow-hidden bg-[#050609]"
         >
-          <div className="w-full max-w-[220px] px-8 text-center sm:max-w-[260px]">
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+            {particles.map((particle, index) => (
+              <span
+                key={index}
+                className="intro-particle absolute rounded-full"
+                style={{
+                  left: `${particle.left}%`,
+                  top: `${particle.top}%`,
+                  width: `${particle.size}px`,
+                  height: `${particle.size}px`,
+                  opacity: particle.opacity,
+                  background: particle.accent ? '#F5C518' : '#FFFFFF',
+                  '--drift-x': `${particle.driftX}px`,
+                  '--drift-y': `${particle.driftY}px`,
+                  '--particle-duration': `${particle.duration}s`,
+                  animationDelay: `${particle.delay}s`,
+                  boxShadow: particle.accent
+                    ? '0 0 14px rgba(245,197,24,0.68)'
+                    : '0 0 10px rgba(255,255,255,0.42)',
+                }}
+              />
+            ))}
+          </div>
+
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(245,197,24,0.055),transparent_20%),radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.035),transparent_32%)]" aria-hidden="true" />
+
+          <div className="absolute left-1/2 top-1/2 w-full max-w-[280px] -translate-x-1/2 -translate-y-1/2 px-6 text-center sm:max-w-[340px]">
             <motion.div
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, ease: 'easeOut' }}
-              className="whitespace-nowrap font-display text-[2.55rem] leading-none text-white italic sm:text-5xl"
+              className="whitespace-nowrap font-display text-[2.65rem] font-bold leading-none text-white italic sm:text-5xl"
             >
               Jared <span className="text-[#F5C518]">Durón</span>
             </motion.div>

@@ -110,6 +110,23 @@ body {
 }
 .animate-float-slow { animation: float-slow 6s ease-in-out infinite; }
 
+@keyframes intro-particle-drift {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  45% {
+    transform: translate3d(var(--drift-x, 30px), var(--drift-y, -24px), 0) scale(1.35);
+  }
+  70% {
+    transform: translate3d(calc(var(--drift-x, 30px) * -0.32), calc(var(--drift-y, -24px) * 0.48), 0) scale(0.82);
+  }
+}
+
+.intro-particle {
+  animation: intro-particle-drift var(--particle-duration, 10s) ease-in-out infinite;
+  will-change: transform;
+}
+
 @keyframes accent-line {
   0% { transform: scaleX(0); transform-origin: left; }
   100% { transform: scaleX(1); transform-origin: left; }
