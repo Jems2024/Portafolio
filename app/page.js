@@ -942,13 +942,26 @@ function Work({ t, locale }) {
     ]
   }, [])
 
+  const photographyProjectIds = ['barcelona-city', 'cyberpunk-portraits', 'fotografia-producto']
+  const graphicDesignProjectIds = ['miniso', 'fotomontaje-epico']
+  const filmmakingProjects = useMemo(
+    () => orderedProjects.filter((project) => !photographyProjectIds.includes(project.id) && !graphicDesignProjectIds.includes(project.id)),
+    [orderedProjects]
+  )
+
   const photographyProjects = useMemo(
-    () => PORTFOLIO_CATEGORY_PROJECTS.filter((project) => project.categoryGroup === 'photography'),
-    []
+    () => [
+      ...orderedProjects.filter((project) => photographyProjectIds.includes(project.id)),
+      ...PORTFOLIO_CATEGORY_PROJECTS.filter((project) => project.categoryGroup === 'photography'),
+    ],
+    [orderedProjects]
   )
   const graphicDesignProjects = useMemo(
-    () => PORTFOLIO_CATEGORY_PROJECTS.filter((project) => project.categoryGroup === 'graphic-design'),
-    []
+    () => [
+      ...orderedProjects.filter((project) => graphicDesignProjectIds.includes(project.id)),
+      ...PORTFOLIO_CATEGORY_PROJECTS.filter((project) => project.categoryGroup === 'graphic-design'),
+    ],
+    [orderedProjects]
   )
 
   useEffect(() => {
@@ -999,7 +1012,7 @@ function Work({ t, locale }) {
 
         <PortfolioCategory id="filmmaking" headingId="filmmaking-title" copy={t.work.filmmaking}>
           <div className="projects-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {orderedProjects.map((p, i) => (
+            {filmmakingProjects.map((p, i) => (
               <ProjectCard key={p.id} project={p} index={i} locale={locale} onOpen={() => setActive(p)} />
             ))}
           </div>
@@ -1008,7 +1021,7 @@ function Work({ t, locale }) {
         <PortfolioCategory id="fotografia" headingId="fotografia-title" copy={t.work.photography} separated>
           <div className="projects-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {photographyProjects.map((p, i) => (
-              <ProjectCard key={p.id} project={p} index={i} locale={locale} external />
+              <ProjectCard key={p.id} project={p} index={i} locale={locale} external={Boolean(p.categoryGroup)} onOpen={() => setActive(p)} />
             ))}
           </div>
         </PortfolioCategory>
@@ -1016,7 +1029,7 @@ function Work({ t, locale }) {
         <PortfolioCategory id="diseno-grafico" headingId="diseno-grafico-title" copy={t.work.graphicDesign} separated>
           <div className="projects-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {graphicDesignProjects.map((p, i) => (
-              <ProjectCard key={p.id} project={p} index={i} locale={locale} external />
+              <ProjectCard key={p.id} project={p} index={i} locale={locale} external={Boolean(p.categoryGroup)} onOpen={() => setActive(p)} />
             ))}
           </div>
         </PortfolioCategory>
