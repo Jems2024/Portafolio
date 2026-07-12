@@ -5,7 +5,7 @@ import './globals.css'
 const siteUrl = 'https://portafolio-olive-beta-79.vercel.app'
 const siteName = 'Jared Durón Portfolio'
 const siteTitle = 'Jared Durón | Filmmaker y producción audiovisual en Barcelona'
-const siteDescription = 'Filmmaker en Barcelona especializado en producción audiovisual, edición de vídeo, dirección de fotografía y diseño gráfico para marcas, agencias y productoras.'
+const siteDescription = 'Filmmaker, fotógrafo y diseñador gráfico en Barcelona especializado en producción audiovisual, fotografía comercial, edición de vídeo e identidad visual para marcas, agencias y productoras.'
 const openGraphTitle = 'Jared Durón — Filmmaker in Barcelona'
 const openGraphDescription = 'Producción audiovisual, filmmaking y diseño gráfico para marcas, agencias y productoras.'
 
@@ -34,6 +34,9 @@ export const metadata = {
     'event coverage',
     'social media content',
     'visual storytelling',
+    'fotografia comercial Barcelona',
+    'fotografia editorial Barcelona',
+    'identidad visual',
     'diseno grafico',
   ],
   authors: [{ name: 'Jared Durón' }],

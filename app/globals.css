@@ -32,6 +32,11 @@ body {
     linear-gradient(180deg, #060814 0%, #080B1A 30%, #06080F 60%, #050609 100%);
   background-attachment: scroll;
   min-height: 100vh;
+  overflow-x: clip;
+}
+
+.projects-grid > * {
+  min-width: 0;
 }
 
 @media (hover: none) and (pointer: coarse) {

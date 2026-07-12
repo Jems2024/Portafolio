@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { ArrowUpRight, Play, Mail, Instagram, Linkedin, MessageCircle, MapPin, Plus, Minus, X, ExternalLink, Sparkles, Star, Clock3, Clapperboard, BadgeCheck, Layers3 } from 'lucide-react'
 import { toast, Toaster } from 'sonner'
-import { PROJECTS, REAL_CLIENTS, BLOG_POSTS } from '@/lib/projects'
+import { PROJECTS, PORTFOLIO_CATEGORY_PROJECTS, REAL_CLIENTS, BLOG_POSTS } from '@/lib/projects'
 
 /* ---------- i18n ---------- */
 const T = {
@@ -47,9 +47,25 @@ const T = {
       },
     },
     work: {
-      kicker: '02 — Selected Work',
-      title: 'Trabajo seleccionado',
-      sub: 'Una selección de campañas comerciales, documentales y coberturas internacionales.',
+      nav: { filmmaking: 'Filmmaking', photography: 'Fotografía', graphicDesign: 'Diseño gráfico' },
+      filmmaking: {
+        eyebrow: '01 · Producción audiovisual',
+        title: 'Historias en movimiento.',
+        highlight: 'Filmmaking con propósito.',
+        description: 'Producción audiovisual, dirección de fotografía y edición de vídeo para marcas, agencias, instituciones y productoras que buscan contenido cinematográfico capaz de conectar con su audiencia.',
+      },
+      photography: {
+        eyebrow: '02 · Fotografía',
+        title: 'La historia también vive',
+        highlight: 'en una sola imagen.',
+        description: 'Fotografía comercial, fotografía de producto, retrato editorial y fotografía urbana en Barcelona, desarrolladas con una dirección visual cuidada y una iluminación pensada para cada proyecto.',
+      },
+      graphicDesign: {
+        eyebrow: '03 · Diseño gráfico',
+        title: 'Ideas que toman forma.',
+        highlight: 'Diseño que crea identidad.',
+        description: 'Diseño gráfico, identidad visual, contenido para redes sociales y comunicación de marca desarrollados para transformar conceptos en sistemas visuales claros, coherentes y memorables.',
+      },
     },
     services: {
       kicker: '03 — Servicios',
@@ -145,7 +161,21 @@ const T = {
         highlights2: ['color grading', 'storytelling'],
       },
     },
-    work: { kicker: '02 — Selected Work', title: 'Selected Work', sub: 'A curated selection of commercial campaigns, documentaries and international coverage.' },
+    work: {
+      nav: { filmmaking: 'Filmmaking', photography: 'Photography', graphicDesign: 'Graphic Design' },
+      filmmaking: {
+        eyebrow: '01 · Audiovisual Production', title: 'Stories in motion.', highlight: 'Purpose-driven filmmaking.',
+        description: 'Audiovisual production, cinematography and video editing for brands, agencies, institutions and production companies seeking cinematic content that connects with their audience.',
+      },
+      photography: {
+        eyebrow: '02 · Photography', title: 'A story can also live', highlight: 'in a single image.',
+        description: 'Commercial photography, product photography, editorial portraits and urban photography in Barcelona, created with carefully considered art direction and lighting.',
+      },
+      graphicDesign: {
+        eyebrow: '03 · Graphic Design', title: 'Ideas taking shape.', highlight: 'Design that builds identity.',
+        description: 'Graphic design, visual identity, social media content and brand communication created to transform concepts into clear, coherent and memorable visual systems.',
+      },
+    },
     services: {
       kicker: '03 — Services',
       title: 'From idea to final master.',
@@ -231,7 +261,21 @@ const T = {
         highlights2: ['color', 'narrativa'],
       },
     },
-    work: { kicker: '02 — Selected Work', title: 'Treball seleccionat', sub: 'Una selecció de campanyes comercials, documentals i cobertures internacionals.' },
+    work: {
+      nav: { filmmaking: 'Filmmaking', photography: 'Fotografia', graphicDesign: 'Disseny gràfic' },
+      filmmaking: {
+        eyebrow: '01 · Producció audiovisual', title: 'Històries en moviment.', highlight: 'Filmmaking amb propòsit.',
+        description: 'Producció audiovisual, direcció de fotografia i edició de vídeo per a marques, agències, institucions i productores que busquen contingut cinematogràfic capaç de connectar amb la seva audiència.',
+      },
+      photography: {
+        eyebrow: '02 · Fotografia', title: 'La història també pot viure', highlight: 'en una sola imatge.',
+        description: 'Fotografia comercial, fotografia de producte, retrat editorial i fotografia urbana a Barcelona, creades amb una direcció visual i una il·luminació cuidada.',
+      },
+      graphicDesign: {
+        eyebrow: '03 · Disseny gràfic', title: 'Idees que prenen forma.', highlight: 'Disseny que crea identitat.',
+        description: 'Disseny gràfic, identitat visual, contingut per a xarxes socials i comunicació de marca desenvolupats per transformar conceptes en sistemes visuals clars, coherents i memorables.',
+      },
+    },
     services: {
       kicker: '03 — Serveis', title: 'De la idea al màster final.',
       items: [
@@ -878,6 +922,7 @@ function AnimatedStatNumber({ value }) {
 /* ---------- Work ---------- */
 function Work({ t, locale }) {
   const [active, setActive] = useState(null)
+  const [activeCategory, setActiveCategory] = useState('filmmaking')
   const orderedProjects = useMemo(() => {
     const pinnedIds = ['pallapupas-videos', 'ayudas-invisibles-bts', 'cortometraje']
     const pinnedProjects = pinnedIds
@@ -897,61 +942,132 @@ function Work({ t, locale }) {
     ]
   }, [])
 
-  return (
-    <section id="work" className="relative py-24 md:py-40 px-6 md:px-10 border-t border-white/5">
-      <div className="max-w-[1600px] mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16 md:mb-24">
-          <div>
-            <SectionKicker>{t.work.kicker}</SectionKicker>
-            <h2 className="font-display text-4xl md:text-6xl lg:text-7xl leading-[1.02] tracking-tight mt-6 max-w-3xl text-balance">
-              {t.work.title}
-            </h2>
-          </div>
-          <div className="max-w-sm">
-            <p className="text-white/60 leading-relaxed">{t.work.sub}</p>
-            <a href="https://www.behance.net/jaredduron" target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-2 text-sm text-white/80 hover:text-white group">
-              <span className="uppercase tracking-widest text-[11px]">Behance</span>
-              <ArrowUpRight className="w-3.5 h-3.5 group-hover:rotate-45 transition-transform" />
-            </a>
-          </div>
-        </div>
+  const photographyProjects = useMemo(
+    () => PORTFOLIO_CATEGORY_PROJECTS.filter((project) => project.categoryGroup === 'photography'),
+    []
+  )
+  const graphicDesignProjects = useMemo(
+    () => PORTFOLIO_CATEGORY_PROJECTS.filter((project) => project.categoryGroup === 'graphic-design'),
+    []
+  )
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
-          {orderedProjects.map((p, i) => (
-            <ProjectCard key={p.id} project={p} index={i} locale={locale} onOpen={() => setActive(p)} />
+  useEffect(() => {
+    const sections = ['filmmaking', 'fotografia', 'diseno-grafico']
+      .map((id) => document.getElementById(id))
+      .filter(Boolean)
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
+      if (visible) setActiveCategory(visible.target.id)
+    }, { rootMargin: '-25% 0px -60% 0px', threshold: [0, 0.15, 0.35] })
+    sections.forEach((section) => observer.observe(section))
+    return () => observer.disconnect()
+  }, [])
+
+  const scrollToCategory = (event, id) => {
+    event.preventDefault()
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    document.getElementById(id)?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' })
+    window.history.replaceState(null, '', `#${id}`)
+  }
+
+  const categoryLinks = [
+    { id: 'filmmaking', label: t.work.nav.filmmaking },
+    { id: 'fotografia', label: t.work.nav.photography },
+    { id: 'diseno-grafico', label: t.work.nav.graphicDesign },
+  ]
+
+  return (
+    <section id="work" aria-label={t.nav.work} className="relative py-24 md:py-40 px-6 md:px-10 border-t border-white/5">
+      <div className="max-w-[1600px] mx-auto">
+        <nav aria-label={t.nav.work} className="mb-20 flex flex-wrap items-center gap-x-3 gap-y-2 border-y border-white/10 py-4 md:mb-28">
+          {categoryLinks.map((link, index) => (
+            <span key={link.id} className="inline-flex items-center gap-3">
+              {index > 0 && <span aria-hidden="true" className="text-white/25">·</span>}
+              <a
+                href={`#${link.id}`}
+                onClick={(event) => scrollToCategory(event, link.id)}
+                aria-current={activeCategory === link.id ? 'location' : undefined}
+                className={`text-[11px] font-medium uppercase tracking-[0.2em] transition-colors motion-reduce:transition-none ${activeCategory === link.id ? 'text-[#F5C518]' : 'text-white/55 hover:text-white'}`}
+              >
+                {link.label}
+              </a>
+            </span>
           ))}
-        </div>
+        </nav>
+
+        <PortfolioCategory id="filmmaking" headingId="filmmaking-title" copy={t.work.filmmaking}>
+          <div className="projects-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {orderedProjects.map((p, i) => (
+              <ProjectCard key={p.id} project={p} index={i} locale={locale} onOpen={() => setActive(p)} />
+            ))}
+          </div>
+        </PortfolioCategory>
+
+        <PortfolioCategory id="fotografia" headingId="fotografia-title" copy={t.work.photography} separated>
+          <div className="projects-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {photographyProjects.map((p, i) => (
+              <ProjectCard key={p.id} project={p} index={i} locale={locale} external />
+            ))}
+          </div>
+        </PortfolioCategory>
+
+        <PortfolioCategory id="diseno-grafico" headingId="diseno-grafico-title" copy={t.work.graphicDesign} separated>
+          <div className="projects-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {graphicDesignProjects.map((p, i) => (
+              <ProjectCard key={p.id} project={p} index={i} locale={locale} external />
+            ))}
+          </div>
+        </PortfolioCategory>
       </div>
       <ProjectModal project={active} locale={locale} onClose={() => setActive(null)} />
     </section>
   )
 }
 
-function ProjectCard({ project, index, locale, onOpen }) {
+function PortfolioCategory({ id, headingId, copy, separated = false, children }) {
   return (
-    <motion.button
-      type="button"
-      onClick={onOpen}
-      data-cursor="View"
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-30px' }}
-      transition={{ duration: 0.8, delay: (index % 3) * 0.08, ease: [0.22, 1, 0.36, 1] }}
-      className="group block text-left w-full"
-    >
+    <section id={id} aria-labelledby={headingId} className={`scroll-mt-28 ${separated ? 'mt-28 border-t border-[#F5C518]/15 pt-28 md:mt-44 md:pt-40' : ''}`}>
+      <header className="mb-14 md:mb-20">
+        <div className="text-[11px] font-medium uppercase tracking-[0.28em] text-white/55">{copy.eyebrow}</div>
+        <h2 id={headingId} className="mt-6 max-w-5xl font-display text-[clamp(2.5rem,6vw,5.5rem)] font-bold leading-[0.98] tracking-tight text-balance">
+          <span className="block text-white">{copy.title}</span>
+          <span className="block text-[#F5C518]">{copy.highlight}</span>
+        </h2>
+        <p className="mt-7 max-w-[760px] text-base leading-[1.7] text-white/62 md:text-lg">{copy.description}</p>
+        <div aria-hidden="true" className="mt-8 h-px w-20 bg-[#F5C518]" />
+      </header>
+      {children}
+    </section>
+  )
+}
+
+function ProjectCard({ project, index, locale, onOpen, external = false }) {
+  const sharedProps = {
+    'data-cursor': external ? 'Open' : 'View',
+    initial: { opacity: 0, y: 40 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, margin: '-30px' },
+    transition: { duration: 0.8, delay: (index % 3) * 0.08, ease: [0.22, 1, 0.36, 1] },
+    className: 'group block text-left w-full min-w-0',
+  }
+
+  const content = (
+    <>
       <div className="relative overflow-hidden aspect-square bg-neutral-900">
         <div className="absolute inset-0">
           <Image
             src={project.cover}
-            alt={`${project.title} — ${project.client} — Jared Durón filmmaker Barcelona`}
+            alt={project.alt?.[locale] || `${project.title} — ${project.client} — Jared Durón filmmaker Barcelona`}
             fill
             loading="lazy"
-            sizes="(min-width: 768px) 31vw, (min-width: 640px) 50vw, 100vw"
+            sizes="(min-width: 1024px) 31vw, (min-width: 640px) 50vw, 100vw"
             quality={68}
-            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] motion-reduce:transition-none"
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-70 group-hover:opacity-50 transition-opacity duration-500" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-70 group-hover:opacity-50 transition-opacity duration-500 motion-reduce:transition-none" />
 
         <div className="absolute top-3 left-3 right-3 flex justify-between items-start text-[10px] uppercase tracking-widest text-white/80">
           <span className="truncate max-w-[60%]">{project.category[locale]}</span>
@@ -960,19 +1076,33 @@ function ProjectCard({ project, index, locale, onOpen }) {
 
         <div className="absolute bottom-3 left-3 right-3 flex justify-between items-end text-white gap-3">
           <div className="min-w-0">
-            <div className="font-display text-lg md:text-xl leading-tight tracking-tight truncate">{project.title}</div>
-            <div className="text-[11px] text-white/70 mt-0.5 truncate">{project.client}</div>
+            <h3 className={`font-display text-lg md:text-xl leading-tight tracking-tight ${external ? 'line-clamp-2' : 'truncate'}`}>{project.title}</h3>
+            <div className="text-[11px] text-white/70 mt-0.5 truncate">{external ? 'Behance' : project.client}</div>
           </div>
-          <div className="w-9 h-9 shrink-0 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-500">
+          <div className="w-9 h-9 shrink-0 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-500 motion-reduce:transition-none">
             <ArrowUpRight className="w-3.5 h-3.5 text-white" />
           </div>
         </div>
       </div>
 
       <div className="mt-3 flex items-start justify-between gap-3 text-[11px] uppercase tracking-widest text-white/40">
-        <span className="truncate">{project.location}</span>
-        <span className="text-right shrink-0">{project.role}</span>
+        <span className="truncate">{external ? project.category[locale] : project.location}</span>
+        <span className="text-right shrink-0">{external ? 'Behance' : project.role}</span>
       </div>
+    </>
+  )
+
+  if (external) {
+    return <motion.a {...sharedProps} href={project.behanceUrl} target="_blank" rel="noopener noreferrer" aria-label={`${project.title} — Behance`}>{content}</motion.a>
+  }
+
+  return (
+    <motion.button
+      type="button"
+      onClick={onOpen}
+      {...sharedProps}
+    >
+      {content}
     </motion.button>
   )
 }
