@@ -50,20 +50,20 @@ const T = {
       nav: { filmmaking: 'Filmmaking', photography: 'Fotografía', graphicDesign: 'Diseño gráfico' },
       filmmaking: {
         eyebrow: '01 · Producción audiovisual',
-        title: 'Historias en movimiento.',
-        highlight: 'Filmmaking con propósito.',
+        title: 'Filmmaking',
+        highlight: '',
         description: 'Producción audiovisual, dirección de fotografía y edición de vídeo para marcas, agencias, instituciones y productoras que buscan contenido cinematográfico capaz de conectar con su audiencia.',
       },
       photography: {
         eyebrow: '02 · Fotografía',
-        title: 'La historia también vive',
-        highlight: 'en una sola imagen.',
+        title: 'Fotografía',
+        highlight: '',
         description: 'Fotografía comercial, fotografía de producto, retrato editorial y fotografía urbana en Barcelona, desarrolladas con una dirección visual cuidada y una iluminación pensada para cada proyecto.',
       },
       graphicDesign: {
         eyebrow: '03 · Diseño gráfico',
-        title: 'Ideas que toman forma.',
-        highlight: 'Diseño que crea identidad.',
+        title: 'Diseño gráfico',
+        highlight: '',
         description: 'Diseño gráfico, identidad visual, contenido para redes sociales y comunicación de marca desarrollados para transformar conceptos en sistemas visuales claros, coherentes y memorables.',
       },
     },
@@ -164,15 +164,15 @@ const T = {
     work: {
       nav: { filmmaking: 'Filmmaking', photography: 'Photography', graphicDesign: 'Graphic Design' },
       filmmaking: {
-        eyebrow: '01 · Audiovisual Production', title: 'Stories in motion.', highlight: 'Purpose-driven filmmaking.',
+        eyebrow: '01 · Audiovisual Production', title: 'Filmmaking', highlight: '',
         description: 'Audiovisual production, cinematography and video editing for brands, agencies, institutions and production companies seeking cinematic content that connects with their audience.',
       },
       photography: {
-        eyebrow: '02 · Photography', title: 'A story can also live', highlight: 'in a single image.',
+        eyebrow: '02 · Photography', title: 'Photography', highlight: '',
         description: 'Commercial photography, product photography, editorial portraits and urban photography in Barcelona, created with carefully considered art direction and lighting.',
       },
       graphicDesign: {
-        eyebrow: '03 · Graphic Design', title: 'Ideas taking shape.', highlight: 'Design that builds identity.',
+        eyebrow: '03 · Graphic Design', title: 'Graphic Design', highlight: '',
         description: 'Graphic design, visual identity, social media content and brand communication created to transform concepts into clear, coherent and memorable visual systems.',
       },
     },
@@ -264,15 +264,15 @@ const T = {
     work: {
       nav: { filmmaking: 'Filmmaking', photography: 'Fotografia', graphicDesign: 'Disseny gràfic' },
       filmmaking: {
-        eyebrow: '01 · Producció audiovisual', title: 'Històries en moviment.', highlight: 'Filmmaking amb propòsit.',
+        eyebrow: '01 · Producció audiovisual', title: 'Filmmaking', highlight: '',
         description: 'Producció audiovisual, direcció de fotografia i edició de vídeo per a marques, agències, institucions i productores que busquen contingut cinematogràfic capaç de connectar amb la seva audiència.',
       },
       photography: {
-        eyebrow: '02 · Fotografia', title: 'La història també pot viure', highlight: 'en una sola imatge.',
+        eyebrow: '02 · Fotografia', title: 'Fotografia', highlight: '',
         description: 'Fotografia comercial, fotografia de producte, retrat editorial i fotografia urbana a Barcelona, creades amb una direcció visual i una il·luminació cuidada.',
       },
       graphicDesign: {
-        eyebrow: '03 · Disseny gràfic', title: 'Idees que prenen forma.', highlight: 'Disseny que crea identitat.',
+        eyebrow: '03 · Disseny gràfic', title: 'Disseny gràfic', highlight: '',
         description: 'Disseny gràfic, identitat visual, contingut per a xarxes socials i comunicació de marca desenvolupats per transformar conceptes en sistemes visuals clars, coherents i memorables.',
       },
     },
@@ -943,7 +943,7 @@ function Work({ t, locale }) {
   }, [])
 
   const photographyProjectIds = ['barcelona-city', 'cyberpunk-portraits', 'fotografia-producto']
-  const graphicDesignProjectIds = ['miniso', 'fotomontaje-epico']
+  const graphicDesignProjectIds = ['john-deere-expo', 'miniso', 'fotomontaje-epico']
   const filmmakingProjects = useMemo(
     () => orderedProjects.filter((project) => !photographyProjectIds.includes(project.id) && !graphicDesignProjectIds.includes(project.id)),
     [orderedProjects]
@@ -1046,7 +1046,7 @@ function PortfolioCategory({ id, headingId, copy, separated = false, children })
         <div className="text-[11px] font-medium uppercase tracking-[0.28em] text-white/55">{copy.eyebrow}</div>
         <h2 id={headingId} className="mt-6 max-w-5xl font-display text-[clamp(2.5rem,6vw,5.5rem)] font-bold leading-[0.98] tracking-tight text-balance">
           <span className="block text-white">{copy.title}</span>
-          <span className="block text-[#F5C518]">{copy.highlight}</span>
+          {copy.highlight && <span className="block text-[#F5C518]">{copy.highlight}</span>}
         </h2>
         <p className="mt-7 max-w-[760px] text-base leading-[1.7] text-white/62 md:text-lg">{copy.description}</p>
         <div aria-hidden="true" className="mt-8 h-px w-20 bg-[#F5C518]" />
