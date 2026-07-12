@@ -1,5 +1,7 @@
 export default function sitemap() {
-  const baseUrl = 'https://portafolio-olive-beta-79.vercel.app'
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '')
+
+  if (!baseUrl) return []
 
   return [
     {

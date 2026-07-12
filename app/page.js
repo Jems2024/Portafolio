@@ -10,6 +10,11 @@ import { PROJECTS, PORTFOLIO_CATEGORY_PROJECTS, REAL_CLIENTS, BLOG_POSTS } from 
 /* ---------- i18n ---------- */
 const T = {
   es: {
+    seo: {
+      title: 'Jared Durón | Filmmaker en Barcelona',
+      description: 'Filmmaker en Barcelona especializado en producción audiovisual, fotografía, edición de vídeo y diseño gráfico para marcas, agencias y productoras.',
+    },
+    a11y: { viewOnBehance: 'Ver proyecto en Behance', primaryLink: 'Enlace de navegación principal', mobileLink: 'Enlace del menú móvil', footerLink: 'Enlace del pie de página' },
     nav: { work: 'Proyectos', about: 'Sobre mí', services: 'Servicios', process: 'Proceso', blog: 'Blog', contact: 'Contacto' },
     hero: {
       eyebrow: 'Filmmaker & Graphic Designer · Barcelona',
@@ -28,7 +33,7 @@ const T = {
     about: {
       kicker: '01 — Sobre mí',
       title: 'Cine, marca y verdad en cada frame.',
-      body1: 'Soy Jared Durón, filmmaker y diseñador gráfico con base en Barcelona. Originario de Honduras, cuento con más de 7 años transformando ideas en experiencias visuales para marcas, agencias y productoras internacionales.',
+      body1: 'Jared Durón es filmmaker en Barcelona especializado en producción audiovisual, fotografía y diseño gráfico para marcas, agencias y productoras. Su trabajo abarca desde la idea y el rodaje hasta la edición, el color y la entrega final.',
       body2: 'He participado en proyectos para KNX (ISE 2026 Barcelona, Light+Building 2026 Frankfurt), WWF, BCIE, John Deere, Grupo Roble (Multiplaza, MetroMall), Miniso y clientes creadores como Juan Lucho o Prósperos Podcast. Especializado en producción integral: preproducción, rodaje, edición, motion, color grading y VideoMapping.',
       stats: [
         { n: '7+', l: 'Años de experiencia' },
@@ -130,6 +135,11 @@ const T = {
     },
   },
   en: {
+    seo: {
+      title: 'Jared Durón | Barcelona Filmmaker',
+      description: 'Barcelona filmmaker specializing in audiovisual production, photography, video editing and graphic design for brands, agencies and production companies.',
+    },
+    a11y: { viewOnBehance: 'View project on Behance', primaryLink: 'Primary navigation link', mobileLink: 'Mobile menu link', footerLink: 'Footer link' },
     nav: { work: 'Work', about: 'About', services: 'Services', process: 'Process', blog: 'Journal', contact: 'Contact' },
     hero: {
       eyebrow: 'Filmmaker & Graphic Designer · Barcelona',
@@ -143,7 +153,7 @@ const T = {
     about: {
       kicker: '01 — About',
       title: 'Cinema, brand and truth in every frame.',
-      body1: "I'm Jared Durón, a filmmaker and graphic designer based in Barcelona. Originally from Honduras, I bring 7+ years turning ideas into visual experiences for premium brands, agencies and international production houses.",
+      body1: 'Jared Durón is a Barcelona filmmaker specializing in audiovisual production, photography and graphic design for brands, agencies and production companies. His work covers everything from concept and filming to editing, color grading and final delivery.',
       body2: 'I have participated in projects for KNX (ISE 2026 Barcelona, Light+Building 2026 Frankfurt), WWF, BCIE, John Deere, Grupo Roble (Multiplaza, MetroMall), Miniso and creator clients like Juan Lucho and Prósperos Podcast. Specialized in end-to-end production: pre-production, shooting, editing, motion, color grading and VideoMapping.',
       stats: [
         { n: '7+', l: 'Years of experience' },
@@ -231,6 +241,11 @@ const T = {
     footer: { tagline: 'Cinematic video production. Made in Barcelona.', rights: 'All rights reserved.' },
   },
   ca: {
+    seo: {
+      title: 'Jared Durón | Filmmaker a Barcelona',
+      description: 'Filmmaker a Barcelona especialitzat en producció audiovisual, fotografia, edició de vídeo i disseny gràfic per a marques, agències i productores.',
+    },
+    a11y: { viewOnBehance: 'Veure projecte a Behance', primaryLink: 'Enllaç de navegació principal', mobileLink: 'Enllaç del menú mòbil', footerLink: 'Enllaç del peu de pàgina' },
     nav: { work: 'Projectes', about: 'Sobre mi', services: 'Serveis', process: 'Procés', blog: 'Blog', contact: 'Contacte' },
     hero: {
       eyebrow: 'Filmmaker & Graphic Designer · Barcelona',
@@ -243,7 +258,7 @@ const T = {
     marquee: 'Disponible per a projectes · Barcelona · Worldwide · Comercial · Documental · Esdeveniments ·',
     about: {
       kicker: '01 — Sobre mi', title: 'Cinema, marca i veritat a cada frame.',
-      body1: 'Sóc Jared Durón, filmmaker i dissenyador gràfic amb base a Barcelona. Originari d\'Hondures, tinc més de 7 anys transformant idees en experiències visuals per a marques, agències i productores internacionals.',
+      body1: 'Jared Durón és filmmaker a Barcelona especialitzat en producció audiovisual, fotografia i disseny gràfic per a marques, agències i productores. El seu treball abasta des de la idea i el rodatge fins a l’edició, el color i el lliurament final.',
       body2: "He participat en projectes per a KNX (ISE 2026 Barcelona, Light+Building 2026 Frankfurt), WWF, BCIE, John Deere, Grupo Roble, Miniso i creadors com Juan Lucho o Prósperos Podcast. Especialitzat en producció integral: preproducció, rodatge, edició, motion, color grading i VideoMapping.",
       stats: [
         { n: '7+', l: "Anys d'experiència" },
@@ -364,12 +379,9 @@ function Nav({ locale, setLocale, t }) {
         </a>
 
         <nav className={`hidden items-center gap-8 text-[11px] font-medium uppercase tracking-[0.22em] transition-all duration-500 motion-reduce:transition-none lg:flex ${scrolled ? 'translate-y-0 opacity-100' : 'pointer-events-none -translate-y-2 opacity-0'}`} aria-label="Primary navigation">
-          <a href="#work" className="hover:text-[#F5C518] transition-colors">{t.nav.work}</a>
-          <a href="#about" className="hover:text-[#F5C518] transition-colors">{t.nav.about}</a>
-          <a href="#services" className="hover:text-[#F5C518] transition-colors">{t.nav.services}</a>
-          <a href="#process" className="hover:text-[#F5C518] transition-colors">{t.nav.process}</a>
-          <a href="#blog" className="hover:text-[#F5C518] transition-colors">{t.nav.blog}</a>
-          <a href="#contact" className="hover:text-[#F5C518] transition-colors">{t.nav.contact}</a>
+          {['work', 'about', 'services', 'process', 'blog', 'contact'].map((key) => (
+            <a key={key} href={`#${key}`} aria-label={`${t.a11y.primaryLink}: ${t.nav[key]}`} className="hover:text-[#F5C518] transition-colors">{t.nav[key]}</a>
+          ))}
         </nav>
 
         <div className="flex items-center gap-4">
@@ -385,7 +397,7 @@ function Nav({ locale, setLocale, t }) {
               </button>
             ))}
           </div>
-          <a href="#contact" className={`hidden items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] transition-all duration-500 hover:border-[#F5C518]/70 hover:text-[#F5C518] motion-reduce:transition-none md:inline-flex ${scrolled ? 'translate-y-0 opacity-100' : 'pointer-events-none -translate-y-2 opacity-0'}`}>
+          <a href="#contact" aria-label={`${t.a11y.primaryLink}: ${t.hero.cta2}`} className={`hidden items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] transition-all duration-500 hover:border-[#F5C518]/70 hover:text-[#F5C518] motion-reduce:transition-none md:inline-flex ${scrolled ? 'translate-y-0 opacity-100' : 'pointer-events-none -translate-y-2 opacity-0'}`}>
             {t.hero.cta2} <ArrowUpRight className="w-3.5 h-3.5" />
           </a>
           <button
@@ -413,14 +425,14 @@ function Nav({ locale, setLocale, t }) {
             className="mx-4 mb-4 rounded-[24px] border border-white/10 bg-[#070B1A]/95 px-6 py-6 shadow-[0_30px_80px_rgba(0,0,0,0.35)] backdrop-blur-xl md:mx-10 lg:ml-auto lg:max-w-sm"
           >
             {['work', 'about', 'services', 'process', 'blog', 'contact'].map((k) => (
-              <a key={k} href={`#${k}`} onClick={() => setOpen(false)} className="block border-b border-white/10 py-3 text-2xl font-semibold leading-none transition-colors last:border-b-0 hover:text-[#F5C518]">{t.nav[k]}</a>
+              <a key={k} href={`#${k}`} aria-label={`${t.a11y.mobileLink}: ${t.nav[k]}`} onClick={() => setOpen(false)} className="block border-b border-white/10 py-3 text-2xl font-semibold leading-none transition-colors last:border-b-0 hover:text-[#F5C518]">{t.nav[k]}</a>
             ))}
             <div className="flex gap-2 pt-4">
               {['es', 'en', 'ca'].map((l) => (
                 <button key={l} onClick={() => setLocale(l)} className={`rounded-full border border-white/20 px-3 py-1 text-xs uppercase tracking-widest ${locale === l ? 'bg-white text-black' : ''}`} aria-pressed={locale === l}>{l}</button>
               ))}
             </div>
-            <a href="#contact" onClick={() => setOpen(false)} className="mt-5 inline-flex items-center gap-2 rounded-full border border-[#F5C518]/55 px-4 py-2 text-[11px] uppercase tracking-[0.22em] text-[#F5C518]">
+            <a href="#contact" aria-label={`${t.a11y.mobileLink}: ${t.hero.cta2}`} onClick={() => setOpen(false)} className="mt-5 inline-flex items-center gap-2 rounded-full border border-[#F5C518]/55 px-4 py-2 text-[11px] uppercase tracking-[0.22em] text-[#F5C518]">
               {t.hero.cta2}
               <ArrowUpRight className="h-3.5 w-3.5" />
             </a>
@@ -485,12 +497,6 @@ function Hero({ t }) {
               <span className="font-bold text-[#F5C518]">{heroRole}</span>
               {heroPlace && <span className="font-medium text-white/82"> {heroPlace}</span>}
             </motion.span>
-            <motion.span
-              initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
-              className="hidden"
-            >
-              {t.hero.title2}
-            </motion.span>
           </h1>
 
           <motion.p
@@ -508,7 +514,7 @@ function Hero({ t }) {
               <span>{t.hero.cta1}</span>
               <ArrowUpRight className="w-4 h-4 group-hover:rotate-45 transition-transform duration-300" />
             </a>
-            <a href="#contact" className="inline-flex items-center gap-3 border border-white/20 px-6 md:px-7 py-3.5 rounded-full text-sm uppercase tracking-wider hover:bg-white/10 transition-all">
+            <a href="#contact" aria-label={`${t.hero.cta2}: ${t.contact.sub}`} className="inline-flex items-center gap-3 border border-white/20 px-6 md:px-7 py-3.5 rounded-full text-sm uppercase tracking-wider hover:bg-white/10 transition-all">
               <span>{t.hero.cta2}</span>
             </a>
             <button
@@ -798,10 +804,10 @@ function About({ t }) {
                 <span className="h-px w-10 bg-[#F5C518]" />
                 <span>{t.about.experience.eyebrow}</span>
               </div>
-              <h2 className="max-w-[590px] font-sans leading-[1] tracking-normal text-[#F6F4EF]">
+              <h3 className="max-w-[590px] font-sans leading-[1] tracking-normal text-[#F6F4EF]">
                 <span className="block text-[clamp(1.55rem,2.15vw,2.55rem)] font-semibold leading-[1.12] text-white/88">{t.about.experience.titleIntro}</span>
                 <span className="mt-3 block whitespace-pre-line text-[clamp(2.05rem,3.35vw,4.1rem)] font-bold leading-[1] text-[#F5C518]">{t.about.experience.titleHighlight}</span>
-              </h2>
+              </h3>
               <div className="mt-5 h-px w-20 bg-[#F5C518]/70" />
               <div className="mt-6 max-w-xl space-y-3 text-sm leading-relaxed text-white/68 md:text-[15px]">
                 <p><AccentText text={t.about.experience.body1} terms={t.about.experience.highlights1} /></p>
@@ -1089,7 +1095,7 @@ function ProjectCard({ project, index, locale, onOpen, external = false }) {
 
         <div className="absolute bottom-3 left-3 right-3 flex justify-between items-end text-white gap-3">
           <div className="min-w-0">
-            <h3 className={`font-display text-lg md:text-xl leading-tight tracking-tight ${external ? 'line-clamp-2' : 'truncate'}`}>{project.title}</h3>
+            <p className={`font-display text-lg md:text-xl leading-tight tracking-tight ${external ? 'line-clamp-2' : 'truncate'}`}>{project.title}</p>
             <div className="text-[11px] text-white/70 mt-0.5 truncate">{external ? 'Behance' : project.client}</div>
           </div>
           <div className="w-9 h-9 shrink-0 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-500 motion-reduce:transition-none">
@@ -1106,7 +1112,8 @@ function ProjectCard({ project, index, locale, onOpen, external = false }) {
   )
 
   if (external) {
-    return <motion.a {...sharedProps} href={project.behanceUrl} target="_blank" rel="noopener noreferrer" aria-label={`${project.title} — Behance`}>{content}</motion.a>
+    const externalLabel = locale === 'en' ? 'View project on Behance' : locale === 'ca' ? 'Veure projecte a Behance' : 'Ver proyecto en Behance'
+    return <motion.a {...sharedProps} href={project.behanceUrl} target="_blank" rel="noopener noreferrer" aria-label={`${externalLabel}: ${project.title}`}>{content}</motion.a>
   }
 
   return (
@@ -1132,6 +1139,7 @@ function ProjectModal({ project, locale, onClose }) {
   const loadLabel = locale === 'en' ? 'Load video' : locale === 'ca' ? 'Carregar video' : 'Cargar video'
   const galleryLabel = locale === 'en' ? 'Visual material' : locale === 'ca' ? 'Material visual' : 'Material visual'
   const detailsLabel = locale === 'en' ? 'Project details' : locale === 'ca' ? 'Detalls del projecte' : 'Detalles del proyecto'
+  const behanceLabel = locale === 'en' ? 'View project on Behance' : locale === 'ca' ? 'Veure projecte a Behance' : 'Ver proyecto en Behance'
   const lightboxImage = typeof lightboxIndex === 'number' ? project?.gallery?.[lightboxIndex] : null
 
   const showPrevPhoto = () => {
@@ -1233,6 +1241,7 @@ function ProjectModal({ project, locale, onClose }) {
                       <a
                         href={project.behanceUrl}
                         target="_blank" rel="noopener noreferrer"
+                        aria-label={`${behanceLabel}: ${project.title}`}
                         className="mt-6 inline-flex items-center gap-3 bg-white text-black px-5 py-3 rounded-full text-xs uppercase tracking-wider hover:bg-[#F5C518] transition-colors group"
                       >
                         View on Behance <ExternalLink className="w-4 h-4 group-hover:rotate-12 transition-transform" />
@@ -1343,6 +1352,7 @@ function ProjectModal({ project, locale, onClose }) {
                     <a
                       href={project.behanceUrl}
                       target="_blank" rel="noopener noreferrer"
+                      aria-label={`${behanceLabel}: ${project.title}`}
                       className="mt-7 inline-flex items-center gap-3 rounded-full bg-white px-5 py-3 text-xs uppercase tracking-wider text-black transition-colors hover:bg-[#F5C518] group"
                     >
                       View on Behance <ExternalLink className="w-4 h-4 group-hover:rotate-12 transition-transform" />
@@ -1400,6 +1410,7 @@ function ProjectModal({ project, locale, onClose }) {
                         href={project.behanceUrl}
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label={`${behanceLabel}: ${project.title}`}
                         className="inline-flex items-center gap-2 text-[11px] uppercase tracking-widest text-white/70 hover:text-white transition-colors"
                       >
                         Abrir en Behance
@@ -1815,9 +1826,9 @@ function ServiceRow({ index, title, desc }) {
         0{index + 1}
       </div>
       <div className="col-span-10 md:col-span-4">
-        <h3 className={`font-display text-2xl md:text-4xl tracking-tight transition-all duration-500 ${hover ? 'italic translate-x-2' : ''}`}>
+        <p className={`font-display text-2xl md:text-4xl tracking-tight transition-all duration-500 ${hover ? 'italic translate-x-2' : ''}`}>
           {title}
-        </h3>
+        </p>
       </div>
       <div className="col-span-12 md:col-span-6 md:col-start-7">
         <p className="text-white/60 leading-relaxed text-sm md:text-base max-w-lg">{desc}</p>
@@ -2154,16 +2165,16 @@ function Footer({ t }) {
       <div className="max-w-[1600px] mx-auto">
         <div className="grid md:grid-cols-12 gap-10">
           <div className="md:col-span-6">
-            <h3 className="font-display text-4xl md:text-6xl leading-tight text-balance">
+            <p className="font-display text-4xl md:text-6xl leading-tight text-balance">
               Jared Durón<span className="text-white/40">.</span>
-            </h3>
+            </p>
             <p className="mt-4 text-white/50 max-w-md">{t.footer.tagline}</p>
           </div>
           <div className="md:col-span-2">
             <div className="text-[11px] uppercase tracking-widest text-white/40 mb-4">Menu</div>
             <ul className="space-y-2 text-sm">
               {['work', 'about', 'services', 'process', 'blog', 'contact'].map((k) => (
-                <li key={k}><a href={`#${k}`} className="hover:text-white/60">{t.nav[k]}</a></li>
+                <li key={k}><a href={`#${k}`} aria-label={`${t.a11y.footerLink}: ${t.nav[k]}`} className="hover:text-white/60">{t.nav[k]}</a></li>
               ))}
             </ul>
           </div>
@@ -2494,6 +2505,24 @@ function App() {
   useEffect(() => {
     if (typeof window !== 'undefined') localStorage.setItem('locale', locale)
   }, [locale])
+
+  useEffect(() => {
+    document.documentElement.lang = locale
+    document.title = t.seo.title
+    const description = document.querySelector('meta[name="description"]')
+    if (description) description.setAttribute('content', t.seo.description)
+
+    const ogTitle = document.querySelector('meta[property="og:title"]')
+    const ogDescription = document.querySelector('meta[property="og:description"]')
+    const twitterTitle = document.querySelector('meta[name="twitter:title"]')
+    const twitterDescription = document.querySelector('meta[name="twitter:description"]')
+    const ogLocale = document.querySelector('meta[property="og:locale"]')
+    ogTitle?.setAttribute('content', t.seo.title)
+    ogDescription?.setAttribute('content', t.seo.description)
+    twitterTitle?.setAttribute('content', t.seo.title)
+    twitterDescription?.setAttribute('content', t.seo.description)
+    ogLocale?.setAttribute('content', locale === 'en' ? 'en_US' : locale === 'ca' ? 'ca_ES' : 'es_ES')
+  }, [locale, t.seo])
 
   return (
     <>

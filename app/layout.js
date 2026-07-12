@@ -2,12 +2,10 @@ import { Poppins } from 'next/font/google'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import './globals.css'
 
-const siteUrl = 'https://portafolio-olive-beta-79.vercel.app'
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '')
 const siteName = 'Jared Durón Portfolio'
-const siteTitle = 'Jared Durón | Filmmaker y producción audiovisual en Barcelona'
-const siteDescription = 'Filmmaker, fotógrafo y diseñador gráfico en Barcelona especializado en producción audiovisual, fotografía comercial, edición de vídeo e identidad visual para marcas, agencias y productoras.'
-const openGraphTitle = 'Jared Durón — Filmmaker in Barcelona'
-const openGraphDescription = 'Producción audiovisual, filmmaking y diseño gráfico para marcas, agencias y productoras.'
+const siteTitle = 'Jared Durón | Filmmaker en Barcelona'
+const siteDescription = 'Filmmaker en Barcelona especializado en producción audiovisual, fotografía, edición de vídeo y diseño gráfico para marcas, agencias y productoras.'
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -17,33 +15,17 @@ const poppins = Poppins({
 })
 
 export const metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: siteUrl ? new URL(siteUrl) : undefined,
   title: {
     default: siteTitle,
     template: `%s | ${siteName}`,
   },
   description: siteDescription,
-  keywords: [
-    'Jared Durón',
-    'Jared Durón filmmaker',
-    'filmmaker Barcelona',
-    'videographer Barcelona',
-    'produccion audiovisual Barcelona',
-    'brand films',
-    'video corporativo',
-    'event coverage',
-    'social media content',
-    'visual storytelling',
-    'fotografia comercial Barcelona',
-    'fotografia editorial Barcelona',
-    'identidad visual',
-    'diseno grafico',
-  ],
   authors: [{ name: 'Jared Durón' }],
   creator: 'Jared Durón',
   publisher: 'Jared Durón',
   alternates: {
-    canonical: siteUrl,
+    canonical: siteUrl || undefined,
   },
   robots: {
     index: true,
@@ -59,16 +41,27 @@ export const metadata = {
   openGraph: {
     type: 'website',
     locale: 'es_ES',
-    url: siteUrl,
+    url: siteUrl || undefined,
     siteName,
-    title: openGraphTitle,
-    description: openGraphDescription,
+    title: siteTitle,
+    description: siteDescription,
+    images: siteUrl ? [{ url: `${siteUrl}/og-image.jpg`, width: 1200, height: 630, alt: 'Jared Durón, filmmaker en Barcelona' }] : undefined,
   },
   twitter: {
-    card: 'summary',
-    title: openGraphTitle,
-    description: openGraphDescription,
+    card: 'summary_large_image',
+    title: siteTitle,
+    description: siteDescription,
+    images: siteUrl ? [`${siteUrl}/og-image.jpg`] : undefined,
   },
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon-32x32.png', type: 'image/png', sizes: '32x32' },
+      { url: '/favicon-16x16.png', type: 'image/png', sizes: '16x16' },
+    ],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
+  },
+  manifest: '/site.webmanifest',
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
   },
@@ -85,20 +78,22 @@ const personJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Jared Durón',
-  jobTitle: 'Filmmaker / Videographer / Visual Creator',
-  url: siteUrl,
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Barcelona',
-    addressCountry: 'Spain',
-  },
+  jobTitle: 'Filmmaker',
+  ...(siteUrl ? { url: siteUrl } : {}),
+  sameAs: [
+    'https://www.behance.net/jaredduron',
+    'https://www.instagram.com/jared_duron10/',
+    'https://www.linkedin.com/in/jared-duron-87a041100/',
+    'https://www.tiktok.com/@jems2124',
+    'https://www.facebook.com/jaredmisael.duron/',
+  ],
 }
 
 const websiteJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   name: siteName,
-  url: siteUrl,
+  ...(siteUrl ? { url: siteUrl } : {}),
   inLanguage: ['es', 'en', 'ca'],
   description: siteDescription,
   publisher: {
