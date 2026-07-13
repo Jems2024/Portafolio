@@ -1,11 +1,13 @@
 import { Poppins } from 'next/font/google'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import ConsentManager from '@/components/consent-manager'
+import { SOCIAL_PROFILE_URLS } from '@/lib/social-links'
 import './globals.css'
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '')
 const siteName = 'Jared Durón Portfolio'
-const siteTitle = 'Jared Durón | Filmmaker en Barcelona'
-const siteDescription = 'Filmmaker en Barcelona especializado en producción audiovisual, fotografía, edición de vídeo y diseño gráfico para marcas, agencias y productoras.'
+const siteTitle = 'Jared Durón | Filmmaker, Fotografía y Diseño en Barcelona'
+const siteDescription = 'Filmmaker en Barcelona especializado en producción audiovisual, fotografía comercial y diseño gráfico para marcas, agencias, documentales y eventos.'
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -80,13 +82,7 @@ const personJsonLd = {
   name: 'Jared Durón',
   jobTitle: 'Filmmaker',
   ...(siteUrl ? { url: siteUrl } : {}),
-  sameAs: [
-    'https://www.behance.net/jaredduron',
-    'https://www.instagram.com/jared_duron10/',
-    'https://www.linkedin.com/in/jared-duron-87a041100/',
-    'https://www.tiktok.com/@jems2124',
-    'https://www.facebook.com/jaredmisael.duron/',
-  ],
+  sameAs: SOCIAL_PROFILE_URLS,
 }
 
 const websiteJsonLd = {
@@ -106,8 +102,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es" className={poppins.variable}>
       <head>
-        <link rel="preconnect" href="https://customer-assets.emergentagent.com" />
-        <link rel="preconnect" href="https://mir-s3-cdn-cf.behance.net" />
+        <link rel="preload" as="image" href="/hero/hero-poster-mobile.webp" type="image/webp" media="(max-width: 767px)" fetchPriority="high" />
+        <link rel="preload" as="image" href="/hero/hero-poster-desktop.webp" type="image/webp" media="(min-width: 768px)" fetchPriority="high" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
@@ -119,6 +115,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className="antialiased text-neutral-100 font-sans selection:bg-[#F5C518] selection:text-black">
         {children}
+        <ConsentManager />
         <SpeedInsights />
       </body>
     </html>

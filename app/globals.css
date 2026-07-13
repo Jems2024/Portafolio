@@ -39,6 +39,15 @@ body {
   min-width: 0;
 }
 
+.deferred-section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
+
+.social-wall iframe {
+  max-width: 100%;
+}
+
 @media (hover: none) and (pointer: coarse) {
   body { cursor: auto; }
   .custom-cursor { display: none !important; }

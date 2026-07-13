@@ -6,19 +6,24 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { ArrowUpRight, Play, Mail, Instagram, Linkedin, MessageCircle, MapPin, Plus, Minus, X, ExternalLink, Sparkles, Star, Clock3, Clapperboard, BadgeCheck, Layers3 } from 'lucide-react'
 import { toast, Toaster } from 'sonner'
 import { PROJECTS, PORTFOLIO_CATEGORY_PROJECTS, REAL_CLIENTS, BLOG_POSTS } from '@/lib/projects'
+import HeroMedia from '@/components/hero-media'
+import SocialSection from '@/components/social-section'
+import { SOCIAL_LINKS } from '@/lib/social-links'
+import { trackEvent } from '@/lib/analytics'
+import { openConsentPreferences } from '@/lib/consent'
 
 /* ---------- i18n ---------- */
 const T = {
   es: {
     seo: {
-      title: 'Jared Durón | Filmmaker en Barcelona',
-      description: 'Filmmaker en Barcelona especializado en producción audiovisual, fotografía, edición de vídeo y diseño gráfico para marcas, agencias y productoras.',
+      title: 'Jared Durón | Filmmaker, Fotografía y Diseño en Barcelona',
+      description: 'Filmmaker en Barcelona especializado en producción audiovisual, fotografía comercial y diseño gráfico para marcas, agencias, documentales y eventos.',
     },
     a11y: { viewOnBehance: 'Ver proyecto en Behance', primaryLink: 'Enlace de navegación principal', mobileLink: 'Enlace del menú móvil', footerLink: 'Enlace del pie de página' },
     nav: { work: 'Proyectos', about: 'Sobre mí', services: 'Servicios', process: 'Proceso', blog: 'Blog', contact: 'Contacto' },
     hero: {
       eyebrow: 'Filmmaker & Graphic Designer · Barcelona',
-      title: 'JARED DURÓN · FILMMAKER EN BARCELONA',
+      title: 'Jared Durón · Filmmaker en Barcelona',
       title1: 'Jared Durón — Filmmaker in Barcelona.',
       title2: 'Films that grow brands.',
       sub: 'Producción audiovisual y diseño gráfico para marcas premium, agencias creativas y productoras internacionales. Más de 7 años transformando ideas en experiencias visuales.',
@@ -33,7 +38,7 @@ const T = {
     about: {
       kicker: '01 — Sobre mí',
       title: 'Cine, marca y verdad en cada frame.',
-      body1: 'Jared Durón es filmmaker en Barcelona especializado en producción audiovisual, fotografía y diseño gráfico para marcas, agencias y productoras. Su trabajo abarca desde la idea y el rodaje hasta la edición, el color y la entrega final.',
+      body1: 'Jared Durón es filmmaker en Barcelona especializado en producción audiovisual, fotografía comercial y diseño gráfico para marcas, agencias y productoras. Desarrolla proyectos audiovisuales, documentales, eventos y campañas desde la idea y el rodaje hasta la edición, el color y la entrega final.',
       body2: 'He participado en proyectos para KNX (ISE 2026 Barcelona, Light+Building 2026 Frankfurt), WWF, BCIE, John Deere, Grupo Roble (Multiplaza, MetroMall), Miniso y clientes creadores como Juan Lucho o Prósperos Podcast. Especializado en producción integral: preproducción, rodaje, edición, motion, color grading y VideoMapping.',
       stats: [
         { n: '7+', l: 'Años de experiencia' },
@@ -129,21 +134,34 @@ const T = {
       types: ['Publicidad / Brand film', 'Vídeo corporativo', 'Documental', 'Evento', 'Redes sociales', 'Otro'],
       budgets: ['Desde 350€', '350€ - 1.500€', '1.500€ - 5.000€', '5.000€ - 15.000€', 'A medida / sin límite creativo'],
     },
+    social: {
+      eyebrow: 'REDES · PROCESO CREATIVO',
+      title: 'Detrás de cada proyecto',
+      titleLead: 'hay',
+      highlight: 'más historias.',
+      description: 'Sigue a Jared Durón para descubrir rodajes, fotografía comercial, diseño gráfico, documentales, eventos y contenido detrás de cámaras desde Barcelona.',
+      navLabel: 'Redes sociales de Jared Durón',
+      cta: 'Ver todo el contenido',
+      wall: { manual: 'Ver últimas publicaciones', loading: 'Cargando publicaciones', error: 'No se pudo cargar el muro social.', retry: 'Reintentar' },
+    },
     footer: {
       tagline: 'Cinematic video production. Made in Barcelona.',
       rights: 'Todos los derechos reservados.',
+      privacy: 'Preferencias de privacidad',
+      seoKicker: 'Producción audiovisual en Barcelona',
+      seoBody: 'Trabajo con marcas, agencias y proyectos creativos que necesitan producción audiovisual en Barcelona: brand films, vídeo corporativo, cobertura de eventos, contenido para redes sociales, edición de vídeo, motion graphics, diseño gráfico y piezas cinematográficas pensadas para comunicar con claridad.',
     },
   },
   en: {
     seo: {
-      title: 'Jared Durón | Barcelona Filmmaker',
-      description: 'Barcelona filmmaker specializing in audiovisual production, photography, video editing and graphic design for brands, agencies and production companies.',
+      title: 'Jared Durón | Filmmaker, Photography & Design Barcelona',
+      description: 'Barcelona filmmaker specializing in audiovisual production, commercial photography and graphic design for brands, agencies, documentaries and events.',
     },
     a11y: { viewOnBehance: 'View project on Behance', primaryLink: 'Primary navigation link', mobileLink: 'Mobile menu link', footerLink: 'Footer link' },
     nav: { work: 'Work', about: 'About', services: 'Services', process: 'Process', blog: 'Journal', contact: 'Contact' },
     hero: {
       eyebrow: 'Filmmaker & Graphic Designer · Barcelona',
-      title: 'JARED DURÓN · FILMMAKER IN BARCELONA',
+      title: 'Jared Durón · Filmmaker in Barcelona',
       title1: 'Jared Durón — Filmmaker in Barcelona.',
       title2: 'Films that grow brands.',
       sub: 'Audiovisual production and graphic design for premium brands, creative agencies and international production houses. 7+ years turning ideas into visual experiences.',
@@ -153,7 +171,7 @@ const T = {
     about: {
       kicker: '01 — About',
       title: 'Cinema, brand and truth in every frame.',
-      body1: 'Jared Durón is a Barcelona filmmaker specializing in audiovisual production, photography and graphic design for brands, agencies and production companies. His work covers everything from concept and filming to editing, color grading and final delivery.',
+      body1: 'Jared Durón is a Barcelona filmmaker specializing in audiovisual production, commercial photography and graphic design for brands, agencies and production companies. He develops audiovisual projects, documentaries, events and campaigns from concept and filming to editing, color grading and final delivery.',
       body2: 'I have participated in projects for KNX (ISE 2026 Barcelona, Light+Building 2026 Frankfurt), WWF, BCIE, John Deere, Grupo Roble (Multiplaza, MetroMall), Miniso and creator clients like Juan Lucho and Prósperos Podcast. Specialized in end-to-end production: pre-production, shooting, editing, motion, color grading and VideoMapping.',
       stats: [
         { n: '7+', l: 'Years of experience' },
@@ -238,18 +256,34 @@ const T = {
       types: ['Advertising / Brand film', 'Corporate video', 'Documentary', 'Event', 'Social media', 'Other'],
       budgets: ['From €350', '€350 - €1.5k', '€1.5k - €5k', '€5k - €15k', 'Custom / no creative limit'],
     },
-    footer: { tagline: 'Cinematic video production. Made in Barcelona.', rights: 'All rights reserved.' },
+    social: {
+      eyebrow: 'SOCIAL · CREATIVE PROCESS',
+      title: 'Behind every project,',
+      titleLead: 'there is',
+      highlight: 'more to see.',
+      description: 'Follow Jared Durón for filmmaking, commercial photography, graphic design, documentaries, events and behind-the-scenes content from Barcelona.',
+      navLabel: 'Jared Durón social profiles',
+      cta: 'View all content',
+      wall: { manual: 'View latest posts', loading: 'Loading posts', error: 'The social wall could not be loaded.', retry: 'Try again' },
+    },
+    footer: {
+      tagline: 'Cinematic video production. Made in Barcelona.',
+      rights: 'All rights reserved.',
+      privacy: 'Privacy preferences',
+      seoKicker: 'Audiovisual production in Barcelona',
+      seoBody: 'I work with brands, agencies and creative projects that need audiovisual production in Barcelona: brand films, corporate video, event coverage, social content, video editing, motion graphics, graphic design and cinematic pieces made to communicate clearly.',
+    },
   },
   ca: {
     seo: {
-      title: 'Jared Durón | Filmmaker a Barcelona',
-      description: 'Filmmaker a Barcelona especialitzat en producció audiovisual, fotografia, edició de vídeo i disseny gràfic per a marques, agències i productores.',
+      title: 'Jared Durón | Filmmaker, Fotografia i Disseny a Barcelona',
+      description: 'Filmmaker a Barcelona especialitzat en producció audiovisual, fotografia comercial i disseny gràfic per a marques, agències, documentals i esdeveniments.',
     },
     a11y: { viewOnBehance: 'Veure projecte a Behance', primaryLink: 'Enllaç de navegació principal', mobileLink: 'Enllaç del menú mòbil', footerLink: 'Enllaç del peu de pàgina' },
     nav: { work: 'Projectes', about: 'Sobre mi', services: 'Serveis', process: 'Procés', blog: 'Blog', contact: 'Contacte' },
     hero: {
       eyebrow: 'Filmmaker & Graphic Designer · Barcelona',
-      title: 'JARED DURÓN · FILMMAKER A BARCELONA',
+      title: 'Jared Durón · Filmmaker a Barcelona',
       title1: 'Jared Durón — Filmmaker a Barcelona.',
       title2: 'Pel·lícules que fan créixer marques.',
       sub: 'Producció audiovisual i disseny gràfic per a marques premium, agències creatives i productores internacionals.',
@@ -258,7 +292,7 @@ const T = {
     marquee: 'Disponible per a projectes · Barcelona · Worldwide · Comercial · Documental · Esdeveniments ·',
     about: {
       kicker: '01 — Sobre mi', title: 'Cinema, marca i veritat a cada frame.',
-      body1: 'Jared Durón és filmmaker a Barcelona especialitzat en producció audiovisual, fotografia i disseny gràfic per a marques, agències i productores. El seu treball abasta des de la idea i el rodatge fins a l’edició, el color i el lliurament final.',
+      body1: 'Jared Durón és filmmaker a Barcelona especialitzat en producció audiovisual, fotografia comercial i disseny gràfic per a marques, agències i productores. Desenvolupa projectes audiovisuals, documentals, esdeveniments i campanyes des de la idea i el rodatge fins a l’edició, el color i el lliurament final.',
       body2: "He participat en projectes per a KNX (ISE 2026 Barcelona, Light+Building 2026 Frankfurt), WWF, BCIE, John Deere, Grupo Roble, Miniso i creadors com Juan Lucho o Prósperos Podcast. Especialitzat en producció integral: preproducció, rodatge, edició, motion, color grading i VideoMapping.",
       stats: [
         { n: '7+', l: "Anys d'experiència" },
@@ -342,7 +376,23 @@ const T = {
       types: ['Publicitat / Brand film', 'Vídeo corporatiu', 'Documental', 'Esdeveniment', 'Xarxes socials', 'Altres'],
       budgets: ['Des de 350€', '350€ - 1.500€', '1.500€ - 5.000€', '5.000€ - 15.000€', 'A mida / sense límit creatiu'],
     },
-    footer: { tagline: 'Cinematic video production. Made in Barcelona.', rights: 'Tots els drets reservats.' },
+    social: {
+      eyebrow: 'XARXES · PROCÉS CREATIU',
+      title: 'Darrere de cada projecte',
+      titleLead: 'hi ha',
+      highlight: 'més històries.',
+      description: 'Segueix Jared Durón per descobrir rodatges, fotografia comercial, disseny gràfic, documentals, esdeveniments i contingut entre bastidors des de Barcelona.',
+      navLabel: 'Xarxes socials de Jared Durón',
+      cta: 'Veure tot el contingut',
+      wall: { manual: 'Veure les últimes publicacions', loading: 'Carregant publicacions', error: 'No s’ha pogut carregar el mur social.', retry: 'Tornar-ho a provar' },
+    },
+    footer: {
+      tagline: 'Cinematic video production. Made in Barcelona.',
+      rights: 'Tots els drets reservats.',
+      privacy: 'Preferències de privacitat',
+      seoKicker: 'Producció audiovisual a Barcelona',
+      seoBody: 'Treballo amb marques, agències i projectes creatius que necessiten producció audiovisual a Barcelona: brand films, vídeo corporatiu, cobertura d’esdeveniments, contingut per a xarxes socials, edició de vídeo, motion graphics, disseny gràfic i peces cinematogràfiques pensades per comunicar amb claredat.',
+    },
   },
 }
 
@@ -373,7 +423,7 @@ function Nav({ locale, setLocale, t }) {
   return (
     <header className={`fixed left-0 right-0 top-0 z-50 transition-[background-color,border-color,box-shadow] duration-500 motion-reduce:transition-none ${scrolled ? 'border-b border-white/10 bg-[#070B1A]/78 shadow-[0_18px_60px_rgba(0,0,0,0.22)] backdrop-blur-xl' : 'border-transparent bg-transparent'}`}>
       <div className="mx-auto flex max-w-[1600px] items-center justify-between px-6 py-4 md:px-10 md:py-5">
-        <a href="#top" className="flex items-center gap-2 group" aria-label="Home">
+        <a href="#top" className="flex items-center gap-2 group" aria-label="Home · Jared Durón">
           <div className="w-2 h-2 bg-white rounded-full group-hover:animate-pulse" />
           <span className="font-display text-lg tracking-tight">Jared Durón</span>
         </a>
@@ -454,26 +504,15 @@ function Hero({ t }) {
   const [heroName, heroRoleLine = ''] = t.hero.title.split(' · ')
   const [heroRole = '', ...heroPlaceParts] = heroRoleLine.split(' ')
   const heroPlace = heroPlaceParts.join(' ')
+  const openReel = () => {
+    trackEvent('reel_play', { location: 'hero' })
+    setReelOpen(true)
+  }
 
   return (
     <section ref={ref} id="top" className="cinematic-hero relative min-h-[100svh] w-full overflow-hidden">
       <motion.div style={{ y, scale }} className="absolute inset-0">
-        <Image
-          src="https://mir-s3-cdn-cf.behance.net/projects/404/e9a7e7204648249.Y3JvcCwzMzY3LDI2MzMsMCww.png"
-          alt="Cinematic documentary frame by Jared Duron"
-          fill
-          sizes="100vw"
-          quality={72}
-          className="hidden"
-        />
-        <video
-          className="absolute inset-0 h-full w-full object-cover"
-          autoPlay muted loop playsInline preload="metadata"
-          poster="https://mir-s3-cdn-cf.behance.net/projects/404/e9a7e7204648249.Y3JvcCwzMzY3LDI2MzMsMCww.png"
-        >
-          <source src="https://customer-assets.emergentagent.com/job_filmmaker-barcelona/artifacts/qkv7mv6p_Toma%20Dron%201.mp4" type="video/mp4" />
-          <source src="https://videos.pexels.com/video-files/3209828/3209828-hd_1920_1080_25fps.mp4" type="video/mp4" />
-        </video>
+        <HeroMedia />
         <div className="absolute inset-0 hero-vignette" aria-hidden="true" />
       </motion.div>
 
@@ -487,7 +526,7 @@ function Hero({ t }) {
             <span className="text-xs md:text-sm uppercase tracking-[0.3em] text-white/70">{t.hero.eyebrow}</span>
           </motion.div>
 
-          <h1 className="hero-viewfinder max-w-[min(92vw,1320px)] text-balance font-sans text-[clamp(0.98rem,2.05vw,2rem)] uppercase leading-[1.45] tracking-[0.16em] text-[#F6F4EF] md:tracking-[0.24em] 2xl:whitespace-nowrap">
+          <h1 className="hero-viewfinder max-w-[min(92vw,1320px)] text-balance font-sans text-[clamp(0.98rem,2.05vw,2rem)] leading-[1.45] tracking-[0.16em] text-[#F6F4EF] md:tracking-[0.24em] 2xl:whitespace-nowrap">
             <motion.span
               initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
               className="block will-change-transform"
@@ -518,7 +557,7 @@ function Hero({ t }) {
               <span>{t.hero.cta2}</span>
             </a>
             <button
-              onClick={() => setReelOpen(true)}
+              onClick={openReel}
               data-cursor="Play"
               className="inline-flex items-center gap-3 text-white/80 hover:text-white px-2 py-3.5 text-sm uppercase tracking-wider group"
             >
@@ -539,7 +578,7 @@ function Hero({ t }) {
           </div>
           <button
             type="button"
-            onClick={() => setReelOpen(true)}
+            onClick={openReel}
             data-cursor="Play"
             aria-label={t.hero.reelAria}
             className="group mx-auto inline-flex w-fit items-center gap-3 rounded-full border border-white/28 bg-white/[0.035] px-4 py-2.5 text-white/82 backdrop-blur-sm transition-all hover:border-white/60 hover:bg-white/10 hover:text-white"
@@ -599,7 +638,7 @@ function ReelModal({ open, onClose }) {
             <video
               className="w-full h-full object-cover"
               controls autoPlay playsInline preload="auto"
-              poster="https://mir-s3-cdn-cf.behance.net/projects/404/e9a7e7204648249.Y3JvcCwzMzY3LDI2MzMsMCww.png"
+              poster="/hero/hero-poster-desktop.jpg"
             >
               <source src="https://customer-assets.emergentagent.com/job_filmmaker-barcelona/artifacts/qkv7mv6p_Toma%20Dron%201.mp4" type="video/mp4" />
               <source src="https://videos.pexels.com/video-files/3209828/3209828-hd_1920_1080_25fps.mp4" type="video/mp4" />
@@ -684,6 +723,7 @@ function FloatingWhatsApp({ locale }) {
       rel="noopener noreferrer"
       data-cursor="Chat"
       aria-label={label}
+      onClick={() => trackEvent('whatsapp_click', { location: 'floating_button' })}
       initial={{ opacity: 0, y: 20, scale: 0.9 }}
       animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 20, scale: visible ? 1 : 0.9 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
@@ -1063,6 +1103,12 @@ function PortfolioCategory({ id, headingId, copy, separated = false, children })
 }
 
 function ProjectCard({ project, index, locale, onOpen, external = false }) {
+  const trackProjectOpen = () => {
+    trackEvent('project_open', {
+      project_slug: project.slug || project.id,
+      project_category: project.categoryGroup || project.category?.[locale] || 'portfolio',
+    })
+  }
   const sharedProps = {
     'data-cursor': external ? 'Open' : 'View',
     initial: { opacity: 0, y: 40 },
@@ -1113,13 +1159,16 @@ function ProjectCard({ project, index, locale, onOpen, external = false }) {
 
   if (external) {
     const externalLabel = locale === 'en' ? 'View project on Behance' : locale === 'ca' ? 'Veure projecte a Behance' : 'Ver proyecto en Behance'
-    return <motion.a {...sharedProps} href={project.behanceUrl} target="_blank" rel="noopener noreferrer" aria-label={`${externalLabel}: ${project.title}`}>{content}</motion.a>
+    return <motion.a {...sharedProps} href={project.behanceUrl} target="_blank" rel="noopener noreferrer" aria-label={`${externalLabel}: ${project.title}`} onClick={trackProjectOpen}>{content}</motion.a>
   }
 
   return (
     <motion.button
       type="button"
-      onClick={onOpen}
+      onClick={() => {
+        trackProjectOpen()
+        onOpen?.()
+      }}
       {...sharedProps}
     >
       {content}
@@ -1956,7 +2005,6 @@ function Testimonials({ t }) {
                 key={idx}
                 onClick={() => setI(idx)}
                 className={`text-center transition-all duration-500 px-4 py-3 rounded-lg border ${idx === i ? 'bg-white/5 border-[#F5C518]/40' : 'border-white/10 hover:border-white/30'}`}
-                aria-label={`Testimonial ${idx + 1}`}
               >
                 <div className={`text-xs font-medium ${idx === i ? 'text-[#F5C518]' : 'text-white/70'}`}>{item2.a}</div>
                 <div className="text-[10px] text-white/40 mt-0.5">{item2.r}</div>
@@ -2033,15 +2081,17 @@ function Contact({ t, locale }) {
       })
       const data = await res.json().catch(() => ({}))
       if (!res.ok) throw new Error(data.detail || data.error || t.contact.error)
+      trackEvent('contact_submit', { status: 'success' })
       toast.success(t.contact.success)
       setForm({ name: '', email: '', phone: '', company: '', budget: '', projectType: '', message: '' })
     } catch (error) {
+      trackEvent('contact_submit', { status: 'error' })
       toast.error(error.message || t.contact.error)
     } finally { setLoading(false) }
   }
 
   return (
-    <section id="contact" className="relative py-24 md:py-40 px-6 md:px-10 border-t border-white/5">
+    <section id="contact" className="deferred-section relative py-24 md:py-40 px-6 md:px-10 border-t border-white/5">
       <div className="max-w-[1600px] mx-auto grid md:grid-cols-12 gap-8 md:gap-16">
         <div className="md:col-span-5">
           <SectionKicker>{t.contact.kicker}</SectionKicker>
@@ -2051,7 +2101,7 @@ function Contact({ t, locale }) {
           <p className="mt-6 text-white/60 leading-relaxed max-w-md">{t.contact.sub}</p>
 
           <div className="mt-12 space-y-4 text-sm">
-            <a href="https://wa.me/34637434235?text=Hola%20Jared%2C%20me%20interesa%20trabajar%20contigo" target="_blank" rel="noopener noreferrer" data-cursor="Chat" className="flex items-center gap-4 text-white/80 hover:text-white transition-colors group">
+            <a href="https://wa.me/34637434235?text=Hola%20Jared%2C%20me%20interesa%20trabajar%20contigo" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('whatsapp_click', { location: 'contact_section' })} data-cursor="Chat" className="flex items-center gap-4 text-white/80 hover:text-white transition-colors group">
               <MessageCircle className="w-4 h-4" /> WhatsApp · +34 637 43 42 35
               <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
             </a>
@@ -2059,22 +2109,15 @@ function Contact({ t, locale }) {
               <Mail className="w-4 h-4" /> jaredmisaelduron@gmail.com
               <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
             </a>
-            <a href="https://www.instagram.com/jared_duron10/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-white/80 hover:text-white transition-colors group">
-              <Instagram className="w-4 h-4" /> Instagram · @jared_duron10
-              <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
-            </a>
-            <a href="https://www.behance.net/jaredduron" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-white/80 hover:text-white transition-colors group">
-              <ExternalLink className="w-4 h-4" /> Behance · jaredduron
-              <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
-            </a>
-            <a href="https://www.linkedin.com/in/jared-duron-87a041100/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-white/80 hover:text-white transition-colors group">
-              <Linkedin className="w-4 h-4" /> LinkedIn
-              <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
-            </a>
-            <a href="https://www.tiktok.com/@jems2124?lang=es-419" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-white/80 hover:text-white transition-colors group">
-              <Play className="w-4 h-4" /> TikTok · @jems2124
-              <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
-            </a>
+            {SOCIAL_LINKS.map((social) => {
+              const SocialIcon = social.id === 'instagram' ? Instagram : social.id === 'linkedin' ? Linkedin : social.id === 'youtube' ? Play : ExternalLink
+              return (
+                <a key={social.id} href={social.url} target="_blank" rel="me noopener noreferrer" aria-label={`${social.ariaLabel[locale]}. ${social.name} · ${social.user}`} onClick={() => trackEvent('social_click', { network: social.id, location: 'contact_section' })} className="flex items-center gap-4 text-white/80 hover:text-white transition-colors group">
+                  <SocialIcon aria-hidden="true" className="w-4 h-4" /> {social.name} · {social.user}
+                  <ArrowUpRight aria-hidden="true" className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </a>
+              )
+            })}
             <div className="flex items-center gap-4 text-white/60 pt-4">
               <MapPin className="w-4 h-4" /> Barcelona, Catalunya · Available worldwide
             </div>
@@ -2083,19 +2126,19 @@ function Contact({ t, locale }) {
 
         <form onSubmit={submit} className="md:col-span-7 space-y-6">
           <div className="grid md:grid-cols-2 gap-6">
-            <FormField label={t.contact.name} required>
-              <input required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full bg-transparent border-b border-white/20 focus:border-white outline-none py-3 text-lg transition-colors" />
+            <FormField label={t.contact.name} htmlFor="contact-name" required>
+              <input id="contact-name" required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full bg-transparent border-b border-white/20 focus:border-white outline-none py-3 text-lg transition-colors" />
             </FormField>
-            <FormField label={t.contact.email} required>
-              <input required type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="w-full bg-transparent border-b border-white/20 focus:border-white outline-none py-3 text-lg transition-colors" />
+            <FormField label={t.contact.email} htmlFor="contact-email" required>
+              <input id="contact-email" required type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="w-full bg-transparent border-b border-white/20 focus:border-white outline-none py-3 text-lg transition-colors" />
             </FormField>
           </div>
           <div className="grid md:grid-cols-2 gap-6">
-            <FormField label={t.contact.company}>
-              <input value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} className="w-full bg-transparent border-b border-white/20 focus:border-white outline-none py-3 text-lg transition-colors" />
+            <FormField label={t.contact.company} htmlFor="contact-company">
+              <input id="contact-company" value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} className="w-full bg-transparent border-b border-white/20 focus:border-white outline-none py-3 text-lg transition-colors" />
             </FormField>
-            <FormField label={t.contact.phone}>
-              <input type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="+34 600 000 000" className="w-full bg-transparent border-b border-white/20 focus:border-white outline-none py-3 text-lg transition-colors placeholder:text-white/25" />
+            <FormField label={t.contact.phone} htmlFor="contact-phone">
+              <input id="contact-phone" type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="+34 600 000 000" className="w-full bg-transparent border-b border-white/20 focus:border-white outline-none py-3 text-lg transition-colors placeholder:text-white/25" />
             </FormField>
           </div>
           <FormField label={t.contact.budget}>
@@ -2126,8 +2169,8 @@ function Contact({ t, locale }) {
               ))}
             </div>
           </FormField>
-          <FormField label={t.contact.message} required>
-            <textarea required rows={4} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className="w-full bg-transparent border-b border-white/20 focus:border-white outline-none py-3 text-lg transition-colors resize-none" />
+          <FormField label={t.contact.message} htmlFor="contact-message" required>
+            <textarea id="contact-message" required rows={4} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className="w-full bg-transparent border-b border-white/20 focus:border-white outline-none py-3 text-lg transition-colors resize-none" />
           </FormField>
 
           <div className="pt-6 flex justify-end">
@@ -2147,19 +2190,25 @@ function Contact({ t, locale }) {
   )
 }
 
-function FormField({ label, required, children }) {
+function FormField({ label, htmlFor, required, children }) {
   return (
     <div>
-      <label className="block text-[11px] uppercase tracking-widest text-white/50 mb-1">
-        {label}{required && <span className="text-white/40"> *</span>}
-      </label>
+      {htmlFor ? (
+        <label htmlFor={htmlFor} className="block text-[11px] uppercase tracking-widest text-white/50 mb-1">
+          {label}{required && <span className="text-white/40"> *</span>}
+        </label>
+      ) : (
+        <div className="block text-[11px] uppercase tracking-widest text-white/50 mb-1">
+          {label}{required && <span className="text-white/40"> *</span>}
+        </div>
+      )}
       {children}
     </div>
   )
 }
 
 /* ---------- Footer ---------- */
-function Footer({ t }) {
+function Footer({ t, locale }) {
   return (
     <footer className="relative border-t border-white/10 px-6 md:px-10 py-16">
       <div className="max-w-[1600px] mx-auto">
@@ -2181,18 +2230,18 @@ function Footer({ t }) {
           <div className="md:col-span-2">
             <div className="text-[11px] uppercase tracking-widest text-white/40 mb-4">Social</div>
             <ul className="space-y-2 text-sm">
-              <li><a href="https://www.behance.net/jaredduron" target="_blank" rel="noopener noreferrer" className="hover:text-white/60">Behance</a></li>
-              <li><a href="https://www.instagram.com/jared_duron10/" target="_blank" rel="noopener noreferrer" className="hover:text-white/60">Instagram</a></li>
-              <li><a href="https://www.linkedin.com/in/jared-duron-87a041100/" target="_blank" rel="noopener noreferrer" className="hover:text-white/60">LinkedIn</a></li>
-              <li><a href="https://www.tiktok.com/@jems2124?lang=es-419" target="_blank" rel="noopener noreferrer" className="hover:text-white/60">TikTok</a></li>
-              <li><a href="https://www.facebook.com/jaredmisael.duron/" target="_blank" rel="noopener noreferrer" className="hover:text-white/60">Facebook</a></li>
+              {SOCIAL_LINKS.map((social) => (
+                <li key={social.id}>
+                  <a href={social.url} target="_blank" rel="me noopener noreferrer" aria-label={social.ariaLabel[locale]} onClick={() => trackEvent('social_click', { network: social.id, location: 'footer' })} className="hover:text-white/60">{social.name}</a>
+                </li>
+              ))}
             </ul>
           </div>
           <div className="md:col-span-2">
             <div className="text-[11px] uppercase tracking-widest text-white/40 mb-4">Contact</div>
             <ul className="space-y-2 text-sm">
               <li><a href="mailto:jaredmisaelduron@gmail.com" className="hover:text-white/60 break-all">jaredmisaelduron@gmail.com</a></li>
-              <li><a href="https://wa.me/34637434235" className="hover:text-white/60">+34 637 43 42 35</a></li>
+              <li><a href="https://wa.me/34637434235" onClick={() => trackEvent('whatsapp_click', { location: 'footer' })} className="hover:text-white/60">+34 637 43 42 35</a></li>
               <li className="text-white/60">Barcelona, ES</li>
             </ul>
           </div>
@@ -2201,7 +2250,7 @@ function Footer({ t }) {
           <div>© {new Date().getFullYear()} Jared Durón. {t.footer.rights}</div>
           <div className="flex gap-6">
             <span>Made in Barcelona</span>
-            <span>v1.0</span>
+            <button type="button" onClick={openConsentPreferences} className="text-left hover:text-white">{t.footer.privacy}</button>
           </div>
         </div>
 
@@ -2209,12 +2258,10 @@ function Footer({ t }) {
         <div className="mt-14 pt-10 border-t border-white/5">
           <div className="text-[10px] uppercase tracking-[0.3em] text-white/40 mb-5 flex items-center gap-3">
             <span className="w-1.5 h-1.5 rounded-full bg-[#F5C518]" />
-            <span>Produccion audiovisual en Barcelona</span>
+            <span>{t.footer.seoKicker}</span>
           </div>
           <p className="max-w-4xl text-sm md:text-base text-white/45 leading-relaxed">
-            Trabajo con marcas, agencias y proyectos creativos que necesitan produccion audiovisual en Barcelona:
-            brand films, video corporativo, cobertura de eventos, contenido para redes sociales, edicion de video,
-            motion graphics, diseno grafico y piezas cinematograficas pensadas para comunicar con claridad.
+            {t.footer.seoBody}
           </p>
         </div>      </div>
     </footer>
@@ -2496,6 +2543,12 @@ function IntroLoader() {
 function App() {
   const [locale, setLocale] = useState('es')
   const t = useMemo(() => T[locale], [locale])
+  const changeLocale = (nextLocale) => {
+    if (!T[nextLocale] || nextLocale === locale) return
+    setLocale(nextLocale)
+    trackEvent('language_change', { selected_language: nextLocale })
+    window.dispatchEvent(new CustomEvent('portfolio:locale-change', { detail: nextLocale }))
+  }
 
   useEffect(() => {
     const saved = typeof window !== 'undefined' ? localStorage.getItem('locale') : null
@@ -2529,7 +2582,7 @@ function App() {
       <IntroLoader />
       <Toaster position="bottom-right" theme="dark" />
       <div className="grain relative z-10">
-        <Nav locale={locale} setLocale={setLocale} t={t} />
+        <Nav locale={locale} setLocale={changeLocale} t={t} />
         <main>
           <Hero t={t} />
           <Marquee text={t.marquee} />
@@ -2542,8 +2595,9 @@ function App() {
           <FAQ t={t} />
           <Blog t={t} locale={locale} />
           <Contact t={t} locale={locale} />
+          <SocialSection t={t} locale={locale} copy={t.social} />
         </main>
-        <Footer t={t} />
+        <Footer t={t} locale={locale} />
         <FloatingWhatsApp locale={locale} />
       </div>
     </>
