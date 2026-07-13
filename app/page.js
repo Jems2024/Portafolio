@@ -2,15 +2,17 @@
 
 import { useEffect, useRef, useState, useMemo } from 'react'
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { ArrowUpRight, Play, Mail, Instagram, Linkedin, MessageCircle, MapPin, Plus, Minus, X, ExternalLink, Sparkles, Star, Clock3, Clapperboard, BadgeCheck, Layers3 } from 'lucide-react'
-import { toast, Toaster } from 'sonner'
 import { PROJECTS, PORTFOLIO_CATEGORY_PROJECTS, REAL_CLIENTS, BLOG_POSTS } from '@/lib/projects'
 import HeroMedia from '@/components/hero-media'
 import SocialFeed from '@/components/social-feed'
 import { SOCIAL_LINKS } from '@/lib/social-links'
 import { trackEvent } from '@/lib/analytics'
 import { openConsentPreferences } from '@/lib/consent'
+
+const Toaster = dynamic(() => import('sonner').then((module) => module.Toaster), { ssr: false })
 
 /* ---------- i18n ---------- */
 const T = {
@@ -2025,10 +2027,12 @@ function Contact({ t, locale }) {
       const data = await res.json().catch(() => ({}))
       if (!res.ok) throw new Error(data.detail || data.error || t.contact.error)
       trackEvent('contact_submit', { status: 'success' })
+      const { toast } = await import('sonner')
       toast.success(t.contact.success)
       setForm({ name: '', email: '', phone: '', company: '', budget: '', projectType: '', message: '' })
     } catch (error) {
       trackEvent('contact_submit', { status: 'error' })
+      const { toast } = await import('sonner')
       toast.error(error.message || t.contact.error)
     } finally { setLoading(false) }
   }
@@ -2545,7 +2549,7 @@ function App() {
   return (
     <>
       <IntroLoader />
-      <Toaster position="bottom-right" theme="dark" />
+      {deferredReady && <Toaster position="bottom-right" theme="dark" />}
       <div className="grain relative z-10">
         <Nav locale={locale} setLocale={changeLocale} t={t} />
         <main>
