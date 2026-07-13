@@ -44,7 +44,7 @@ body {
   contain-intrinsic-size: auto 900px;
 }
 
-.social-wall iframe {
+.social-feed iframe {
   max-width: 100%;
 }
 

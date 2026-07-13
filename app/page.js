@@ -7,7 +7,7 @@ import { ArrowUpRight, Play, Mail, Instagram, Linkedin, MessageCircle, MapPin, P
 import { toast, Toaster } from 'sonner'
 import { PROJECTS, PORTFOLIO_CATEGORY_PROJECTS, REAL_CLIENTS, BLOG_POSTS } from '@/lib/projects'
 import HeroMedia from '@/components/hero-media'
-import SocialSection from '@/components/social-section'
+import SocialFeed from '@/components/social-feed'
 import { SOCIAL_LINKS } from '@/lib/social-links'
 import { trackEvent } from '@/lib/analytics'
 import { openConsentPreferences } from '@/lib/consent'
@@ -134,16 +134,6 @@ const T = {
       types: ['Publicidad / Brand film', 'Vídeo corporativo', 'Documental', 'Evento', 'Redes sociales', 'Otro'],
       budgets: ['Desde 350€', '350€ - 1.500€', '1.500€ - 5.000€', '5.000€ - 15.000€', 'A medida / sin límite creativo'],
     },
-    social: {
-      eyebrow: 'REDES · PROCESO CREATIVO',
-      title: 'Detrás de cada proyecto',
-      titleLead: 'hay',
-      highlight: 'más historias.',
-      description: 'Sigue a Jared Durón para descubrir rodajes, fotografía comercial, diseño gráfico, documentales, eventos y contenido detrás de cámaras desde Barcelona.',
-      navLabel: 'Redes sociales de Jared Durón',
-      cta: 'Ver todo el contenido',
-      wall: { manual: 'Ver últimas publicaciones', loading: 'Cargando publicaciones', error: 'No se pudo cargar el muro social.', retry: 'Reintentar' },
-    },
     footer: {
       tagline: 'Cinematic video production. Made in Barcelona.',
       rights: 'Todos los derechos reservados.',
@@ -256,16 +246,6 @@ const T = {
       types: ['Advertising / Brand film', 'Corporate video', 'Documentary', 'Event', 'Social media', 'Other'],
       budgets: ['From €350', '€350 - €1.5k', '€1.5k - €5k', '€5k - €15k', 'Custom / no creative limit'],
     },
-    social: {
-      eyebrow: 'SOCIAL · CREATIVE PROCESS',
-      title: 'Behind every project,',
-      titleLead: 'there is',
-      highlight: 'more to see.',
-      description: 'Follow Jared Durón for filmmaking, commercial photography, graphic design, documentaries, events and behind-the-scenes content from Barcelona.',
-      navLabel: 'Jared Durón social profiles',
-      cta: 'View all content',
-      wall: { manual: 'View latest posts', loading: 'Loading posts', error: 'The social wall could not be loaded.', retry: 'Try again' },
-    },
     footer: {
       tagline: 'Cinematic video production. Made in Barcelona.',
       rights: 'All rights reserved.',
@@ -375,16 +355,6 @@ const T = {
       send: 'Enviar missatge', sending: 'Enviant…', success: 'Missatge enviat. Et responc aviat.', error: 'Alguna cosa ha fallat. Escriu a jaredmisaelduron@gmail.com',
       types: ['Publicitat / Brand film', 'Vídeo corporatiu', 'Documental', 'Esdeveniment', 'Xarxes socials', 'Altres'],
       budgets: ['Des de 350€', '350€ - 1.500€', '1.500€ - 5.000€', '5.000€ - 15.000€', 'A mida / sense límit creatiu'],
-    },
-    social: {
-      eyebrow: 'XARXES · PROCÉS CREATIU',
-      title: 'Darrere de cada projecte',
-      titleLead: 'hi ha',
-      highlight: 'més històries.',
-      description: 'Segueix Jared Durón per descobrir rodatges, fotografia comercial, disseny gràfic, documentals, esdeveniments i contingut entre bastidors des de Barcelona.',
-      navLabel: 'Xarxes socials de Jared Durón',
-      cta: 'Veure tot el contingut',
-      wall: { manual: 'Veure les últimes publicacions', loading: 'Carregant publicacions', error: 'No s’ha pogut carregar el mur social.', retry: 'Tornar-ho a provar' },
     },
     footer: {
       tagline: 'Cinematic video production. Made in Barcelona.',
@@ -2587,6 +2557,7 @@ function App() {
           <Hero t={t} />
           <Marquee text={t.marquee} />
           <About t={t} />
+          <SocialFeed locale={locale} />
           <Work t={t} locale={locale} />
           <Services t={t} />
           <Process t={t} />
@@ -2595,7 +2566,6 @@ function App() {
           <FAQ t={t} />
           <Blog t={t} locale={locale} />
           <Contact t={t} locale={locale} />
-          <SocialSection t={t} locale={locale} copy={t.social} />
         </main>
         <Footer t={t} locale={locale} />
         <FloatingWhatsApp locale={locale} />
