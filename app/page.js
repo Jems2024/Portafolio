@@ -508,35 +508,6 @@ function Hero({ t }) {
             </motion.span>
           </h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65, delay: 0.24, ease: [0.22, 1, 0.36, 1] }}
-            className="hidden"
-          >
-            <Highlight text={t.hero.sub} />
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}
-            className="hidden"
-          >
-            <a href="#work" data-cursor="View" className="inline-flex items-center gap-3 bg-white text-black px-6 md:px-7 py-3.5 rounded-full text-sm uppercase tracking-wider hover:bg-white/90 transition-all group">
-              <span>{t.hero.cta1}</span>
-              <ArrowUpRight className="w-4 h-4 group-hover:rotate-45 transition-transform duration-300" />
-            </a>
-            <a href="#contact" aria-label={`${t.hero.cta2}: ${t.contact.sub}`} className="inline-flex items-center gap-3 border border-white/20 px-6 md:px-7 py-3.5 rounded-full text-sm uppercase tracking-wider hover:bg-white/10 transition-all">
-              <span>{t.hero.cta2}</span>
-            </a>
-            <button
-              onClick={openReel}
-              data-cursor="Play"
-              className="inline-flex items-center gap-3 text-white/80 hover:text-white px-2 py-3.5 text-sm uppercase tracking-wider group"
-            >
-              <span className="w-9 h-9 rounded-full border border-white/40 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all">
-                <Play className="w-3.5 h-3.5 fill-current ml-0.5" />
-              </span>
-              <span>{t.hero.playReel}</span>
-            </button>
-          </motion.div>
         </div>
 
         <motion.div
@@ -561,11 +532,6 @@ function Hero({ t }) {
           <div className="flex justify-center gap-2 sm:justify-end">
             <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 2, repeat: Infinity }} className="w-[1px] h-8 bg-white/40" />
             <span>{t.hero.scroll}</span>
-          </div>
-          <div className="hidden">
-            <span>41.3874° N</span>
-            <span>2.1686° E</span>
-            <span>Barcelona / SP</span>
           </div>
         </motion.div>
       </motion.div>
@@ -733,6 +699,12 @@ const ABOUT_PORTRAITS = [
 /* ---------- About ---------- */
 function About({ t }) {
   const [activePortrait, setActivePortrait] = useState(0)
+  const portraitMountedRef = useRef(false)
+  const portrait = ABOUT_PORTRAITS[activePortrait]
+
+  useEffect(() => {
+    portraitMountedRef.current = true
+  }, [])
 
   useEffect(() => {
     const duration = activePortrait === 0 ? 5000 : 3000
@@ -741,6 +713,12 @@ function About({ t }) {
     }, duration)
 
     return () => clearTimeout(timeout)
+  }, [activePortrait])
+
+  useEffect(() => {
+    const nextPortrait = ABOUT_PORTRAITS[(activePortrait + 1) % ABOUT_PORTRAITS.length]
+    const preloader = new window.Image()
+    preloader.src = nextPortrait
   }, [activePortrait])
 
   return (
@@ -755,28 +733,23 @@ function About({ t }) {
             className="md:col-span-5 relative"
           >
             <div className="relative aspect-[4/5] overflow-hidden bg-neutral-900">
-              {ABOUT_PORTRAITS.map((portrait, index) => (
-                <motion.div
-                  key={portrait}
-                  animate={{
-                    scale: activePortrait === index ? 1 : 1.012,
-                  }}
-                  transition={{ duration: 1.15, ease: [0.22, 1, 0.36, 1] }}
-                  className="absolute inset-0"
-                  style={{ zIndex: activePortrait === index ? 2 : 1 }}
-                >
-                  <Image
-                    src={portrait}
-                    alt={`Jared Durón — retrato ${index + 1}`}
-                    fill
-                    sizes="(min-width: 768px) 38vw, 100vw"
-                    quality={78}
-                    loading="eager"
-                    className="object-cover"
-                    priority={index === 0}
-                  />
-                </motion.div>
-              ))}
+              <motion.div
+                key={portrait}
+                initial={portraitMountedRef.current ? { scale: 1.012 } : false}
+                animate={{ scale: 1 }}
+                transition={{ duration: 1.15, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute inset-0"
+              >
+                <Image
+                  src={portrait}
+                  alt={`Jared Durón — retrato ${activePortrait + 1}`}
+                  fill
+                  sizes="(min-width: 768px) 38vw, 100vw"
+                  quality={78}
+                  className="object-cover"
+                  priority={activePortrait === 0}
+                />
+              </motion.div>
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end text-[11px] uppercase tracking-widest text-white/70">
                 <span>Jared Durón</span>
@@ -2512,6 +2485,7 @@ function IntroLoader() {
 /* ---------- Root ---------- */
 function App() {
   const [locale, setLocale] = useState('es')
+  const [deferredReady, setDeferredReady] = useState(false)
   const t = useMemo(() => T[locale], [locale])
   const changeLocale = (nextLocale) => {
     if (!T[nextLocale] || nextLocale === locale) return
@@ -2528,6 +2502,27 @@ function App() {
   useEffect(() => {
     if (typeof window !== 'undefined') localStorage.setItem('locale', locale)
   }, [locale])
+
+  useEffect(() => {
+    const revealDeferredContent = () => setDeferredReady(true)
+
+    if ('requestIdleCallback' in window) {
+      const idleId = window.requestIdleCallback(revealDeferredContent, { timeout: 600 })
+      return () => window.cancelIdleCallback(idleId)
+    }
+
+    const timeoutId = window.setTimeout(revealDeferredContent, 0)
+    return () => window.clearTimeout(timeoutId)
+  }, [])
+
+  useEffect(() => {
+    if (!deferredReady || !window.location.hash) return
+    const targetId = decodeURIComponent(window.location.hash.slice(1))
+    const target = document.getElementById(targetId)
+    if (!target) return
+    const frameId = window.requestAnimationFrame(() => target.scrollIntoView({ block: 'start' }))
+    return () => window.cancelAnimationFrame(frameId)
+  }, [deferredReady])
 
   useEffect(() => {
     document.documentElement.lang = locale
@@ -2558,17 +2553,25 @@ function App() {
           <Marquee text={t.marquee} />
           <About t={t} />
           <SocialFeed locale={locale} />
-          <Work t={t} locale={locale} />
-          <Services t={t} />
-          <Process t={t} />
-          <Clients t={t} />
-          <Testimonials t={t} />
-          <FAQ t={t} />
-          <Blog t={t} locale={locale} />
-          <Contact t={t} locale={locale} />
+          {deferredReady && (
+            <>
+              <Work t={t} locale={locale} />
+              <Services t={t} />
+              <Process t={t} />
+              <Clients t={t} />
+              <Testimonials t={t} />
+              <FAQ t={t} />
+              <Blog t={t} locale={locale} />
+              <Contact t={t} locale={locale} />
+            </>
+          )}
         </main>
-        <Footer t={t} locale={locale} />
-        <FloatingWhatsApp locale={locale} />
+        {deferredReady && (
+          <>
+            <Footer t={t} locale={locale} />
+            <FloatingWhatsApp locale={locale} />
+          </>
+        )}
       </div>
     </>
   )
