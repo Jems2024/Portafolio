@@ -102,8 +102,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es" className={poppins.variable}>
       <head>
-        <link rel="preload" as="image" href="/hero/hero-poster-mobile.webp" type="image/webp" media="(max-width: 767px)" fetchPriority="high" />
-        <link rel="preload" as="image" href="/hero/hero-poster-desktop.webp" type="image/webp" media="(min-width: 768px)" fetchPriority="high" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
