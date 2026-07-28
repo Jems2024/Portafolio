@@ -123,7 +123,7 @@ const T = {
       items: [
         { q: '¿Dónde estás basado y viajas para proyectos?', a: 'Estoy basado en Barcelona y viajo regularmente por España, Europa y proyectos internacionales. Trabajo con equipos locales en cada destino.' },
         { q: '¿Cuánto cuesta un vídeo corporativo o una campaña?', a: 'Cada proyecto se cotiza según brief, días de rodaje, equipo y postproducción. Podemos empezar desde 350€ para piezas sencillas y crecer hasta donde la creatividad y el alcance del cliente quieran llegar.' },
-        { q: '¿Cuál es el plazo de entrega habitual?', a: 'Un vídeo corporativo suele entregarse en 3-4 semanas. Campañas publicitarias entre 6-10 semanas dependiendo del alcance.' },
+        { q: '¿Cuál es el plazo de entrega habitual?', a: 'El plazo de entrega depende de la complejidad y alcance del proyecto, ajustándose habitualmente desde 4 días hasta 10 semanas.' },
         { q: '¿Trabajas con agencias y productoras?', a: 'Sí. Colaboro como director, editor o videografo freelance con agencias creativas y productoras nacionales e internacionales. También asumo dirección creativa y diseño gráfico para campañas integrales.' },
       ],
     },
@@ -237,7 +237,7 @@ const T = {
       items: [
         { q: 'Where are you based and do you travel?', a: 'Based in Barcelona and traveling regularly across Spain, Europe and international projects. I work with local crews in each destination.' },
         { q: 'How much does a corporate video or a campaign cost?', a: 'Each project is quoted based on brief, shoot days, crew and post-production. We can start from €350 for simple pieces and scale as far as the client’s creativity and project scope want to go.' },
-        { q: 'What is the usual delivery timeline?', a: 'A corporate video is usually delivered in 3-4 weeks. Advertising campaigns between 6-10 weeks depending on scope.' },
+        { q: 'What is the usual delivery timeline?', a: 'Delivery timeline depends on the project scope and complexity, ranging from 4 days to 10 weeks.' },
         { q: 'Do you work with agencies and production companies?', a: 'Yes. I collaborate as director, editor or freelance videographer with national and international creative agencies. I also take on creative direction and graphic design for integrated campaigns.' },
       ],
     },
@@ -347,7 +347,7 @@ const T = {
       items: [
         { q: 'On et bases i viatges per als projectes?', a: 'Base a Barcelona i viatjo regularment per Espanya, Europa i projectes internacionals.' },
         { q: 'Quant costa un vídeo corporatiu o una campanya?', a: 'Cada projecte es cotitza segons brief, dies de rodatge, equip i postproducció. Podem començar des de 350€ per peces senzilles i créixer fins on la creativitat i l’abast del client vulguin arribar.' },
-        { q: 'Quin és el termini de lliurament habitual?', a: 'Un vídeo corporatiu es lliura en 3-4 setmanes. Campanyes publicitàries entre 6-10 setmanes.' },
+        { q: 'Quin és el termini de lliurament habitual?', a: 'El termini de lliurament depèn del projecte i la seva complexitat, variant habitualment de 4 dies a 10 setmanes.' },
         { q: 'Treballes amb agències i productores?', a: 'Sí, com a director, editor o videògraf freelance amb agències i productores. També assumeixo direcció creativa i disseny gràfic.' },
       ],
     },
@@ -709,7 +709,7 @@ function About({ t }) {
   }, [])
 
   useEffect(() => {
-    const duration = activePortrait === 0 ? 5000 : 3000
+    const duration = activePortrait === 0 ? 6500 : 5500
     const timeout = setTimeout(() => {
       setActivePortrait((current) => (current + 1) % ABOUT_PORTRAITS.length)
     }, duration)
@@ -734,26 +734,29 @@ function About({ t }) {
             initial={{ opacity: 0, scale: 0.96 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true, margin: '-100px' }} transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
             className="md:col-span-5 relative"
           >
-            <div className="relative aspect-[4/5] overflow-hidden bg-neutral-900">
-              <motion.div
-                key={portrait}
-                initial={portraitMountedRef.current ? { scale: 1.012 } : false}
-                animate={{ scale: 1 }}
-                transition={{ duration: 1.15, ease: [0.22, 1, 0.36, 1] }}
-                className="absolute inset-0"
-              >
-                <Image
-                  src={portrait}
-                  alt={`Jared Durón — retrato ${activePortrait + 1}`}
-                  fill
-                  sizes="(min-width: 768px) 38vw, 100vw"
-                  quality={78}
-                  className="object-cover"
-                  priority={activePortrait === 0}
-                />
-              </motion.div>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-              <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end text-[11px] uppercase tracking-widest text-white/70">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-neutral-900 shadow-2xl border border-white/10">
+              <AnimatePresence mode="popLayout">
+                <motion.div
+                  key={portrait}
+                  initial={{ opacity: 0, scale: 1.05 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.96 }}
+                  transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+                  className="absolute inset-0"
+                >
+                  <Image
+                    src={portrait}
+                    alt={`Jared Durón — retrato ${activePortrait + 1}`}
+                    fill
+                    sizes="(min-width: 768px) 60vw, 100vw"
+                    quality={95}
+                    className="object-cover"
+                    priority={activePortrait === 0}
+                  />
+                </motion.div>
+              </AnimatePresence>
+              <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              <div className="absolute bottom-4 left-4 right-4 z-10 flex justify-between items-end text-[11px] uppercase tracking-widest text-white/80 font-medium">
                 <span>Jared Durón</span>
                 <span className="font-mono-num">EST. 2017</span>
               </div>
@@ -1072,8 +1075,8 @@ function ProjectCard({ project, index, locale, onOpen, external = false }) {
             alt={project.alt?.[locale] || `${project.title} — ${project.client} — Jared Durón filmmaker Barcelona`}
             fill
             loading="lazy"
-            sizes="(min-width: 1024px) 31vw, (min-width: 640px) 50vw, 100vw"
-            quality={68}
+            sizes="(min-width: 1024px) 50vw, (min-width: 640px) 50vw, 100vw"
+            quality={95}
             className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] motion-reduce:transition-none"
           />
         </div>
@@ -1288,8 +1291,8 @@ function ProjectModal({ project, locale, onClose }) {
                         src={project.cover}
                         alt=""
                         fill
-                        sizes="(min-width: 1024px) 1024px, 100vw"
-                        quality={70}
+                        sizes="100vw"
+                        quality={95}
                         className="object-cover opacity-70 transition-transform duration-700 group-hover:scale-[1.03]"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#02040A]/90 via-[#031026]/30 to-transparent" />
@@ -1318,8 +1321,8 @@ function ProjectModal({ project, locale, onClose }) {
                           width={1400}
                           height={900}
                           loading="lazy"
-                          sizes="(min-width: 1280px) 1180px, 100vw"
-                          quality={72}
+                          sizes="100vw"
+                          quality={95}
                           className="h-auto w-full"
                         />
                       </div>
@@ -1483,8 +1486,8 @@ function PhotoMosaic({ project, onOpen }) {
               alt={`Fotografia de ${project.title} ${idx + 1}`}
               fill
               loading="lazy"
-              sizes="(min-width: 1280px) 560px, (min-width: 768px) 45vw, 50vw"
-              quality={72}
+              sizes="(min-width: 768px) 50vw, 100vw"
+              quality={95}
               className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
             />
             <div className="absolute inset-0 bg-black/0 transition-colors duration-500 group-hover:bg-black/18" />
@@ -1573,7 +1576,7 @@ function PhotoLightbox({ image, images, currentIndex, projectTitle, onClose, onP
               alt={`Foto ampliada de ${projectTitle}`}
               fill
               sizes="100vw"
-              quality={82}
+              quality={100}
               className="object-contain"
             />
           </motion.div>
@@ -1735,8 +1738,8 @@ function BlogModal({ post, locale, onClose }) {
                   alt={post.title[locale]}
                   fill
                   loading="lazy"
-                  sizes="(min-width: 1024px) 420px, 100vw"
-                  quality={70}
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  quality={95}
                   className="object-cover opacity-80"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#080A12] via-[#080A12]/25 to-black/10" />
@@ -2389,6 +2392,7 @@ function Loader() {
 }
 
 function IntroLoader() {
+  const [mounted, setMounted] = useState(false)
   const [done, setDone] = useState(false)
   const [progress, setProgress] = useState(0)
   const particles = useMemo(() => {
@@ -2398,19 +2402,20 @@ function IntroLoader() {
     }
 
     return Array.from({ length: 32 }).map((_, index) => ({
-      left: rand(index * 7.13) * 100,
-      top: rand(index * 11.37) * 100,
-      size: 1.2 + rand(index * 3.71) * 2.8,
-      opacity: 0.22 + rand(index * 5.91) * 0.42,
-      duration: 7 + rand(index * 2.43) * 7,
-      delay: -rand(index * 9.17) * 8,
-      driftX: (rand(index * 4.29) - 0.5) * 90,
-      driftY: (rand(index * 8.61) - 0.5) * 70,
+      left: Number((rand(index * 7.13) * 100).toFixed(4)),
+      top: Number((rand(index * 11.37) * 100).toFixed(4)),
+      size: Number((1.2 + rand(index * 3.71) * 2.8).toFixed(4)),
+      opacity: Number((0.22 + rand(index * 5.91) * 0.42).toFixed(4)),
+      duration: Number((7 + rand(index * 2.43) * 7).toFixed(4)),
+      delay: Number((-rand(index * 9.17) * 8).toFixed(4)),
+      driftX: Number(((rand(index * 4.29) - 0.5) * 90).toFixed(4)),
+      driftY: Number(((rand(index * 8.61) - 0.5) * 70).toFixed(4)),
       accent: rand(index * 6.41) > 0.76,
     }))
   }, [])
 
   useEffect(() => {
+    setMounted(true)
     let value = 0
     const id = setInterval(() => {
       value = Math.min(value + 2, 100)
@@ -2434,7 +2439,7 @@ function IntroLoader() {
           className="fixed inset-0 z-[100] h-dvh overflow-hidden bg-[#050609]"
         >
           <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-            {particles.map((particle, index) => (
+            {mounted && particles.map((particle, index) => (
               <span
                 key={index}
                 className="intro-particle absolute rounded-full"
