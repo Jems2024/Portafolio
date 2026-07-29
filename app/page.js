@@ -936,8 +936,8 @@ function Work({ t, locale }) {
     ]
   }, [])
 
-  const photographyProjectIds = ['barcelona-city', 'cyberpunk-portraits', 'fotografia-producto']
-  const graphicDesignProjectIds = ['john-deere-expo', 'miniso', 'fotomontaje-epico']
+  const photographyProjectIds = ['barcelona-city', 'cyberpunk-portraits', 'fotografia-producto', 'sauvage-dior', 'fotografias']
+  const graphicDesignProjectIds = ['john-deere-expo', 'miniso', 'fotomontaje-epico', 'de-la-granja', 'ultra-burger', 'blass-coffee', 'mall-multiplaza']
   const filmmakingProjects = useMemo(
     () => orderedProjects.filter((project) => !photographyProjectIds.includes(project.id) && !graphicDesignProjectIds.includes(project.id)),
     [orderedProjects]
@@ -1180,276 +1180,288 @@ function ProjectModal({ project, locale, onClose }) {
       {project && (
         <motion.div
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-          transition={{ duration: 0.24 }}
+          transition={{ duration: 0.3 }}
           className="fixed inset-0 z-[120] overflow-y-auto bg-[#030711]"
           onClick={onClose}
         >
-          <div className="fixed inset-x-0 top-0 z-20 h-28 bg-gradient-to-b from-[#030711] via-[#030711]/92 to-transparent pointer-events-none" />
+          {/* Close button */}
+          <button
+            type="button"
+            onClick={onClose}
+            data-cursor="Close"
+            className="fixed right-5 top-5 md:right-8 md:top-7 z-30 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-white flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.45)]"
+            aria-label="Close"
+          >
+            <X className="w-4 h-4" />
+          </button>
+
           <motion.div
             role="dialog"
             aria-modal="true"
             onClick={(e) => e.stopPropagation()}
-            initial={{ y: 18, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 18, opacity: 0 }}
-            transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="relative min-h-screen w-full px-5 py-24 md:px-10 md:py-28"
+            initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 20, opacity: 0 }}
+            transition={{ duration: 0.38, ease: 'easeOut' }}
+            className="relative min-h-screen w-full"
           >
-            <button
-              type="button"
-              onClick={onClose}
-              data-cursor="Close"
-              className="fixed right-4 top-4 md:right-8 md:top-7 z-30 w-12 h-12 rounded-full bg-white text-black flex items-center justify-center hover:bg-[#F5C518] transition-colors shadow-[0_14px_40px_rgba(0,0,0,0.45)]"
-              aria-label="Close"
-            >
-              <X className="w-5 h-5" />
-            </button>
-            <div className="relative mx-auto w-full max-w-[1280px] overflow-visible">
-              <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_50%_0%,rgba(28,67,138,0.30),transparent_42%),linear-gradient(180deg,#061126_0%,#030711_48%,#02040A_100%)]" />
 
-              <div className="relative text-center">
-                <div className="text-[11px] uppercase tracking-[0.3em] text-white/55 mb-4">{project.category[locale]} · {project.year}</div>
-                <h2 className="mx-auto max-w-5xl font-display text-5xl md:text-8xl lg:text-9xl leading-[0.92] tracking-tight text-balance">
+            {/* HERO full-bleed */}
+            <div className="relative w-full h-[55vh] min-h-[340px] max-h-[600px] overflow-hidden">
+              <motion.div
+                initial={{ scale: 1.06, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.75, ease: 'easeOut' }}
+                className="absolute inset-0"
+              >
+                <Image
+                  src={project.cover}
+                  alt={project.title}
+                  fill
+                  priority
+                  sizes="100vw"
+                  quality={95}
+                  className="object-cover"
+                />
+              </motion.div>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#030711] via-[#030711]/50 to-[#030711]/10" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#030711]/35 via-transparent to-transparent" />
+
+              <div className="absolute top-6 left-6 md:top-8 md:left-10">
+                <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/40 backdrop-blur-md px-3.5 py-1.5 text-[10px] uppercase tracking-[0.28em] text-white/75">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#F5C518] inline-block" />
+                  {project.category[locale]} · {project.year}
+                </span>
+              </div>
+
+              <div className="absolute bottom-0 left-0 right-0 px-6 pb-10 md:px-12 md:pb-12 lg:px-16 lg:pb-14">
+                <motion.h2
+                  initial={{ y: 14, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 0.15, ease: 'easeOut' }}
+                  className="font-display text-3xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.02] tracking-tight text-white max-w-5xl text-balance"
+                >
                   {project.title}
-                </h2>
-                <div className="mt-6 md:mt-8 font-display italic text-2xl md:text-4xl text-white/68">{project.subtitle}</div>
-                <div className="mx-auto mt-8 md:mt-10 max-w-3xl border border-white/10 bg-white/[0.035] px-6 py-6 text-sm leading-relaxed text-white/68 shadow-[0_24px_80px_rgba(0,0,0,0.32)] md:px-10 md:py-8 md:text-base">
-                  {project.description[locale]}
-                </div>
+                </motion.h2>
+                {project.subtitle && (
+                  <motion.p
+                    initial={{ y: 10, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.45, delay: 0.25, ease: 'easeOut' }}
+                    className="mt-2.5 font-display italic text-base md:text-xl text-white/50 max-w-3xl"
+                  >
+                    {project.subtitle}
+                  </motion.p>
+                )}
+              </div>
+            </div>
 
-                <div className="hidden">
-                  <div className="lg:col-span-4">
-                    <div className="grid grid-cols-2 lg:grid-cols-1 gap-5">
-                      <MetaRow k="Client" v={project.client} />
-                      <MetaRow k="Role" v={project.role} />
-                      <MetaRow k="Location" v={project.location} />
-                      <MetaRow k="Year" v={project.year} />
+            {/* BODY: 2-column layout */}
+            <div className="mx-auto w-full max-w-[1360px] px-6 md:px-12 lg:px-16 pb-28">
+              <div className="pt-10 md:pt-14 lg:grid lg:grid-cols-[260px_1fr] xl:grid-cols-[300px_1fr] lg:gap-14 xl:gap-20 lg:items-start">
+
+                {/* Sidebar sticky */}
+                <aside className="mb-10 lg:mb-0">
+                  <div className="lg:sticky lg:top-10">
+                    <div className="rounded-2xl border border-white/[0.09] bg-white/[0.025] p-6 backdrop-blur-sm shadow-[0_8px_32px_rgba(0,0,0,0.28)]">
+
+                      <div className="space-y-5">
+                        {[
+                          { k: locale === 'en' ? 'Client' : locale === 'ca' ? 'Client' : 'Cliente', v: project.client },
+                          { k: locale === 'en' ? 'Role' : locale === 'ca' ? 'Rol' : 'Rol', v: project.role },
+                          { k: locale === 'en' ? 'Location' : locale === 'ca' ? 'Ubicació' : 'Ubicación', v: project.location },
+                          { k: locale === 'en' ? 'Year' : 'Año', v: project.year },
+                        ].filter(({ v }) => v).map(({ k, v }) => (
+                          <div key={k}>
+                            <div className="text-[9px] uppercase tracking-[0.3em] text-[#F5C518]/60 mb-1">{k}</div>
+                            <div className="text-sm text-white/85 font-medium leading-snug">{v}</div>
+                          </div>
+                        ))}
+                      </div>
+
+                      {project.tags?.length > 0 && (
+                        <div className="mt-6 pt-5 border-t border-white/[0.07]">
+                          <div className="text-[9px] uppercase tracking-[0.3em] text-[#F5C518]/60 mb-3">
+                            {locale === 'en' ? 'Skills' : 'Disciplinas'}
+                          </div>
+                          <div className="flex flex-wrap gap-1.5">
+                            {project.tags.map(tag => (
+                              <span key={tag} className="rounded-full border border-white/10 bg-black/30 px-2.5 py-1 text-[10px] text-white/55">
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {project.behanceUrl && (
+                        <div className="mt-6 pt-5 border-t border-white/[0.07]">
+                          <a
+                            href={project.behanceUrl}
+                            target="_blank" rel="noopener noreferrer"
+                            aria-label={`${behanceLabel}: ${project.title}`}
+                            className="group flex items-center justify-center gap-2 w-full rounded-xl bg-white px-4 py-3 text-[11px] uppercase tracking-widest text-black hover:bg-[#F5C518] transition-colors duration-300 font-medium"
+                          >
+                            Behance <ExternalLink className="w-3 h-3 group-hover:rotate-12 transition-transform" />
+                          </a>
+                        </div>
+                      )}
                     </div>
-                    {project.tools?.length > 0 && false && <MetaRow k="Tools" v={project.tools.join(' · ')} /> /* Tools intentionally hidden */}
-                    {project.tags?.length > 0 && (
-                      <div className="mt-6">
-                        <div className="text-[11px] uppercase tracking-widest text-white/45 mb-2">Tags</div>
-                        <div className="flex flex-wrap gap-2">
-                          {project.tags.map(tag => (
-                            <span key={tag} className="text-[11px] px-2.5 py-1 border border-white/15 rounded-full bg-black/35 text-white/75">{tag}</span>
+                  </div>
+                </aside>
+
+                {/* Main content */}
+                <main className="min-w-0">
+
+                  <p className="text-base md:text-lg leading-relaxed text-white/70 max-w-2xl">
+                    {project.description[locale]}
+                  </p>
+
+                  {hasVideos && (
+                    <section className="mt-12 md:mt-16">
+                      <div className="flex items-center justify-between mb-5">
+                        <div className="flex items-center gap-3">
+                          <div className="h-px w-5 bg-[#F5C518]/50" />
+                          <span className="text-[10px] uppercase tracking-[0.28em] text-[#F5C518]/80">{mediaLabel}</span>
+                        </div>
+                        {!loadMedia && (
+                          <button
+                            type="button"
+                            onClick={() => setLoadMedia(true)}
+                            className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.05] px-4 py-2 text-[11px] uppercase tracking-widest text-white/70 hover:bg-white hover:text-black transition-all duration-300"
+                          >
+                            {loadLabel} <Play className="w-3 h-3" />
+                          </button>
+                        )}
+                      </div>
+
+                      {loadMedia ? (
+                        <div className="grid gap-4">
+                          {project.videoEmbeds.map((src, idx) => (
+                            <div key={src} className="relative aspect-video overflow-hidden rounded-xl border border-white/10 bg-black shadow-[0_16px_64px_rgba(0,0,0,0.55)]">
+                              <iframe
+                                src={src}
+                                title={`${project.title} video ${idx + 1}`}
+                                loading="lazy"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
+                                allowFullScreen
+                                className="absolute inset-0 h-full w-full border-0"
+                              />
+                            </div>
                           ))}
                         </div>
-                      </div>
-                    )}
-                    {project.behanceUrl && (
-                      <a
-                        href={project.behanceUrl}
-                        target="_blank" rel="noopener noreferrer"
-                        aria-label={`${behanceLabel}: ${project.title}`}
-                        className="mt-6 inline-flex items-center gap-3 bg-white text-black px-5 py-3 rounded-full text-xs uppercase tracking-wider hover:bg-[#F5C518] transition-colors group"
-                      >
-                        View on Behance <ExternalLink className="w-4 h-4 group-hover:rotate-12 transition-transform" />
-                      </a>
-                    )}
-                  </div>
-                  <div className="lg:col-span-8 bg-[#08152B] border border-white/10 p-5 md:p-7">
-                    <p className="text-base md:text-lg text-white/88 leading-relaxed">{project.description[locale]}</p>
-                  </div>
-                </div>
-              </div>
-              {hasVideos && (
-                <section className="relative mt-16 md:mt-24">
-                  <div className="mb-4 flex items-center justify-between gap-4 border-t border-white/10 pt-5">
-                    <div className="text-[10px] uppercase tracking-[0.28em] text-[#F5C518]/85">{mediaLabel}</div>
-                    {!loadMedia && (
-                      <button
-                        type="button"
-                        onClick={() => setLoadMedia(true)}
-                        className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-[11px] uppercase tracking-widest text-black hover:bg-[#F5C518] transition-colors"
-                      >
-                        {loadLabel}
-                        <Play className="w-3.5 h-3.5" />
-                      </button>
-                    )}
-                  </div>
-
-                  {loadMedia ? (
-                    <div className="grid gap-5">
-                      {project.videoEmbeds.map((src, idx) => (
-                        <div key={src} className="relative aspect-video overflow-hidden border border-white/10 bg-black shadow-[0_30px_120px_rgba(0,0,0,0.55)]">
-                          <iframe
-                            src={src}
-                            title={`${project.title} video ${idx + 1}`}
-                            loading="lazy"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
-                            allowFullScreen
-                            className="absolute inset-0 h-full w-full border-0"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <button
-                      type="button"
-                      onClick={() => setLoadMedia(true)}
-                      className="group relative flex aspect-video w-full items-center justify-center overflow-hidden border border-white/10 bg-black text-white shadow-[0_30px_120px_rgba(0,0,0,0.55)]"
-                    >
-                      <Image
-                        src={project.cover}
-                        alt=""
-                        fill
-                        sizes="100vw"
-                        quality={95}
-                        className="object-cover opacity-70 transition-transform duration-700 group-hover:scale-[1.03]"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#02040A]/90 via-[#031026]/30 to-transparent" />
-                      <span className="relative flex h-16 w-16 items-center justify-center rounded-full bg-white text-black transition-transform duration-300 group-hover:scale-105">
-                        <Play className="h-6 w-6 translate-x-0.5" />
-                      </span>
-                    </button>
-                  )}
-                </section>
-              )}
-
-              <div className="relative mt-12 md:mt-16">
-                <div className="mb-4 border-t border-white/10 pt-5 text-[10px] uppercase tracking-[0.28em] text-white/55">{galleryLabel}</div>
-                {isPhotoProject ? (
-                  <PhotoMosaic project={project} onOpen={setLightboxIndex} />
-                ) : (
-                  <div className="space-y-4 md:space-y-6">
-                    {project.gallery.map((img, idx) => (
-                      <div
-                        key={idx}
-                        className="overflow-hidden bg-[#030A18]/72 border border-white/10 shadow-[0_18px_60px_rgba(0,0,0,0.42)]"
-                      >
-                        <Image
-                          src={img}
-                          alt={`Material visual de ${project.title} ${idx + 1}`}
-                          width={1400}
-                          height={900}
-                          loading="lazy"
-                          sizes="100vw"
-                          quality={95}
-                          className="h-auto w-full"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                )}
-
-                <section className="mt-10 md:mt-14 border border-white/10 bg-[#061126]/88 p-5 md:p-8">
-                  <div className="mb-6 text-[10px] uppercase tracking-[0.28em] text-white/55">{detailsLabel}</div>
-                  <div className="grid gap-6 md:grid-cols-4">
-                    <MetaRow k="Client" v={project.client} />
-                    <MetaRow k="Role" v={project.role} />
-                    <MetaRow k="Location" v={project.location} />
-                    <MetaRow k="Year" v={project.year} />
-                  </div>
-                  {project.tags?.length > 0 && (
-                    <div className="mt-7 flex flex-wrap justify-center gap-2 md:justify-start">
-                      {project.tags.map(tag => (
-                        <span key={tag} className="rounded-full border border-white/12 bg-black/30 px-3 py-1.5 text-[11px] text-white/65">{tag}</span>
-                      ))}
-                    </div>
-                  )}
-                  {project.behanceUrl && (
-                    <a
-                      href={project.behanceUrl}
-                      target="_blank" rel="noopener noreferrer"
-                      aria-label={`${behanceLabel}: ${project.title}`}
-                      className="mt-7 inline-flex items-center gap-3 rounded-full bg-white px-5 py-3 text-xs uppercase tracking-wider text-black transition-colors hover:bg-[#F5C518] group"
-                    >
-                      View on Behance <ExternalLink className="w-4 h-4 group-hover:rotate-12 transition-transform" />
-                    </a>
-                  )}
-                </section>
-
-                {false && project.videoEmbeds?.length > 0 && (
-                  <div className="mt-10 md:mt-14 border border-white/10 bg-[#030A18]/72 shadow-[0_18px_60px_rgba(0,0,0,0.42)] overflow-hidden">
-                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 px-4 md:px-6 py-4 border-b border-white/10">
-                      <div>
-                        <div className="text-[10px] uppercase tracking-[0.28em] text-[#F5C518]/80">Videos del proyecto</div>
-                        <div className="mt-1 text-sm text-white/65">Carga los players solo cuando los necesites</div>
-                      </div>
-                      {!loadMedia && (
+                      ) : (
                         <button
                           type="button"
                           onClick={() => setLoadMedia(true)}
-                          className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-[11px] uppercase tracking-widest text-black hover:bg-[#F5C518] transition-colors"
+                          className="group relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-black shadow-[0_16px_64px_rgba(0,0,0,0.45)]"
                         >
-                          Cargar videos
-                          <Play className="w-3.5 h-3.5" />
+                          <Image
+                            src={project.cover}
+                            alt=""
+                            fill
+                            sizes="(min-width: 1024px) 1000px, 100vw"
+                            quality={95}
+                            className="object-cover opacity-50 transition-transform duration-700 group-hover:scale-[1.03]"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                          <span className="relative flex h-14 w-14 items-center justify-center rounded-full bg-white text-black shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-transform duration-300 group-hover:scale-110">
+                            <Play className="h-5 w-5 translate-x-0.5" />
+                          </span>
                         </button>
                       )}
+                    </section>
+                  )}
+
+                  <section className="mt-12 md:mt-16">
+                    <div className="flex items-center gap-3 mb-5">
+                      <div className="h-px w-5 bg-[#F5C518]/50" />
+                      <span className="text-[10px] uppercase tracking-[0.28em] text-[#F5C518]/80">{galleryLabel}</span>
                     </div>
-                    {loadMedia ? (
-                      <div className="grid gap-4 md:gap-6 p-4 md:p-6">
-                        {project.videoEmbeds.map((src, idx) => (
-                          <div key={src} className="relative aspect-video overflow-hidden bg-[#050A16] border border-white/10">
-                            <iframe
-                              src={src}
-                              title={`${project.title} video ${idx + 1}`}
+
+                    {isPhotoProject ? (
+                      <PhotoMosaic project={project} onOpen={setLightboxIndex} />
+                    ) : (
+                      <div className="space-y-3 md:space-y-4">
+                        {project.gallery.map((img, idx) => (
+                          <div
+                            key={idx}
+                            className="overflow-hidden rounded-xl border border-white/[0.07] bg-[#030A18]/70 shadow-[0_10px_40px_rgba(0,0,0,0.38)]"
+                          >
+                            <Image
+                              src={img}
+                              alt={`Material visual de ${project.title} ${idx + 1}`}
+                              width={1400}
+                              height={900}
                               loading="lazy"
-                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
-                              allowFullScreen
-                              className="absolute inset-0 w-full h-full border-0"
+                              sizes="(min-width: 1280px) 900px, 100vw"
+                              quality={95}
+                              className="h-auto w-full"
                             />
                           </div>
                         ))}
                       </div>
-                    ) : (
-                      <div className="p-6 text-sm text-white/55">Los videos no se cargan automáticamente para mantener fluido el scroll y el popup.</div>
                     )}
-                  </div>
-                )}
+                  </section>
 
-                {behanceEmbedUrl && (
-                  <div className="mt-10 md:mt-14 border border-white/10 bg-[#030A18]/72 shadow-[0_18px_60px_rgba(0,0,0,0.42)] overflow-hidden">
-                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 px-4 md:px-6 py-4 border-b border-white/10">
-                      <div>
-                        <div className="text-[10px] uppercase tracking-[0.28em] text-[#F5C518]/80">Preview sacado de Behance</div>
-                        <div className="mt-1 text-sm text-white/65">Video, fotos y case study publicado del proyecto</div>
+                  {behanceEmbedUrl && (
+                    <section className="mt-12 md:mt-16">
+                      <div className="flex items-center justify-between mb-5">
+                        <div className="flex items-center gap-3">
+                          <div className="h-px w-5 bg-[#F5C518]/50" />
+                          <span className="text-[10px] uppercase tracking-[0.28em] text-[#F5C518]/80">Behance</span>
+                        </div>
+                        <a
+                          href={project.behanceUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${behanceLabel}: ${project.title}`}
+                          className="inline-flex items-center gap-1.5 text-[11px] uppercase tracking-widest text-white/45 hover:text-white transition-colors"
+                        >
+                          {locale === 'en' ? 'Open' : 'Abrir'} <ExternalLink className="w-3 h-3" />
+                        </a>
                       </div>
-                      <a
-                        href={project.behanceUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`${behanceLabel}: ${project.title}`}
-                        className="inline-flex items-center gap-2 text-[11px] uppercase tracking-widest text-white/70 hover:text-white transition-colors"
-                      >
-                        Abrir en Behance
-                        <ExternalLink className="w-3.5 h-3.5" />
-                      </a>
-                    </div>
-                    {loadMedia ? (
-                      <div className="relative h-[520px] md:h-[680px] bg-[#050A16]">
-                        <iframe
-                          src={behanceEmbedUrl}
-                          title={`${project.title} Behance preview`}
-                          loading="lazy"
-                          allowFullScreen
-                          allow="clipboard-write; fullscreen"
-                          className="absolute inset-0 w-full h-full border-0"
-                        />
+                      <div className="overflow-hidden rounded-xl border border-white/[0.07] bg-[#050A16] shadow-[0_10px_40px_rgba(0,0,0,0.38)]">
+                        {loadMedia ? (
+                          <div className="relative h-[480px] md:h-[620px]">
+                            <iframe
+                              src={behanceEmbedUrl}
+                              title={`${project.title} Behance preview`}
+                              loading="lazy"
+                              allowFullScreen
+                              allow="clipboard-write; fullscreen"
+                              className="absolute inset-0 w-full h-full border-0"
+                            />
+                          </div>
+                        ) : (
+                          <button
+                            type="button"
+                            onClick={() => setLoadMedia(true)}
+                            className="flex min-h-[180px] w-full flex-col items-center justify-center gap-3 text-white/55 hover:text-white transition-colors"
+                          >
+                            <span className="w-12 h-12 rounded-full bg-white/[0.06] border border-white/10 flex items-center justify-center">
+                              <Play className="w-4 h-4" />
+                            </span>
+                            <span className="text-xs uppercase tracking-widest">{locale === 'en' ? 'Load Behance preview' : 'Cargar preview de Behance'}</span>
+                          </button>
+                        )}
                       </div>
-                    ) : (
-                      <button
-                        type="button"
-                        onClick={() => setLoadMedia(true)}
-                        className="flex min-h-[220px] w-full flex-col items-center justify-center gap-4 bg-[#050A16] px-6 text-center text-white/70 hover:text-white transition-colors"
-                      >
-                        <span className="w-14 h-14 rounded-full bg-white text-black flex items-center justify-center">
-                          <Play className="w-5 h-5" />
-                        </span>
-                        <span className="text-sm uppercase tracking-widest">Cargar preview de Behance</span>
-                        <span className="max-w-md text-xs normal-case tracking-normal text-white/45">Se carga bajo demanda para mantener fluido el scroll y la apertura del popup.</span>
-                      </button>
-                    )}
-                  </div>
-                )}
+                    </section>
+                  )}
 
-                <div className="mt-14 md:mt-20 text-center border-t border-white/10 pt-12 md:pt-16">
-                  <div className="text-[11px] uppercase tracking-[0.3em] text-white/50 mb-4">Next chapter</div>
-                  <a href="#contact" onClick={onClose} className="font-display text-4xl md:text-6xl italic hover:text-white/60 transition-colors">
-                    Let&apos;s work together →
-                  </a>
-                </div>
+                  <div className="mt-16 md:mt-20 pt-10 border-t border-white/[0.07]">
+                    <div className="text-[10px] uppercase tracking-[0.3em] text-white/30 mb-3">Next chapter</div>
+                    <a
+                      href="#contact"
+                      onClick={onClose}
+                      className="font-display text-3xl md:text-5xl italic text-white/80 hover:text-[#F5C518] transition-colors duration-300"
+                    >
+                      Let&apos;s work together →
+                    </a>
+                  </div>
+                </main>
               </div>
             </div>
           </motion.div>
+
           <PhotoLightbox
             image={lightboxImage}
             images={project.gallery}
@@ -1508,81 +1520,100 @@ function PhotoLightbox({ image, images, currentIndex, projectTitle, onClose, onP
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.22 }}
-          className="fixed inset-0 z-[140] flex items-center justify-center overflow-hidden bg-black/82 p-4 backdrop-blur-2xl md:p-10"
-          onClick={(e) => {
-            e.stopPropagation()
-            onClose()
-          }}
+          transition={{ duration: 0.28 }}
+          className="fixed inset-0 z-[140] flex flex-col items-center justify-center overflow-hidden bg-black/92 backdrop-blur-2xl"
+          onClick={(e) => { e.stopPropagation(); onClose() }}
         >
-          <div className="absolute inset-0 opacity-28 blur-3xl">
-            <Image
-              src={image}
-              alt=""
-              fill
-              sizes="100vw"
-              quality={40}
-              className="scale-110 object-cover"
-            />
+          {/* Blurred background color sampling */}
+          <div className="absolute inset-0 opacity-20 blur-3xl scale-110 pointer-events-none">
+            <Image src={image} alt="" fill sizes="100vw" quality={75} className="object-cover" />
           </div>
-          <div className="absolute inset-0 bg-gradient-to-b from-[#030711]/85 via-black/72 to-[#030711]/90" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/80 pointer-events-none" />
+
+          {/* Close button */}
           <button
             type="button"
-            onClick={(e) => {
-              e.stopPropagation()
-              onClose()
-            }}
-            className="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white text-black transition-colors hover:bg-[#F5C518] md:right-8 md:top-8"
+            onClick={(e) => { e.stopPropagation(); onClose() }}
+            className="absolute right-4 top-4 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 border border-white/15 text-white backdrop-blur-md transition-all hover:bg-white hover:text-black md:right-8 md:top-6"
             aria-label="Cerrar imagen"
           >
-            <X className="h-5 w-5" />
+            <X className="h-4 w-4" />
           </button>
+
+          {/* Counter */}
           {total > 1 && (
-            <>
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation()
-                  onPrev()
-                }}
-                className="absolute left-4 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/45 text-white backdrop-blur-md transition-colors hover:bg-white hover:text-black md:left-8 md:h-12 md:w-12"
-                aria-label="Foto anterior"
-              >
-                <span className="text-2xl leading-none">‹</span>
-              </button>
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation()
-                  onNext()
-                }}
-                className="absolute right-4 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/45 text-white backdrop-blur-md transition-colors hover:bg-white hover:text-black md:right-8 md:h-12 md:w-12"
-                aria-label="Foto siguiente"
-              >
-                <span className="text-2xl leading-none">›</span>
-              </button>
-            </>
-          )}
-          <motion.div
-            initial={{ scale: 0.96, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.98, opacity: 0 }}
-            transition={{ duration: 0.28, ease: 'easeOut' }}
-            className="relative h-[82dvh] w-full max-w-6xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <Image
-              src={image}
-              alt={`Foto ampliada de ${projectTitle}`}
-              fill
-              sizes="100vw"
-              quality={100}
-              className="object-contain"
-            />
-          </motion.div>
-          {total > 1 && (
-            <div className="absolute bottom-5 left-1/2 z-10 -translate-x-1/2 rounded-full border border-white/15 bg-black/45 px-4 py-2 font-mono-num text-[11px] tracking-[0.24em] text-white/70 backdrop-blur-md">
+            <div className="absolute top-5 left-1/2 z-20 -translate-x-1/2 rounded-full border border-white/15 bg-black/50 px-4 py-1.5 font-mono text-[11px] tracking-[0.24em] text-white/60 backdrop-blur-md">
               {String((currentIndex ?? 0) + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
+            </div>
+          )}
+
+          {/* Prev arrow */}
+          {total > 1 && (
+            <button
+              type="button"
+              onClick={(e) => { e.stopPropagation(); onPrev() }}
+              className="absolute left-3 top-1/2 z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-black/50 text-white backdrop-blur-md transition-all hover:bg-white hover:text-black md:left-6 md:h-14 md:w-14"
+              aria-label="Foto anterior"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M15 19l-7-7 7-7"/></svg>
+            </button>
+          )}
+
+          {/* Next arrow */}
+          {total > 1 && (
+            <button
+              type="button"
+              onClick={(e) => { e.stopPropagation(); onNext() }}
+              className="absolute right-3 top-1/2 z-20 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-black/50 text-white backdrop-blur-md transition-all hover:bg-white hover:text-black md:right-6 md:h-14 md:w-14"
+              aria-label="Foto siguiente"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M9 5l7 7-7 7"/></svg>
+            </button>
+          )}
+
+          {/* Main image with keyed AnimatePresence for smooth transition */}
+          <div className="relative z-10 flex-1 flex items-center justify-center w-full px-16 md:px-20 py-16" onClick={(e) => e.stopPropagation()}>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={image}
+                initial={{ opacity: 0, scale: 0.97 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 1.02 }}
+                transition={{ duration: 0.25, ease: 'easeOut' }}
+                className="relative w-full h-full max-h-[75dvh] max-w-6xl"
+              >
+                <Image
+                  src={image}
+                  alt={`Foto ampliada de ${projectTitle}`}
+                  fill
+                  sizes="(min-width: 1280px) 80vw, 95vw"
+                  quality={100}
+                  className="object-contain"
+                  priority
+                />
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Thumbnail strip */}
+          {total > 1 && (
+            <div className="relative z-20 flex gap-1.5 px-4 pb-5 overflow-x-auto max-w-full" onClick={(e) => e.stopPropagation()}>
+              {(images ?? []).map((thumb, idx) => (
+                <button
+                  key={thumb}
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    const diff = idx - (currentIndex ?? 0)
+                    if (diff < 0) { for (let i = 0; i < -diff; i++) onPrev() }
+                    else if (diff > 0) { for (let i = 0; i < diff; i++) onNext() }
+                  }}
+                  className={`relative h-12 w-16 shrink-0 overflow-hidden rounded border transition-all duration-200 ${idx === currentIndex ? 'border-[#F5C518] opacity-100 scale-105' : 'border-white/15 opacity-45 hover:opacity-75'}`}
+                  aria-label={`Ir a foto ${idx + 1}`}
+                >
+                  <Image src={thumb} alt="" fill sizes="64px" quality={75} className="object-cover" />
+                </button>
+              ))}
             </div>
           )}
         </motion.div>
@@ -1590,7 +1621,6 @@ function PhotoLightbox({ image, images, currentIndex, projectTitle, onClose, onP
     </AnimatePresence>
   )
 }
-
 function MetaRow({ k, v }) {
   return (
     <div>
