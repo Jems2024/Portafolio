@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, useMemo } from 'react'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
-import { ArrowUpRight, Play, Mail, Instagram, Linkedin, MessageCircle, MapPin, Plus, Minus, X, ExternalLink, Sparkles, Star, Clock3, Clapperboard, BadgeCheck, Layers3 } from 'lucide-react'
+import { ArrowUpRight, Play, Mail, Instagram, Linkedin, MessageCircle, MapPin, Plus, Minus, X, ExternalLink, Sparkles, Star, Clock3, Clapperboard, BadgeCheck, Layers3, Volume2, VolumeX, Maximize2 } from 'lucide-react'
 import { PROJECTS, PORTFOLIO_CATEGORY_PROJECTS, REAL_CLIENTS, BLOG_POSTS } from '@/lib/projects'
 import HeroMedia from '@/components/hero-media'
 import SocialFeed from '@/components/social-feed'
@@ -501,59 +501,118 @@ function Nav({ locale, setLocale, t }) {
 }
 
 /* ---------- Concise Project-First Hero ---------- */
-function Hero({ t }) {
+/* ---------- Minimalist Cinematic Video Hero ---------- */
+function Hero({ t, locale }) {
   const [reelOpen, setReelOpen] = useState(false)
+  const [isMuted, setIsMuted] = useState(true)
+  const videoElementRef = useRef(null)
+
   const openReel = () => {
     trackEvent('reel_play', { location: 'hero' })
     setReelOpen(true)
   }
 
+  const toggleSound = () => {
+    setIsMuted((prev) => !prev)
+  }
+
+  const toggleFullscreen = () => {
+    if (!videoElementRef.current) {
+      openReel()
+      return
+    }
+    if (!document.fullscreenElement) {
+      videoElementRef.current.requestFullscreen?.().catch(() => openReel())
+    } else {
+      document.exitFullscreen?.().catch(() => {})
+    }
+  }
+
   return (
-    <section id="top" className="cinematic-hero relative w-full overflow-hidden border-b border-[#415A77]/25 bg-[#0D1B2A] pt-28 pb-14 md:pt-36 md:pb-20">
-      <div className="absolute inset-0 pointer-events-none opacity-20">
-        <HeroMedia />
-        <div className="absolute inset-0 hero-vignette" aria-hidden="true" />
+    <section id="top" className="cinematic-hero relative w-full overflow-hidden border-b border-[#415A77]/25 bg-[#0D1B2A] h-[86vh] min-h-[580px] max-h-[940px] flex flex-col justify-between">
+      {/* BACKGROUND VIDEO: Clearly visible, atmospheric and sharp */}
+      <div className="absolute inset-0 pointer-events-auto opacity-80 md:opacity-85 transition-opacity duration-700">
+        <HeroMedia isMuted={isMuted} onVideoRef={(el) => { videoElementRef.current = el }} />
+        {/* Subtle cinematic gradient to keep background video vivid while guaranteeing contrast */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0D1B2A] via-[#0D1B2A]/20 to-[#0D1B2A]/40 pointer-events-none" aria-hidden="true" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0D1B2A]/60 via-transparent to-[#0D1B2A]/35 pointer-events-none" aria-hidden="true" />
       </div>
 
-      <div className="relative z-10 mx-auto flex max-w-[1600px] flex-col justify-between px-6 md:px-10">
-        {/* Top Eyebrow */}
-        <div className="flex items-center justify-between border-b border-[#415A77]/25 pb-4 text-[10px] md:text-xs font-mono uppercase tracking-[0.25em] text-[#778DA9]">
-          <div className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 bg-[#415A77]" />
-            <span>BARCELONA · 41.3874° N</span>
+      {/* TOP HUD TELEMETRY BAR */}
+      <div className="relative z-10 mx-auto w-full max-w-[1600px] px-6 md:px-10 pt-28 md:pt-32">
+        <div className="flex items-center justify-between border-b border-[#415A77]/30 pb-3 text-[10px] md:text-[11px] font-mono uppercase tracking-[0.25em] text-[#778DA9]">
+          <div className="flex items-center gap-2.5">
+            <span className="w-2 h-2 bg-emerald-400 animate-pulse" />
+            <span className="text-[#E0E1DD] font-semibold">REC ● LIVE REEL</span>
+            <span className="hidden sm:inline text-[#415A77]">|</span>
+            <span className="hidden sm:inline">BCN 41.3879° N, 2.1699° E</span>
           </div>
-          <div className="hidden sm:block">
-            <span>AVAILABLE WORLDWIDE · 2026</span>
+          <div className="flex items-center gap-4 text-[#778DA9]">
+            <span className="hidden md:inline">24 FPS · 4K MASTER</span>
+            <button
+              type="button"
+              onClick={toggleSound}
+              aria-label={isMuted ? 'Activar audio de fondo' : 'Silenciar audio de fondo'}
+              className="inline-flex items-center gap-1.5 border border-[#415A77]/40 bg-[#1B263B]/80 px-2.5 py-1 text-[10px] text-[#E0E1DD] hover:bg-[#E0E1DD] hover:text-[#0D1B2A] transition-colors"
+            >
+              {isMuted ? <VolumeX className="w-3 h-3 text-[#778DA9]" /> : <Volume2 className="w-3 h-3 text-emerald-400" />}
+              <span>{isMuted ? 'AUDIO: OFF' : 'AUDIO: ON'}</span>
+            </button>
           </div>
         </div>
+      </div>
 
-        {/* Center Editorial Title */}
-        <div className="my-10 md:my-14">
-          <div className="font-display text-[clamp(2.5rem,7vw,6.5rem)] font-bold leading-[0.95] tracking-tight text-[#E0E1DD]">
+      {/* CENTER / LOWER EDITORIAL MINIMALIST TITLE (Ultra clean, no paragraphs) */}
+      <div className="relative z-10 mx-auto w-full max-w-[1600px] px-6 md:px-10 my-auto pb-4 pt-10">
+        <div className="max-w-4xl">
+          <motion.h1
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="font-display text-[clamp(2.75rem,8.5vw,7.5rem)] font-bold leading-[0.9] tracking-tight text-[#E0E1DD] drop-shadow-[0_8px_32px_rgba(13,27,42,0.9)]"
+          >
             JARED DURÓN
-          </div>
-          <div className="mt-2 text-base md:text-2xl font-mono uppercase tracking-[0.16em] text-[#778DA9]">
-            FILMMAKER · GRAPHIC DESIGNER · BARCELONA
-          </div>
-          <p className="mt-5 max-w-2xl text-sm md:text-base leading-relaxed text-[#778DA9]">
-            {t.hero.sub}
-          </p>
-        </div>
+          </motion.h1>
 
-        {/* Actions Row */}
-        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-[#415A77]/25 pt-5 text-xs font-mono uppercase tracking-[0.2em]">
-          <div className="flex flex-wrap items-center gap-4">
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.15, ease: 'easeOut' }}
+            className="mt-3.5 text-xs md:text-xl font-mono uppercase tracking-[0.24em] text-[#E0E1DD]/90"
+          >
+            FILMMAKER & AUDIOVISUAL DIRECTOR · BARCELONA
+          </motion.div>
+        </div>
+      </div>
+
+      {/* BOTTOM ACTION & NAVIGATION BAR */}
+      <div className="relative z-10 mx-auto w-full max-w-[1600px] px-6 md:px-10 pb-8 md:pb-10">
+        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-[#415A77]/30 pt-5 text-xs font-mono uppercase tracking-[0.2em]">
+          <div className="flex flex-wrap items-center gap-3 md:gap-4">
+            {/* PROMINENT OPTION TO WATCH FULL VIDEO */}
             <button
               type="button"
               onClick={openReel}
               data-cursor="Play"
-              aria-label={t.hero.reelAria}
-              className="inline-flex items-center gap-3 border border-[#415A77] bg-[#1B263B]/80 px-5 py-2.5 text-[#E0E1DD] transition-all hover:border-[#778DA9] hover:bg-[#1B263B]"
+              aria-label={locale === 'en' ? 'Watch full reel video' : locale === 'ca' ? 'Veure reel complet' : 'Ver video reel completo'}
+              className="group inline-flex items-center gap-3 bg-[#E0E1DD] text-[#0D1B2A] px-6 py-3.5 text-xs font-mono uppercase tracking-widest font-semibold hover:bg-[#415A77] hover:text-[#E0E1DD] transition-all shadow-[0_4px_24px_rgba(0,0,0,0.5)]"
             >
-              <Play className="h-3.5 w-3.5 fill-[#E0E1DD] text-[#E0E1DD]" />
-              <span>{t.hero.playReel}</span>
+              <Play className="h-3.5 w-3.5 fill-[#0D1B2A] text-[#0D1B2A] group-hover:fill-[#E0E1DD] group-hover:text-[#E0E1DD] transition-colors" />
+              <span>{locale === 'en' ? 'WATCH FULL REEL' : locale === 'ca' ? 'VEURE REEL COMPLET' : 'VER VIDEO COMPLETO'}</span>
             </button>
 
+            <button
+              type="button"
+              onClick={toggleFullscreen}
+              aria-label="Pantalla completa"
+              className="hidden sm:inline-flex items-center gap-2 border border-[#415A77]/50 bg-[#1B263B]/70 px-4 py-3.5 text-xs text-[#778DA9] hover:text-[#E0E1DD] hover:border-[#778DA9] transition-colors"
+            >
+              <Maximize2 className="h-3.5 w-3.5" />
+              <span className="hidden md:inline">{locale === 'en' ? 'FULLSCREEN' : 'PANTALLA COMPLETA'}</span>
+            </button>
+          </div>
+
+          <div className="flex items-center gap-6">
             <a
               href="#work"
               className="inline-flex items-center gap-2 text-[#778DA9] hover:text-[#E0E1DD] transition-colors py-2 px-1"
@@ -561,20 +620,17 @@ function Hero({ t }) {
               <span>[ 01 // SELECTED WORK ↓ ]</span>
             </a>
           </div>
-
-          <div className="hidden md:flex items-center gap-3 text-[11px] text-[#778DA9]">
-            <span className="w-2 h-2 bg-[#415A77] animate-pulse" />
-            <span>DIRECTION · CINEMATOGRAPHY · POSTPRODUCTION</span>
-          </div>
         </div>
       </div>
 
-      <ReelModal open={reelOpen} onClose={() => setReelOpen(false)} />
+      <ReelModal open={reelOpen} onClose={() => setReelOpen(false)} locale={locale} />
     </section>
   )
 }
 
-function ReelModal({ open, onClose }) {
+function ReelModal({ open, onClose, locale }) {
+  const [activeReelIndex, setActiveReelIndex] = useState(0)
+
   useEffect(() => {
     if (!open) return
     const onKey = (e) => { if (e.key === 'Escape') onClose() }
@@ -583,36 +639,97 @@ function ReelModal({ open, onClose }) {
     return () => { document.body.style.overflow = ''; window.removeEventListener('keydown', onKey) }
   }, [open, onClose])
 
+  const REEL_TRACKS = [
+    {
+      title: locale === 'en' ? 'Master Cinematic Reel' : 'Reel Cinematográfico Master',
+      sourceType: 'mp4',
+      src: 'https://customer-assets.emergentagent.com/job_filmmaker-barcelona/artifacts/qkv7mv6p_Toma%20Dron%201.mp4',
+      specs: 'BARCELONA 4K · 24 FPS',
+    },
+    {
+      title: 'Lo que me gusta (Cortometraje)',
+      sourceType: 'embed',
+      src: 'https://www.youtube.com/embed/hmC-gPI-KZQ?autoplay=1',
+      specs: 'FICCIÓN · BARCELONA',
+    },
+    {
+      title: 'Ayudas invisibles (Behind The Scenes)',
+      sourceType: 'embed',
+      src: 'https://www.youtube.com/embed/iz_8WSOb6hM?autoplay=1',
+      specs: 'DOCUMENTAL · BARCELONA',
+    },
+  ]
+
+  const currentTrack = REEL_TRACKS[activeReelIndex]
+
   return (
     <AnimatePresence>
       {open && (
         <motion.div
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}
-          className="fixed inset-0 z-[90] bg-[#0D1B2A]/95 backdrop-blur-xl flex items-center justify-center p-4 md:p-8"
+          className="fixed inset-0 z-[140] bg-[#0D1B2A]/95 backdrop-blur-2xl flex flex-col items-center justify-center p-4 md:p-8"
           onClick={onClose}
         >
-          <button
-            onClick={onClose} data-cursor="Close"
-            className="absolute top-6 right-6 md:top-8 md:right-10 z-10 w-10 h-10 border border-[#415A77] bg-[#1B263B] flex items-center justify-center text-[#E0E1DD] hover:border-[#778DA9] transition-all"
-            aria-label="Close"
-          >
-            <X className="w-4 h-4" />
-          </button>
+          {/* Top modal header bar */}
+          <div className="w-full max-w-6xl flex items-center justify-between pb-3 text-xs font-mono uppercase tracking-[0.2em] text-[#778DA9]" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center gap-3">
+              <span className="w-2 h-2 bg-emerald-400 animate-pulse" />
+              <span className="text-[#E0E1DD] font-medium">{currentTrack.title}</span>
+              <span className="hidden sm:inline text-[#415A77]">/</span>
+              <span className="hidden sm:inline">{currentTrack.specs}</span>
+            </div>
+
+            <button
+              onClick={onClose} data-cursor="Close"
+              className="w-10 h-10 border border-[#415A77]/40 bg-[#1B263B] flex items-center justify-center text-[#E0E1DD] hover:bg-[#E0E1DD] hover:text-[#0D1B2A] transition-all"
+              aria-label="Cerrar video"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+
+          {/* Main Video Frame */}
           <motion.div
             initial={{ scale: 0.96, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.96, opacity: 0 }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-6xl aspect-video bg-black border border-[#415A77]/50 overflow-hidden shadow-2xl"
+            className="relative w-full max-w-6xl aspect-video bg-black border border-[#415A77]/40 overflow-hidden shadow-[0_20px_80px_rgba(0,0,0,0.8)]"
           >
-            <video
-              className="w-full h-full object-cover"
-              controls autoPlay playsInline preload="auto"
-              poster="/hero/hero-poster-desktop.jpg"
-            >
-              <source src="https://customer-assets.emergentagent.com/job_filmmaker-barcelona/artifacts/qkv7mv6p_Toma%20Dron%201.mp4" type="video/mp4" />
-              <source src="https://videos.pexels.com/video-files/3209828/3209828-hd_1920_1080_25fps.mp4" type="video/mp4" />
-            </video>
+            {currentTrack.sourceType === 'mp4' ? (
+              <video
+                key={currentTrack.src}
+                className="w-full h-full object-cover"
+                controls autoPlay playsInline preload="auto"
+                poster="/hero/hero-poster-desktop.jpg"
+              >
+                <source src={currentTrack.src} type="video/mp4" />
+                <source src="https://videos.pexels.com/video-files/3209828/3209828-hd_1920_1080_25fps.mp4" type="video/mp4" />
+              </video>
+            ) : (
+              <iframe
+                key={currentTrack.src}
+                src={currentTrack.src}
+                title={currentTrack.title}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                allowFullScreen
+                className="w-full h-full border-0"
+              />
+            )}
           </motion.div>
+
+          {/* Bottom Video Selection Tabs */}
+          <div className="w-full max-w-6xl mt-4 flex flex-wrap items-center gap-2" onClick={(e) => e.stopPropagation()}>
+            {REEL_TRACKS.map((t, idx) => (
+              <button
+                key={idx}
+                type="button"
+                onClick={() => setActiveReelIndex(idx)}
+                className={`px-3.5 py-2 text-[10px] md:text-[11px] font-mono uppercase tracking-widest border transition-colors ${idx === activeReelIndex ? 'bg-[#1B263B] border-[#E0E1DD] text-[#E0E1DD]' : 'border-[#415A77]/30 text-[#778DA9] hover:border-[#778DA9]'}`}
+              >
+                0{idx + 1} // {t.title}
+              </button>
+            ))}
+          </div>
         </motion.div>
       )}
     </AnimatePresence>
@@ -2539,7 +2656,7 @@ function App() {
       <div className="grain relative z-10">
         <Nav locale={locale} setLocale={changeLocale} t={t} />
         <main>
-          <Hero t={t} />
+          <Hero t={t} locale={locale} />
           <Marquee text={t.marquee} />
           <Work t={t} locale={locale} />
           <About t={t} />
