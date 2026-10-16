@@ -111,30 +111,30 @@ export default function ConsentManager() {
           role="dialog"
           aria-modal="false"
           aria-labelledby="privacy-consent-title"
-          className="fixed inset-x-4 bottom-4 z-[120] mx-auto max-w-3xl rounded-2xl border border-[#F5C518]/35 bg-[#071126]/98 p-5 text-white shadow-[0_24px_80px_rgba(0,0,0,0.65)] backdrop-blur-xl md:p-6"
+          className="fixed inset-x-4 bottom-4 z-[120] mx-auto max-w-3xl rounded-none border border-[#415A77]/50 bg-[#1B263B] p-5 text-[#E0E1DD] shadow-[0_24px_80px_rgba(0,0,0,0.8)] backdrop-blur-xl md:p-6"
         >
-          <div id="privacy-consent-title" className="text-lg font-semibold">{copy.title}</div>
-          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-white/68">{copy.body}</p>
+          <div id="privacy-consent-title" className="text-lg font-semibold tracking-tight">{copy.title}</div>
+          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[#778DA9]">{copy.body}</p>
 
           <div className="mt-5 grid gap-3 sm:grid-cols-3">
-            <label className="flex min-h-20 items-start gap-3 rounded-xl border border-white/10 bg-white/[0.035] p-3 text-sm">
-              <input type="checkbox" checked disabled className="mt-1 accent-[#F5C518]" />
-              <span><span className="block font-medium">{copy.necessary}</span><span className="mt-1 block text-xs leading-relaxed text-white/50">{copy.necessaryHelp}</span></span>
+            <label className="flex min-h-20 items-start gap-3 rounded-none border border-[#415A77]/30 bg-[#0D1B2A]/80 p-3 text-sm">
+              <input type="checkbox" checked disabled className="mt-1 accent-[#778DA9]" />
+              <span><span className="block font-medium text-[#E0E1DD]">{copy.necessary}</span><span className="mt-1 block text-xs leading-relaxed text-[#778DA9]">{copy.necessaryHelp}</span></span>
             </label>
-            <label className="flex min-h-20 cursor-pointer items-start gap-3 rounded-xl border border-white/10 bg-white/[0.035] p-3 text-sm hover:border-[#F5C518]/45">
-              <input type="checkbox" checked={draft.analytics} onChange={(event) => setDraft({ ...draft, analytics: event.target.checked })} className="mt-1 accent-[#F5C518]" />
-              <span><span className="block font-medium">{copy.analytics}</span><span className="mt-1 block text-xs leading-relaxed text-white/50">{copy.analyticsHelp}</span></span>
+            <label className="flex min-h-20 cursor-pointer items-start gap-3 rounded-none border border-[#415A77]/30 bg-[#0D1B2A]/80 p-3 text-sm hover:border-[#778DA9]/60">
+              <input type="checkbox" checked={draft.analytics} onChange={(event) => setDraft({ ...draft, analytics: event.target.checked })} className="mt-1 accent-[#778DA9]" />
+              <span><span className="block font-medium text-[#E0E1DD]">{copy.analytics}</span><span className="mt-1 block text-xs leading-relaxed text-[#778DA9]">{copy.analyticsHelp}</span></span>
             </label>
-            <label className="flex min-h-20 cursor-pointer items-start gap-3 rounded-xl border border-white/10 bg-white/[0.035] p-3 text-sm hover:border-[#F5C518]/45">
-              <input type="checkbox" checked={draft.external} onChange={(event) => setDraft({ ...draft, external: event.target.checked })} className="mt-1 accent-[#F5C518]" />
-              <span><span className="block font-medium">{copy.external}</span><span className="mt-1 block text-xs leading-relaxed text-white/50">{copy.externalHelp}</span></span>
+            <label className="flex min-h-20 cursor-pointer items-start gap-3 rounded-none border border-[#415A77]/30 bg-[#0D1B2A]/80 p-3 text-sm hover:border-[#778DA9]/60">
+              <input type="checkbox" checked={draft.external} onChange={(event) => setDraft({ ...draft, external: event.target.checked })} className="mt-1 accent-[#778DA9]" />
+              <span><span className="block font-medium text-[#E0E1DD]">{copy.external}</span><span className="mt-1 block text-xs leading-relaxed text-[#778DA9]">{copy.externalHelp}</span></span>
             </label>
           </div>
 
           <div className="mt-5 flex flex-wrap justify-end gap-2 text-xs font-medium uppercase tracking-[0.12em]">
-            <button type="button" onClick={() => choose({ analytics: false, external: false })} className="min-h-11 rounded-full border border-white/20 px-4 py-2 text-white/70 hover:border-white/55 hover:text-white">{copy.reject}</button>
-            <button type="button" onClick={() => choose(draft)} className="min-h-11 rounded-full border border-[#F5C518]/55 px-4 py-2 text-[#F5C518] hover:bg-[#F5C518]/10">{copy.save}</button>
-            <button type="button" onClick={() => choose({ analytics: true, external: true })} className="min-h-11 rounded-full bg-[#F5C518] px-4 py-2 text-[#071126] hover:bg-[#ffd94f]">{copy.accept}</button>
+            <button type="button" onClick={() => choose({ analytics: false, external: false })} className="min-h-11 rounded-none border border-[#415A77]/40 px-4 py-2 text-[#778DA9] hover:border-[#778DA9] hover:text-[#E0E1DD]">{copy.reject}</button>
+            <button type="button" onClick={() => choose(draft)} className="min-h-11 rounded-none border border-[#415A77] px-4 py-2 text-[#E0E1DD] hover:bg-[#415A77]/20">{copy.save}</button>
+            <button type="button" onClick={() => choose({ analytics: true, external: true })} className="min-h-11 rounded-none bg-[#E0E1DD] px-4 py-2 text-[#0D1B2A] font-semibold hover:bg-[#778DA9] hover:text-[#0D1B2A]">{copy.accept}</button>
           </div>
         </div>
       )}

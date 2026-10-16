@@ -71,7 +71,7 @@ export const metadata = {
 }
 
 export const viewport = {
-  themeColor: '#0A0A0A',
+  themeColor: '#0D1B2A',
   width: 'device-width',
   initialScale: 1,
 }
@@ -111,7 +111,7 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
       </head>
-      <body className="antialiased text-neutral-100 font-sans selection:bg-[#F5C518] selection:text-black">
+      <body className="antialiased text-[#E0E1DD] bg-[#0D1B2A] font-sans selection:bg-[#415A77] selection:text-[#E0E1DD]">
         {children}
         <ConsentManager />
         <SpeedInsights />

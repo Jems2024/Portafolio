@@ -27,13 +27,13 @@ export default function SocialFeed({ locale }) {
   }
 
   return (
-    <section id="social-feed" aria-labelledby="social-feed-title" className="deferred-section border-y border-white/5 px-6 py-12 md:px-10 md:py-20">
+    <section id="social-feed" aria-labelledby="social-feed-title" className="deferred-section border-y border-[#415A77]/25 px-6 py-12 md:px-10 md:py-20">
       <div className="mx-auto max-w-[1600px]">
         <h2 id="social-feed-title" className="font-display text-[clamp(2.6rem,6vw,5.5rem)] leading-[0.98] tracking-tight text-balance">
-          {title.lead} <span className="text-[#F5C518]">{title.highlight}</span>
+          {title.lead} <span className="text-[#778DA9]">{title.highlight}</span>
         </h2>
 
-        <div className="social-feed mt-8 min-h-[320px] overflow-hidden rounded-2xl border border-white/10 bg-[#071126]/70 p-2 sm:mt-10 sm:p-4">
+        <div className="social-feed mt-8 min-h-[320px] overflow-hidden rounded-none border border-[#415A77]/35 bg-[#1B263B]/60 p-2 sm:mt-10 sm:p-4">
           {consent?.external === true ? (
             <>
               <Script
@@ -50,10 +50,10 @@ export default function SocialFeed({ locale }) {
               <button
                 type="button"
                 onClick={enableFeed}
-                className="inline-flex min-h-12 items-center gap-2 rounded-full border border-[#F5C518]/55 px-5 py-3 text-sm font-medium text-[#F5C518] transition-colors hover:bg-[#F5C518]/10"
+                className="inline-flex min-h-12 items-center gap-2 rounded-none border border-[#415A77] bg-[#1B263B] px-5 py-3 text-sm font-medium text-[#E0E1DD] transition-colors hover:border-[#778DA9] hover:bg-[#415A77]/20"
               >
                 {LOAD_COPY[locale] || LOAD_COPY.es}
-                <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
+                <ArrowUpRight aria-hidden="true" className="h-4 w-4 text-[#778DA9]" />
               </button>
             </div>
           )}

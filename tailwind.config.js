@@ -62,6 +62,12 @@ module.exports = {
             '4': 'hsl(var(--chart-4))',
             '5': 'hsl(var(--chart-5))'
           },
+          // Exact Editorial Cinematic Palette
+          richBlack: '#0D1B2A',
+          oxfordBlue: '#1B263B',
+          yinmnBlue: '#415A77',
+          silverLake: '#778DA9',
+          platinum: '#E0E1DD',
           sidebar: {
             DEFAULT: 'hsl(var(--sidebar-background))',
             foreground: 'hsl(var(--sidebar-foreground))',
